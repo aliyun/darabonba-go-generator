@@ -1,0 +1,1 @@
+# darabonba-go-generator
