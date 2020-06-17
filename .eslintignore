@@ -1,0 +1,5 @@
+*.debug.js
+*.min.js
+node_modules/*
+.idea/
+.DS_Store

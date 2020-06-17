@@ -1,0 +1,31 @@
+{
+  "name": "@darabonba/go-generator",
+  "version": "1.0.0",
+  "description": "The SDK generator for Golang",
+  "main": "lib/generator",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "lint": "eslint --fix lib/ test/",
+    "test": "mocha --reporter spec --timeout 3000 test/*.test.js",
+    "test-cov": "nyc -r=lcov -r=html -r=text -r=json mocha -t 3000 -R spec test/*.test.js",
+    "ci": "npm run lint && npm run test-cov && codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aliyun/darabonba-go-generator.git"
+  },
+  "devDependencies": {
+    "eslint": "^6",
+    "expect.js": "^0.3.1",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "codecov": "^3"
+  },
+  "dependencies": {
+    "@darabonba/parser": "^1"
+  },
+  "author": "Alibaba Cloud OpenAPI Team",
+  "license": "Apache-2.0"
+}

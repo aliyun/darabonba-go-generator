@@ -1,0 +1,41 @@
+model Config {
+}
+
+init(config: Config);
+
+api hello(): void {
+  __request.method = 'GET';
+  __request.pathname = '/';
+  __request.headers = {
+    host = 'www.test.com',
+  };
+} returns {
+  return;
+}
+
+api helloRuntime(): void {
+  __request.method = 'GET';
+  __request.pathname = '/';
+  __request.headers = {
+    host = 'www.test.com',
+  };
+  var test : map[string]any = null;
+  test = {
+    key = 'value',
+  };
+} returns {
+  return;
+} runtime {
+
+}
+
+model M = {};
+api helloVirtualCall(m: M): void {
+  __request.method = 'GET';
+  __request.pathname = '/';
+  __request.headers = {
+    key = '',
+  };
+} returns {
+  return;
+}

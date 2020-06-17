@@ -1,0 +1,23 @@
+{
+	"scope": "alibabacloud",
+	"name": "import",
+	"version": "0.0.1",
+	"main": "./import.tea",
+	"releases": {
+		"go": "test/fixtures/import/libararies:v0.0.1"
+	},
+	"java": {
+		"package": "com.import",
+		"baseClient": "com.import.baseclient.BaseClient"
+	},
+	"csharp": {
+		"namespace": "AlibabaCloud.import"
+	},
+	"go": {
+		"defaultStruct": "*Client",
+		"baseClient": "gitlab.alibaba-inc.com/alicloud-sdk/import/baseclient"
+	},
+	"typescript": {
+		"baseClient": "@ali/import-baseclient"
+	}
+}
