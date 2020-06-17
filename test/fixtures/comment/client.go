@@ -6,7 +6,7 @@
 package client
 
 import (
-  source  "gitlab.alibaba-inc.com/alicloud-sdk/go-generator/test"
+  source  "github.com/aliyun/darabonba-go-generator/test"
   "github.com/alibabacloud-go/tea/tea"
 )
 

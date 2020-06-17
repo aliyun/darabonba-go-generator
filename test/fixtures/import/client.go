@@ -2,7 +2,7 @@
 package client
 
 import (
-  source  "test/fixtures/import/libararies"
+  source  "github.com/aliyun/darabonba-go-generator/test"
   "github.com/alibabacloud-go/tea/tea"
 )
 

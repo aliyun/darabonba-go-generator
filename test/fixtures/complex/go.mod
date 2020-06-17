@@ -1,5 +1,5 @@
 module github.com/aliyun
 
 require (
-	test/fixtures/import v0.0.1
+	github.com/aliyun/darabonba-go-generator v0.0.1
 )
