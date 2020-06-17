@@ -7,6 +7,7 @@
 [![codecov][cov-image]][cov-url]
 [![David deps][david-image]][david-url]
 [![npm download][download-image]][download-url]
+
 [npm-image]: https://img.shields.io/npm/v/@darabonba/go-generator.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@darabonba/go-generator
 [travis-image]: https://img.shields.io/travis/aliyun/darabonba-go-generator.svg?style=flat-square
