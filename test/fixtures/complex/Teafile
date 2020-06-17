@@ -1,12 +1,9 @@
 {
-  "scope": "alibabacloud",
+  "scope": "darabonba",
   "name": "main",
   "version": "0.0.1",
   "main": "./main.tea",
   "libraries": {
-    "Source": "alibabacloud:Import:*"
-  },
-  "releases": {
-    "go": "github.com/aliyun/go-generator:v1.0.1"
+    "Source": "darabonba:Import:*"
   }
 }
