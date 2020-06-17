@@ -21,9 +21,7 @@
 
 ## 安装
 
-> Darabonba 生成器只能在 Node.js 环境下运行。
-> 建议使用 [NPM](https://www.npmjs.com/) 包管理工具安装
-> 在终端输入以下命令进行安装:
+Darabonba 生成器只能在 Node.js 环境下运行。建议使用 [NPM](https://www.npmjs.com/) 包管理工具安装。在终端输入以下命令进行安装:
 
 ```shell
 npm install @darabonba/go-generator
@@ -31,7 +29,7 @@ npm install @darabonba/go-generator
 
 ## 使用示例
 
-```javascript
+```js
 'use strict';
 
 const path = require('path');
@@ -39,6 +37,7 @@ const fs = require('fs');
 
 const parser = require('@darabonba/parser');
 const Generator = require('@darabonba/go-generator');
+
 const sourceDir = "<Darabonda package directory>";
 const outputDir = "<Generate output directory>";
 
@@ -50,10 +49,10 @@ let ast = parser.parse(fs.readFileSync(mainFile, 'utf8'), mainFile);
 
 // initialize generator
 let generatorConfig = {
-      ...packageMeta,
-      pkgDir: sourceDir,
-      outputDir
-    };
+  ...packageMeta,
+  pkgDir: sourceDir,
+  outputDir
+};
 
 let generator = new Generator(generatorConfig);
 
