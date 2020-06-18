@@ -8,6 +8,9 @@ function print(runtime: object, str: string): void {
 model Request = {
   accesskey?: string(name='accesskey', description='accesskey'),
   region?: string(name='region', description='region'),
+  instance: {
+    instanceId: string(name='instanceId', description='instanceId'),
+  }(name='instance', description='instance'),
 }
 
 static function array(request: object, str: string): [ any ];

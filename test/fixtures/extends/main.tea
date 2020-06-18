@@ -1,0 +1,17 @@
+import Source;
+extends Source;
+init(config: Source.Config){
+   super(config);
+}
+
+api _request(): object {
+    try {
+        var in = 'try';
+    } catch (e){
+        var tmp = 'catch';
+    }
+} returns {
+    retry;
+} runtime {
+
+}
