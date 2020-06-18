@@ -6,13 +6,29 @@ import (
   "github.com/alibabacloud-go/tea/tea"
 )
 
+type Client struct {
+  SourceClient  *source.Client
+}
 
-func Sample (client *source.Client) {
+func NewClient()(*Client, error) {
+  client := new(Client)
+  err := client.Init()
+  return client, err
+}
+
+func (client *Client)Init()(_err error) {
+  return nil
+}
+
+
+
+func (client *Client) Sample (client *source.Client) {
   runtime := &source.RuntimeObject{}
   request := &source.Request{
     Accesskey: tea.String("accesskey"),
     Region: tea.String("region"),
   }
   client.Print(runtime)
+  client.SourceClient.Print(runtime)
 }
 

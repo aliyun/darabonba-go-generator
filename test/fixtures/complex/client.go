@@ -2,6 +2,7 @@
 package client
 
 import (
+  "github.com/alibabacloud-go/tea"
   source  "github.com/aliyun/darabonba-go-generator/test"
   "github.com/alibabacloud-go/tea/tea"
 )
@@ -45,7 +46,7 @@ type ComplexRequest struct {
   Int64List []*int64 `json:"int64List,omitempty" xml:"int64List,omitempty" require:"true" type:"Repeated"`
   Uint64List []*uint64 `json:"uint64List,omitempty" xml:"uint64List,omitempty" require:"true" type:"Repeated"`
   Uint32List []*uint32 `json:"uint32List,omitempty" xml:"uint32List,omitempty" require:"true" type:"Repeated"`
-  Uint16List []*uint16 `json:"uint16-List,omitempty" xml:"uint16-List,omitempty" require:"true" type:"Repeated"`
+  Uint16List []*uint16 `json:"uint16List,omitempty" xml:"uint16List,omitempty" require:"true" type:"Repeated"`
   U64 *uint64 `json:"u64,omitempty" xml:"u64,omitempty" require:"true"`
   U32 *uint32 `json:"u32,omitempty" xml:"u32,omitempty" require:"true"`
   U16 *uint16 `json:"u16,omitempty" xml:"u16,omitempty" require:"true"`
@@ -55,7 +56,9 @@ type ComplexRequest struct {
   Req *tea.Request `json:"req,omitempty" xml:"req,omitempty" require:"true"`
   Resp *tea.Response `json:"resp,omitempty" xml:"resp,omitempty" require:"true"`
   Map map[string]*string `json:"map,omitempty" xml:"map,omitempty" require:"true"`
+  Request *source.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
   Client *source.Client `json:"client,omitempty" xml:"client,omitempty" require:"true"`
+  Instance *source.RequestInstance `json:"instance,omitempty" xml:"instance,omitempty" require:"true"`
   // Deprecated
   Part []*ComplexRequestPart `json:"Part,omitempty" xml:"Part,omitempty" type:"Repeated"`
 }
@@ -223,8 +226,18 @@ func (s *ComplexRequest) SetMap(v map[string]*string) *ComplexRequest {
   return s
 }
 
+func (s *ComplexRequest) SetRequest(v *source.Request) *ComplexRequest {
+  s.Request = v
+  return s
+}
+
 func (s *ComplexRequest) SetClient(v *source.Client) *ComplexRequest {
   s.Client = v
+  return s
+}
+
+func (s *ComplexRequest) SetInstance(v *source.RequestInstance) *ComplexRequest {
+  s.Instance = v
   return s
 }
 
@@ -264,6 +277,23 @@ func (s ComplexRequestPart) GoString() string {
 
 func (s *ComplexRequestPart) SetPartNumber(v string) *ComplexRequestPart {
   s.PartNumber = &v
+  return s
+}
+
+type Response struct {
+  Instance *ComplexRequestPart `json:"instance,omitempty" xml:"instance,omitempty" require:"true"`
+}
+
+func (s Response) String() string {
+  return tea.Prettify(s)
+}
+
+func (s Response) GoString() string {
+  return s.String()
+}
+
+func (s *Response) SetInstance(v *ComplexRequestPart) *Response {
+  s.Instance = v
   return s
 }
 
@@ -310,6 +340,9 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       var read io.Reader
       var byt []byte
       var reqMap map[string]*ComplexRequest
+      mapString := map[string]*string{
+        "str": request.AccessKey,
+      }
       mapVal := map[string]interface{}{
         "read": read,
         "test": "ok",
@@ -352,8 +385,9 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
         "date": tea.String("2019"),
         "name": request_.Method,
       }
-      tmp := tea.Merge(request_.Query,
-        request_.Headers)
+      tmp := tea.ToMap(request_.Query,
+        request_.Headers,
+        request_)
       response_, _err := tea.DoRequest(request_, _runtime)
       if _err != nil {
         return _result, _err
@@ -439,6 +473,8 @@ func (client *Client) Complex3(request *ComplexRequest) (_result *ComplexRequest
   request_.Query = map[string]*string{
     "date": tea.String("2019"),
   }
+  var tmp *ComplexRequest
+  tmp = client.ReturnModel()
   response_, _err := tea.DoRequest(request_, nil)
   if _err != nil {
     return _result, _err
@@ -459,10 +495,21 @@ func (client *Client) Complex3(request *ComplexRequest) (_result *ComplexRequest
   if _err != nil {
     return _result, _err
   }
+  response_.StatusCode
   source.Array(tea.ToMap(request), tea.String("1"))
   _result = &ComplexRequest{}
   _err = tea.Convert(request_.Query, &_result)
   return _result, _err
+}
+
+func (client *Client) NoReturn() (_err error) {
+  request_ := tea.NewRequest()
+  response_, _err := tea.DoRequest(request_, nil)
+  if _err != nil {
+    return _err
+  }
+
+  return nil
 }
 
 
@@ -474,6 +521,40 @@ func (client *Client) Hello (request map[string]interface{}, strs []*string) (_r
 }
 
 func Print (reqeust *tea.Request, reqs []*ComplexRequest, response *tea.Response, val map[string]*string) (_result *source.Request, _err error) {
+  panic("No Support!")
+}
+
+func AssignWithArray () (_err error) {
+  var list []*string
+  list = tea.StringSlice([]*string{tea.String("test")})
+  var str *string
+  str, _err = client.ThrowsFunc()
+  if _err != nil {
+    return _err
+  }
+
+  return _err
+}
+
+func (client *Client) MapAcess () {
+  tmp := map[string]interface{}{
+    "protocol": tea.StringValue(client.EndpointMap[tea.StringValue(client.Protocol)]),
+  }
+}
+
+func (client *Client) ExprFunc () (_result []*string, _err error) {
+  if !true {
+  }
+
+  num := tea.Int(10)
+  req := &ComplexRequest{}
+  mapVal := map[string]interface{}{
+    "num": 10,
+    "client": new(Source),
+    "strs": Array1()),
+    "str": "string" + tea.ToString(tea.IntValue(num)),
+    "str1": "string" + tea.StringValue(req.AccessKey),
+  }
   return _result, _err
 }
 
@@ -515,5 +596,65 @@ func (client *Client) TemplateString () (_result *string, _err error) {
 func (client *Client) ThrowsFunc () (_result *string, _err error) {
   _result = tea.String("/" + tea.StringValue(client.Protocol))
   return _result, _err
+}
+
+func (client *Client) ThrowsFunc1 () (_result *string, _err error) {
+  return _result, _err
+}
+
+func (client *Client) ThrowsFunc2 () (_err error) {
+  _err = tea.NewSDKError(map[string]interface{}{
+    "code": "",
+  })
+  return _err
+}
+
+func (client *Client) ThrowsFunc3 () (_result *string, _err error) {
+  _err = tea.NewSDKError(map[string]interface{}{
+    "code": "",
+  })
+  return _result, _err
+}
+
+func (client *Client) ReturnFunc () (_result *string) {
+  _result = nil
+  return _result
+}
+
+func (client *Client) ReturnFunc1 (cfg *source.Config) (_result *source.Client) {
+  config := &source.Config{}
+  _result = &source.Client{}
+  _result, _err = source.NewClient(config)
+  return _result
+}
+
+func (client *Client) ReturnFunc2 () (_result map[string]interface{}) {
+  tmp := map[string]*string{
+    "subMap": tea.String("ok"),
+  }
+  mapVal := map[string]map[string]*string{
+    "test": tmp,
+  }
+  if true {
+    _result = make(map[string]interface{})
+    _result = mapVal["test"]
+    return _result
+  } else {
+    var body io.Reader
+    _result = make(map[string]interface{})
+    _result.Body = body
+    tea.Convert(tmp, &_result)
+    return _result
+  }
+
+}
+
+func (client *Client) ReturnModel () (_result *ComplexRequest) {
+  _result = &ComplexRequest{}
+  return _result
+}
+
+func (client *Client) EmptyFunc () {
+  panic("No Support!")
 }
 

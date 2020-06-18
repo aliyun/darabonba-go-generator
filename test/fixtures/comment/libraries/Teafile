@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "main": "./import.tea",
   "releases": {
-	"go": "github.com/aliyun/darabonba-go-generator/test"
+    "go": "github.com/aliyun/darabonba-go-generator/test"
+  },
+  "go": {
+    "clientName": "Client"
   }
 }

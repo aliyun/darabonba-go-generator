@@ -88,6 +88,28 @@ describe('new Generator', function() {
     });
   });
 
+  it('extends should ok', function () {
+    const outputDir = path.join(__dirname, 'output/extends');
+    const mainFilePath = path.join(__dirname, 'fixtures/extends/main.tea');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extends/Teafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extends/client.go'),{
+      pkgDir: path.join(__dirname, 'fixtures/extends'),
+      ...pkg
+    });
+  });
+
+  it('extendsWithoutInit should ok', function () {
+    const outputDir = path.join(__dirname, 'output/extendsWithoutInit');
+    const mainFilePath = path.join(__dirname, 'fixtures/extendsWithoutInit/main.tea');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extendsWithoutInit/Teafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extendsWithoutInit/client.go'),{
+      pkgDir: path.join(__dirname, 'fixtures/extendsWithoutInit'),
+      ...pkg
+    });
+  });
+
   it('complex should ok', function () {
     const outputDir = path.join(__dirname, 'output/complex');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Teafile'), 'utf8');
@@ -95,6 +117,7 @@ describe('new Generator', function() {
     const mainFilePath = path.join(__dirname, 'fixtures/complex/main.tea');
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/complex/client.go') , {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
+      package: ['github.com/alibabacloud-go/tea'],
       ...pkg
     });
     const modPath = path.join(__dirname, 'fixtures/complex/go.mod');

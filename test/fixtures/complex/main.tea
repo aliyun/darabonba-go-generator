@@ -36,7 +36,7 @@ model ComplexRequest = {
   int64List: [ int64 ],
   uint64List: [ uint64 ],
   uint32List: [ uint32 ],
-  uint16-List: [ uint16 ],
+  uint16List: [ uint16 ],
   u64: uint64,
   u32: uint32,
   u16: uint16,
@@ -46,7 +46,9 @@ model ComplexRequest = {
   req: $Request,
   resp: $Response,
   map: map[string]string,
+  request: Source.Request,
   client: Source,
+  instance: Source.Request.instance,
   part?: [
     {
       partNumber?: string(description='PartNumber', name='PartNumber')
@@ -54,17 +56,24 @@ model ComplexRequest = {
   ](description='Part', name='Part', deprecated=true),
 }
 
+model Response {
+  instance: ComplexRequest.part,
+}
+
 async function hello(request: object, strs: [ string ]): [ string ] {
   return array1();
 }
 
-static async function print(reqeust: $Request, reqs: [ ComplexRequest ], response: $Response, val: map[string]string): Source.Request {}
+static async function print(reqeust: $Request, reqs: [ ComplexRequest ], response: $Response, val: map[string]string): Source.Request;
 
 api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var name = 'complex';
   var read : readable = null;
   var byt : bytes = null;
   var reqMap : map[string]ComplexRequest = null;
+  var mapString = {
+    str = request.accessKey,
+  };
   var mapVal = {
     read = read,
     test = "ok",
@@ -73,7 +82,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
     u16 = request.u16,
     u32 = request.u32,
     u64 = request.u64,
-    u16List = request.uint16-List,
+    u16List = request.uint16List,
     u32List = request.uint32List,
     u64List = request.uint64List,
     i64List = request.int64List,
@@ -110,6 +119,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var tmp = {
     ...__request.query,
     ...__request.headers,
+    ...__request,
   };
 } returns {
   if (true && true){
@@ -150,6 +160,8 @@ api Complex3(request: ComplexRequest): ComplexRequest {
   __request.query = {
     date = '2019',
   };
+  var tmp : ComplexRequest = null;
+  tmp = returnModel();
 } returns {
   var resp = __response;
   var req = new Source.Request{
@@ -161,9 +173,39 @@ api Complex3(request: ComplexRequest): ComplexRequest {
   req.accesskey = request.accessKey;
   printNull();
   throwsFunc();
+  __response.statusCode;
   Source.array(request, '1');
   return {
     ...__request.query
+  };
+}
+
+static function assignWithArray() throws: void {
+  var list : [ string ] = null;
+  list = [ "test" ];
+
+  var str : string = null;
+  str = throwsFunc();
+}
+
+function mapAcess(): void {
+  var tmp : map[string]any = {
+    protocol = @endpointMap[@protocol],
+  };
+}
+
+async function exprFunc(): [ string ] {
+  if (!true) {
+
+  }
+  var num = 10;
+  var req = new ComplexRequest{};
+  var mapVal : map[string]any = {
+    num = 10,
+    client = Source,
+    strs = array1(),
+    str = `string${num}`,
+    str1 = `string${req.accessKey}`,
   };
 }
 
@@ -178,7 +220,6 @@ static async function printNull(): void {
 }
 
 static function array0(req: object): [ any ] {
-
   return [];
 }
 
@@ -192,4 +233,54 @@ async function templateString(): string {
 
 function throwsFunc() throws: string {
   return `/${@protocol}`;
+}
+
+function throwsFunc1() throws: string {}
+
+function throwsFunc2() throws: void {
+  throw {
+    code = '',
+  };
+}
+
+function throwsFunc3() throws: string {
+  throw {
+    code = '',
+  };
+}
+
+function returnFunc(): string {
+  return null;
+}
+
+function returnFunc1(cfg: Source.Config): Source {
+  var config = new Source.Config{};
+  return new Source(config);
+}
+
+function returnFunc2(): map[string]any {
+  var tmp = {
+    subMap = 'ok',
+  };
+  var mapVal = {
+    test = tmp,
+  };
+  if (true) {
+    return mapVal['test'];
+  } else {
+    var body : readable = null;
+    return {
+      body = body,
+      ...tmp
+    };
+  }
+}
+
+function returnModel(): ComplexRequest {
+  return new ComplexRequest{};
+}
+
+function emptyFunc(): void;
+
+api noReturn(): void {
 }
