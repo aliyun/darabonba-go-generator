@@ -24,7 +24,7 @@
     "codecov": "^3"
   },
   "dependencies": {
-    "@darabonba/parser": "^1"
+    "@darabonba/parser": "^1.0.2"
   },
   "author": "Alibaba Cloud OpenAPI Team",
   "license": "Apache-2.0"
