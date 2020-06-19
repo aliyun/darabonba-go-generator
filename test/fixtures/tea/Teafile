@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "main": "./main.tea",
   "libraries": {
-    "Source": "darabonba:Import:*"
+    "Source": "darabonba:Import:*",
+    "LocalSource": "./localLib"
   }
 }

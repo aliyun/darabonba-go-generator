@@ -1,4 +1,5 @@
 import Source;
+import LocalSource;
 
 init();
 
@@ -6,7 +7,7 @@ type @sourceClient = Source;
 
 function Sample(client: Source): void {
     var runtime = new Source.RuntimeObject{};
-    var request = new Source.Request{
+    var request = new LocalSource.Request{
         accesskey = "accesskey",
         region = "region",
     };

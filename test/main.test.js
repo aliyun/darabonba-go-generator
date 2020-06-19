@@ -35,8 +35,8 @@ describe('new Generator', function() {
 
   it('one model should ok', function () {
     const outputDir = path.join(__dirname, 'output/model');
-    const mainFilePath = path.join(__dirname, 'fixtures/model/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/model/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/model/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/model/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/model'),
@@ -46,8 +46,8 @@ describe('new Generator', function() {
 
   it('one api should ok', function () {
     const outputDir = path.join(__dirname, 'output/api');
-    const mainFilePath = path.join(__dirname, 'fixtures/api/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/api/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/api/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/api/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/api/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/api'),
@@ -57,8 +57,8 @@ describe('new Generator', function() {
 
   it('one function should ok', function () {
     const outputDir = path.join(__dirname, 'output/function');
-    const mainFilePath = path.join(__dirname, 'fixtures/function/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/function/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/function/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/function/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/function/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/function'),
@@ -68,8 +68,8 @@ describe('new Generator', function() {
 
   it('statements should ok', function () {
     const outputDir = path.join(__dirname, 'output/statements');
-    const mainFilePath = path.join(__dirname, 'fixtures/statements/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/statements/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/statements/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/statements'),
@@ -79,8 +79,8 @@ describe('new Generator', function() {
 
   it('import should ok', function () {
     const outputDir = path.join(__dirname, 'output/import');
-    const mainFilePath = path.join(__dirname, 'fixtures/import/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/import/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/import/client.go'),{
       pkgDir: path.join(__dirname, 'fixtures/import'),
@@ -90,8 +90,8 @@ describe('new Generator', function() {
 
   it('extends should ok', function () {
     const outputDir = path.join(__dirname, 'output/extends');
-    const mainFilePath = path.join(__dirname, 'fixtures/extends/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extends/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/extends/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extends/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extends/client.go'),{
       pkgDir: path.join(__dirname, 'fixtures/extends'),
@@ -101,8 +101,8 @@ describe('new Generator', function() {
 
   it('extendsWithoutInit should ok', function () {
     const outputDir = path.join(__dirname, 'output/extendsWithoutInit');
-    const mainFilePath = path.join(__dirname, 'fixtures/extendsWithoutInit/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extendsWithoutInit/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/extendsWithoutInit/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extendsWithoutInit/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extendsWithoutInit/client.go'),{
       pkgDir: path.join(__dirname, 'fixtures/extendsWithoutInit'),
@@ -112,9 +112,9 @@ describe('new Generator', function() {
 
   it('complex should ok', function () {
     const outputDir = path.join(__dirname, 'output/complex');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    const mainFilePath = path.join(__dirname, 'fixtures/complex/main.tea');
+    const mainFilePath = path.join(__dirname, 'fixtures/complex/main.dara');
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/complex/client.go') , {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
       package: ['github.com/alibabacloud-go/tea'],
@@ -127,8 +127,8 @@ describe('new Generator', function() {
 
   it('add annotation should ok', function () {
     const outputDir = path.join(__dirname, 'output/annotation');
-    const mainFilePath = path.join(__dirname, 'fixtures/annotation/main.tea');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/annotation/Teafile'), 'utf8');
+    const mainFilePath = path.join(__dirname, 'fixtures/annotation/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/annotation/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/annotation/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/annotation'),
@@ -138,11 +138,22 @@ describe('new Generator', function() {
 
   it('add comment should ok', function () {
     const outputDir = path.join(__dirname, 'output/comment');
-    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Teafile'), 'utf8');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    const mainFilePath = path.join(__dirname, 'fixtures/comment/main.tea');
+    const mainFilePath = path.join(__dirname, 'fixtures/comment/main.dara');
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/comment/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/comment'),
+      ...pkg
+    });
+  });
+
+  it('tea should ok', function () {
+    const outputDir = path.join(__dirname, 'output/tea');
+    const mainFilePath = path.join(__dirname, 'fixtures/tea/main.tea');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/tea/Teafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/tea/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/tea'),
       ...pkg
     });
   });
