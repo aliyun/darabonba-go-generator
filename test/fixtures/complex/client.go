@@ -376,6 +376,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       }
       client.Strs = request.Strs
       client.EndpointMap[tea.StringValue(client.Protocol)]
+      client.EndpointMap["test"] = tea.String("ok")
       request.Strs = client.Strs
       request_.Protocol = client.Protocol
       request_.Port = request.Num

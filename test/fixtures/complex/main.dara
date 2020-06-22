@@ -107,6 +107,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   };
   @Strs = request.strs;
   @endpointMap[@protocol];
+  @endpointMap['test'] = 'ok';
   request.strs = @Strs;
   __request.protocol = @protocol;
   __request.port = request.num;
