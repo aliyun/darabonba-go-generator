@@ -27,6 +27,9 @@ describe('helper', function () {
 
     type =  _type('integer');
     expect(type).to.equal('int');
+    
+    type =  _type('$Error');
+    expect(type).to.equal('*tea.SDKError');
 
     type =  _type('number');
     expect(type).to.equal('int');
@@ -97,6 +100,9 @@ describe('helper', function () {
 
     val =  _initValue('integer');
     expect(val).to.equal('tea.Int(0)');
+
+    val =  _initValue('$Error');
+    expect(val).to.equal('&tea.SDKError{}');
 
     val =  _initValue('string');
     expect(val).to.equal('tea.String("")');

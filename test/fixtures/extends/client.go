@@ -39,17 +39,23 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
 
     _resp, _err = func()(map[string]interface{}, error){
       request_ := tea.NewRequest()
-      defer func() {
-        e := recover()
-        tmp := tea.String("catch")
-      }()
-      tryRes, tryErr := func()(map[string]interface{}, error) {
+      _, tryErr := func()(_r map[string]interface{}, _e error) {
+        defer func() {
+          if r := tea.Recover(recover()); r != nil {
+            _e = r
+          }
+        }()
         in := tea.String("try")
       }()
-      _result = tryRes
-      _err = tryErr
-      if _err != nil {
-        return _result, _err
+
+      if tryErr != nil {
+        var e = &tea.SDKError{}
+        if _t, ok := tryErr.(*tea.SDKError); ok {
+          e = _t
+        } else {
+          e.SetErrMsg(tryErr.Error())
+        }
+        tmp := e.Message
       }
       response_, _err := tea.DoRequest(request_, _runtime)
       if _err != nil {
@@ -65,4 +71,49 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
   return _resp, _err
 }
 
+
+func (client *Client) TryCatch () {
+  var _err error
+  tryErr := func()(_e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    in := tea.String("try")
+  }()
+
+  if tryErr != nil {
+    var e = &tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      e = _t
+    } else {
+      e.SetErrMsg(tryErr.Error())
+    }
+    tmp := e.Message
+  }
+}
+
+func (client *Client) TryCatchWithReturn () (_result *string) {
+  var _err error
+  _, tryErr := func()(_r *string, _e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    in := tea.String("try")
+  }()
+
+  if tryErr != nil {
+    var e = &tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      e = _t
+    } else {
+      e.SetErrMsg(tryErr.Error())
+    }
+    tmp := e.Message
+  }
+  return _result
+}
 
