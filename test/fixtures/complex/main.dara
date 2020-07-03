@@ -285,3 +285,9 @@ function emptyFunc(): void;
 
 api noReturn(): void {
 }
+
+function Error(e: $Error): $Error {
+  var tmp : $Error = null;
+  var c : class = null;
+  return e;
+}

@@ -563,17 +563,14 @@ func PrintNull () (_err error) {
   defer func() {
     final := tea.String("ok")
   }()
-  tryErr := func()(error) {
+  func()(_e error) {
     str, _err := client.TemplateString()
     if _err != nil {
       return _err
     }
 
   }()
-  _err = tryErr
-  if _err != nil {
-    return _err
-  }
+
   return _err
 }
 
@@ -657,5 +654,12 @@ func (client *Client) ReturnModel () (_result *ComplexRequest) {
 
 func (client *Client) EmptyFunc () {
   panic("No Support!")
+}
+
+func (client *Client) Error (e *tea.SDKError) (_result *tea.SDKError) {
+  var tmp *tea.SDKError
+  var c interface{}
+  _result = e
+  return _result
 }
 
