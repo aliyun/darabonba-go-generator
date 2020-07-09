@@ -151,6 +151,11 @@ api Complex2(request: ComplexRequest, str: [ string ], val: map[string]string): 
   };
 }
 
+api ComplexMap(): map[string]any {
+} runtime {
+  
+}
+
 api Complex3(request: ComplexRequest): ComplexRequest {
   var name = 'complex';
   __request.protocol = templateString();
