@@ -455,6 +455,35 @@ func (client *Client) Complex2(request *ComplexRequest, str []*string, val map[s
   return nil, nil
 }
 
+func (client *Client) ComplexMap() (_result map[string]interface{}, _err error) {
+  _runtime := map[string]interface{}{}
+
+  _resp := make(map[string]interface{})
+  for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
+    if _retryTimes > 0 {
+      _backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
+      if tea.IntValue(_backoffTime) > 0 {
+        tea.Sleep(_backoffTime)
+      }
+    }
+
+    _resp, _err = func()(map[string]interface{}, error){
+      request_ := tea.NewRequest()
+      response_, _err := tea.DoRequest(request_, _runtime)
+      if _err != nil {
+        return _result, _err
+      }
+
+      return nil, nil
+    }()
+    if !tea.BoolValue(tea.Retryable(_err)) {
+      break
+    }
+  }
+
+  return _resp, _err
+}
+
 func (client *Client) Complex3(request *ComplexRequest) (_result *ComplexRequest, _err error) {
   _err = tea.Validate(request)
   if _err != nil {
