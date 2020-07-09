@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.2 - 2020-07-09
+
+> Fix Error when returnType is map.
+
 ## 1.0.1 - 2020-06-19
 
 > Improve Darabonba Go generator to be compatible with darafile.
