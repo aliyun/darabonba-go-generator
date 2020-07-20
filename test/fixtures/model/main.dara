@@ -9,5 +9,6 @@ model MyModel = {
   object: object,
   numberfield: integer,
   readable: readable,
-  request: $Request
+  request: $Request,
+  complexList: [ [ string ] ]
 };

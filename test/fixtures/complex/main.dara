@@ -1,11 +1,14 @@
 import Source;
 
+const version = '1.0.0';
+const tag = 'complex';
 model Config {
   protocol: string,
 }
 type @protocol = string
 type @pathname = string
 type @Strs = [ string ]
+type @compleList = [[string]]
 type @endpointMap = map[string]string
 
 init(config: Config){
@@ -30,7 +33,7 @@ model ComplexRequest = {
   booleantList: [ boolean ],
   i32: int32,
   stringList: [ string ],
-  intList: [ number ],
+  intList: [ integer ],
   int32List: [ int32 ],
   int16List: [ int16 ],
   int64List: [ int64 ],
@@ -60,7 +63,8 @@ model Response {
   instance: ComplexRequest.part,
 }
 
-async function hello(request: object, strs: [ string ]): [ string ] {
+async function hello(request: object, strs: [ string ], complexList: [[string]]): [ string ] {
+  var a : [[string]] = null;
   return array1();
 }
 
@@ -129,8 +133,8 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
     return new Source.RuntimeObject{};
   }
   client.print(request, '1');
-  hello(request, ["1","2"]);
-  hello(null, null);
+  hello(request, ["1","2"], null);
+  hello(null, null, null);
   return {};
   Complex3(null);
 } runtime {

@@ -15,6 +15,7 @@ type MyModel struct {
   Numberfield *int `json:"numberfield,omitempty" xml:"numberfield,omitempty" require:"true"`
   Readable io.Reader `json:"readable,omitempty" xml:"readable,omitempty" require:"true"`
   Request *tea.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
+  ComplexList [][]*string `json:"complexList,omitempty" xml:"complexList,omitempty" require:"true" type:"Repeated"`
 }
 
 func (s MyModel) String() string {
@@ -67,6 +68,11 @@ func (s *MyModel) SetReadable(v io.Reader) *MyModel {
 
 func (s *MyModel) SetRequest(v *tea.Request) *MyModel {
   s.Request = v
+  return s
+}
+
+func (s *MyModel) SetComplexList(v [][]*string) *MyModel {
+  s.ComplexList = v
   return s
 }
 
