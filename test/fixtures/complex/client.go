@@ -7,6 +7,8 @@ import (
   "github.com/alibabacloud-go/tea/tea"
 )
 
+const version = "1.0.0"
+const tag = "complex"
 type Config struct {
   Protocol *string `json:"protocol,omitempty" xml:"protocol,omitempty" require:"true"`
 }
@@ -301,6 +303,7 @@ type Client struct {
   Protocol  *string
   Pathname  *string
   Strs  []*string
+  CompleList  [][]*string
   EndpointMap  map[string]*string
 }
 
@@ -402,11 +405,11 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       }
 
       client.Print(tea.ToMap(request), tea.String("1"))
-      _, _err = client.Hello(tea.ToMap(request), []*string{tea.String("1"), tea.String("2")})
+      _, _err = client.Hello(tea.ToMap(request), []*string{tea.String("1"), tea.String("2")}, nil)
       if _err != nil {
         return _result, _err
       }
-      _, _err = client.Hello(nil, nil)
+      _, _err = client.Hello(nil, nil, nil)
       if _err != nil {
         return _result, _err
       }
@@ -543,7 +546,8 @@ func (client *Client) NoReturn() (_err error) {
 }
 
 
-func (client *Client) Hello (request map[string]interface{}, strs []*string) (_result []*string, _err error) {
+func (client *Client) Hello (request map[string]interface{}, strs []*string, complexList [][]*string) (_result []*string, _err error) {
+  var a [][]*string
   _result = make([]*string, 0)
   _body := Array1()
   _result = _body
