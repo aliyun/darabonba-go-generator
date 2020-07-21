@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.3 - 2020-07-20
+
+> Support multi-dimentional array and description.
+
 ## 1.0.2 - 2020-07-09
 
 > Fix Error when returnType is map.
