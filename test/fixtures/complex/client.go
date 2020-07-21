@@ -7,8 +7,6 @@ import (
   "github.com/alibabacloud-go/tea/tea"
 )
 
-const version = "1.0.0"
-const tag = "complex"
 type Config struct {
   Protocol *string `json:"protocol,omitempty" xml:"protocol,omitempty" require:"true"`
 }
@@ -28,9 +26,13 @@ func (s *Config) SetProtocol(v string) *Config {
 
 type ComplexRequest struct {
   AccessKey *string `json:"accessKey,omitempty" xml:"accessKey,omitempty" require:"true"`
+  // Body
   Body io.Reader `json:"Body,omitempty" xml:"Body,omitempty" require:"true"`
+  // Strs
   Strs []*string `json:"Strs,omitempty" xml:"Strs,omitempty" require:"true" type:"Repeated"`
+  // mapList
   MapList []map[string]interface{} `json:"mapList,omitempty" xml:"mapList,omitempty" require:"true" type:"Repeated"`
+  // header
   Header *ComplexRequestHeader `json:"header,omitempty" xml:"header,omitempty" require:"true" type:"Struct"`
   Num *int `json:"num,omitempty" xml:"num,omitempty" require:"true"`
   I64 *int64 `json:"i64,omitempty" xml:"i64,omitempty" require:"true"`
@@ -62,6 +64,7 @@ type ComplexRequest struct {
   Client *source.Client `json:"client,omitempty" xml:"client,omitempty" require:"true"`
   Instance *source.RequestInstance `json:"instance,omitempty" xml:"instance,omitempty" require:"true"`
   // Deprecated
+  // Part
   Part []*ComplexRequestPart `json:"Part,omitempty" xml:"Part,omitempty" type:"Repeated"`
 }
 
@@ -249,6 +252,7 @@ func (s *ComplexRequest) SetPart(v []*ComplexRequestPart) *ComplexRequest {
 }
 
 type ComplexRequestHeader struct {
+  // Body
   Content *string `json:"Content,omitempty" xml:"Content,omitempty" require:"true" signed:"true"`
 }
 
@@ -266,6 +270,7 @@ func (s *ComplexRequestHeader) SetContent(v string) *ComplexRequestHeader {
 }
 
 type ComplexRequestPart struct     {
+  // PartNumber
   PartNumber *string `json:"PartNumber,omitempty" xml:"PartNumber,omitempty"`
 }
 

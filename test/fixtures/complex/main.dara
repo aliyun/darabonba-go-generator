@@ -1,7 +1,5 @@
 import Source;
 
-const version = '1.0.0';
-const tag = 'complex';
 model Config {
   protocol: string,
 }
