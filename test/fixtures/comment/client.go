@@ -14,8 +14,10 @@ import (
   TestModel
 */
 type Test1 struct {
+  // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
   //model的test back comment
+  // test2 desc
   Test2 *string `json:"test2,omitempty" xml:"test2,omitempty" require:"true"`
   //model的test2 back comment
 }
@@ -43,8 +45,10 @@ func (s *Test1) SetTest2(v string) *Test1 {
 */
 type Test2 struct {
   // model的test front comment
+  // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
   // model的test front comment
+  // test2 desc
   Test2 *string `json:"test2,omitempty" xml:"test2,omitempty" require:"true"`
 }
 
