@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.4 - 2020-07-23
+
+> Support expectedType.
+
 ## 1.0.3 - 2020-07-20
 
 > Support multi-dimentional array and description.
