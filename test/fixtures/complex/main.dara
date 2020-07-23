@@ -103,6 +103,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var req = new ComplexRequest{
     b = false,
     num = 10,
+    i32 = 10000,
     intList = [10,11],
     stringList = ['10','11'],
     booleantList = [ true, false ],
@@ -143,6 +144,7 @@ api Complex2(request: ComplexRequest, str: [ string ], val: map[string]string): 
   var name = 'complex';
   var config = new Source.Config{};
   var client = new Source(config);
+  var configArray : [Source.Config] = [config];
   __request.protocol = 'HTTP';
   __request.port = 80;
   __request.method = 'GET';

@@ -378,6 +378,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       req := &ComplexRequest{
         B: tea.Bool(false),
         Num: tea.Int(10),
+        I32: tea.Int32(10000),
         IntList: []*int{tea.Int(10), tea.Int(11)},
         StringList: []*string{tea.String("10"), tea.String("11")},
         BooleantList: []*bool{tea.Bool(true), tea.Bool(false)},
@@ -447,6 +448,7 @@ func (client *Client) Complex2(request *ComplexRequest, str []*string, val map[s
     return _result, _err
   }
 
+  configArray := []*source.Config{config}
   request_.Protocol = tea.String("HTTP")
   request_.Port = tea.Int(80)
   request_.Method = tea.String("GET")
