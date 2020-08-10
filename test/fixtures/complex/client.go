@@ -7,23 +7,6 @@ import (
   "github.com/alibabacloud-go/tea/tea"
 )
 
-type Config struct {
-  Protocol *string `json:"protocol,omitempty" xml:"protocol,omitempty" require:"true"`
-}
-
-func (s Config) String() string {
-  return tea.Prettify(s)
-}
-
-func (s Config) GoString() string {
-  return s.String()
-}
-
-func (s *Config) SetProtocol(v string) *Config {
-  s.Protocol = &v
-  return s
-}
-
 type ComplexRequest struct {
   AccessKey *string `json:"accessKey,omitempty" xml:"accessKey,omitempty" require:"true"`
   // Body
@@ -34,6 +17,7 @@ type ComplexRequest struct {
   MapList []map[string]interface{} `json:"mapList,omitempty" xml:"mapList,omitempty" require:"true" type:"Repeated"`
   // header
   Header *ComplexRequestHeader `json:"header,omitempty" xml:"header,omitempty" require:"true" type:"Struct"`
+  Configs *ComplexRequestConfigs `json:"configs,omitempty" xml:"configs,omitempty" require:"true" type:"Struct"`
   Num *int `json:"num,omitempty" xml:"num,omitempty" require:"true"`
   I64 *int64 `json:"i64,omitempty" xml:"i64,omitempty" require:"true"`
   F64 *float64 `json:"f64,omitempty" xml:"f64,omitempty" require:"true"`
@@ -98,6 +82,11 @@ func (s *ComplexRequest) SetMapList(v []map[string]interface{}) *ComplexRequest 
 
 func (s *ComplexRequest) SetHeader(v *ComplexRequestHeader) *ComplexRequest {
   s.Header = v
+  return s
+}
+
+func (s *ComplexRequest) SetConfigs(v *ComplexRequestConfigs) *ComplexRequest {
+  s.Configs = v
   return s
 }
 
@@ -269,6 +258,35 @@ func (s *ComplexRequestHeader) SetContent(v string) *ComplexRequestHeader {
   return s
 }
 
+type ComplexRequestConfigs struct {
+  Key *string `json:"key,omitempty" xml:"key,omitempty" require:"true"`
+  Value []*string `json:"value,omitempty" xml:"value,omitempty" require:"true" type:"Repeated"`
+  Extra map[string]*string `json:"extra,omitempty" xml:"extra,omitempty" require:"true"`
+}
+
+func (s ComplexRequestConfigs) String() string {
+  return tea.Prettify(s)
+}
+
+func (s ComplexRequestConfigs) GoString() string {
+  return s.String()
+}
+
+func (s *ComplexRequestConfigs) SetKey(v string) *ComplexRequestConfigs {
+  s.Key = &v
+  return s
+}
+
+func (s *ComplexRequestConfigs) SetValue(v []*string) *ComplexRequestConfigs {
+  s.Value = v
+  return s
+}
+
+func (s *ComplexRequestConfigs) SetExtra(v map[string]*string) *ComplexRequestConfigs {
+  s.Extra = v
+  return s
+}
+
 type ComplexRequestPart struct     {
   // PartNumber
   PartNumber *string `json:"PartNumber,omitempty" xml:"PartNumber,omitempty"`
@@ -310,16 +328,17 @@ type Client struct {
   Strs  []*string
   CompleList  [][]*string
   EndpointMap  map[string]*string
+  Configs  []*source.Config
 }
 
-func NewClient(config *Config)(*Client, error) {
+func NewClient(config *source.Config)(*Client, error) {
   client := new(Client)
   err := client.Init(config)
   return client, err
 }
 
-func (client *Client)Init(config *Config)(_err error) {
-  client.Protocol = config.Protocol
+func (client *Client)Init(config *source.Config)(_err error) {
+  client.Configs[0] = config
   return nil
 }
 
@@ -701,5 +720,73 @@ func (client *Client) Error (e *tea.SDKError) (_result *tea.SDKError) {
   var c interface{}
   _result = e
   return _result
+}
+
+func ArrayAccess () (_result *string) {
+  configs := []*string{tea.String("a"), tea.String("b"), tea.String("c")}
+  config := configs[0]
+  _result = config
+  return _result
+}
+
+func ArrayAccess2 () (_result *string) {
+  data := map[string][]*string{
+    "configs": []*string{tea.String("a"), tea.String("b"), tea.String("c")},
+  }
+  config := data["configs"][0]
+  _result = config
+  return _result
+}
+
+func ArrayAccess3 (request *ComplexRequest) (_result *string) {
+  configVal := request.configs.value[0]
+  _result = configVal
+  return _result
+}
+
+func ArrayAssign (config *string) (_result []*string) {
+  configs := []*string{tea.String("a"), tea.String("b"), tea.String("c")}
+  configs[3] = config
+  _result = configs
+  return _result
+}
+
+func ArrayAssign2 (config *string) (_result []*string) {
+  data := map[string][]*string{
+    "configs": []*string{tea.String("a"), tea.String("b"), tea.String("c")},
+  }
+  data["configs"][3] = config
+  _result = make([]*string, 0)
+  return _result
+}
+
+func ArrayAssign3 (request *ComplexRequest, config *string) {
+  request.configs.value[0] = config
+}
+
+func MapAccess (request *ComplexRequest) (_result *string) {
+  configInfo := request.configs.extra["name"]
+  _result = configInfo
+  return _result
+}
+
+func MapAccess2 (request *source.Request) (_result *string) {
+  configInfo := request.configs.extra["name"]
+  _result = configInfo
+  return _result
+}
+
+func MapAccess3 () (_result *string) {
+  data := map[string]map[string]*string{
+    "configs": map[string]*string{
+      "value": tea.String("string"),
+    },
+  }
+  _result = data["configs"]["value"]
+  return _result
+}
+
+func MapAssign (request *ComplexRequest, name *string) {
+  request.configs.extra["name"] = name
 }
 
