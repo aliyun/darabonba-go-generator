@@ -628,6 +628,8 @@ func PrintNull () (_err error) {
       return _err
     }
 
+
+    return nil
   }()
 
   return _err
