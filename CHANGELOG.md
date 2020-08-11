@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.6 - 2020-08-11
+
+> Add default return to try block.
+
 ## 1.0.5 - 2020-08-11
 
 > Support array_access.
