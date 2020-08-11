@@ -46,6 +46,8 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
           }
         }()
         in := tea.String("try")
+
+        return nil, nil
       }()
 
       if tryErr != nil {
@@ -81,6 +83,8 @@ func (client *Client) TryCatch () {
       }
     }()
     in := tea.String("try")
+
+    return nil
   }()
 
   if tryErr != nil {
@@ -103,6 +107,8 @@ func (client *Client) TryCatchWithReturn () (_result *string) {
       }
     }()
     in := tea.String("try")
+
+    return nil, nil
   }()
 
   if tryErr != nil {
