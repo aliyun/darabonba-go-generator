@@ -1,3 +1,9 @@
+import Source;
+
+model M {
+  subM: {}
+}
+
 model MyModel = {
   stringfield: string,
   stringarrayfield: [ string ],
@@ -6,9 +12,14 @@ model MyModel = {
   submodel: {
     stringfield: string,
   },
+  moduleModelMap: map[string]Source.Request,
+  subModelMap: map[string]M.subM,
+  modelMap: map[string]M,
+  moduleMap: map[string]Source,
   object: object,
   numberfield: integer,
   readable: readable,
   request: $Request,
   complexList: [ [ string ] ]
 };
+

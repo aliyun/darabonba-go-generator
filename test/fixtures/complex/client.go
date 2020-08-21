@@ -366,6 +366,10 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       name := tea.String("complex")
       var read io.Reader
       var byt []byte
+      moduleModelMapVal := make(map[string]*source.RuntimeObject)
+      moduleMapVal := make(map[string]*source.Client)
+      modelMapVal := make(map[string]*ComplexRequest)
+      subModelMapVal := make(map[string]*ComplexRequestHeader)
       var reqMap map[string]*ComplexRequest
       mapString := map[string]*string{
         "str": request.AccessKey,
