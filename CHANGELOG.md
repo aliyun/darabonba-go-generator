@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.7 - 2020-09-10
+
+> Support itemType when it's type is model and fix array error.
+
 ## 1.0.6 - 2020-08-11
 
 > Add default return to try block.
