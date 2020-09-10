@@ -367,3 +367,7 @@ static function mapAccess3(): string {
 static function mapAssign(request: ComplexRequest, name: string): void {
   request.configs.extra['name'] = name;
 }  
+
+static function arrayimport2(request: [ Source.Request ]): string {
+  return '';
+}

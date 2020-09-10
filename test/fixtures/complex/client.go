@@ -796,3 +796,8 @@ func MapAssign (request *ComplexRequest, name *string) {
   request.configs.extra["name"] = name
 }
 
+func Arrayimport2 (request []*source.Request) (_result *string) {
+  _result = tea.String("")
+  return _result
+}
+
