@@ -745,8 +745,15 @@ func ArrayAccess2 () (_result *string) {
 }
 
 func ArrayAccess3 (request *ComplexRequest) (_result *string) {
+  req := &source.Request{}
+  ArrayAccess4([]*source.Request{req})
   configVal := request.configs.value[0]
   _result = configVal
+  return _result
+}
+
+func ArrayAccess4 (requests []*source.Request) (_result *string) {
+  _result = tea.String("")
   return _result
 }
 
