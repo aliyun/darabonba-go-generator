@@ -323,8 +323,14 @@ static function arrayAccess2(): string {
 }
 
 static function arrayAccess3(request: ComplexRequest): string {
+  var req = new Source.Request{};
+  arrayAccess4([req]);
   var configVal = request.configs.value[0];
   return configVal;
+}
+
+static function arrayAccess4(requests: [ Source.Request ]): string {
+  return '';
 }
 
 static function arrayAssign(config: string): [ string ] {
