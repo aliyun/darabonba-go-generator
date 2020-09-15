@@ -449,6 +449,8 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       if _err != nil {
         return _result, _err
       }
+      _result = nil
+      return _result , _err
     }()
     if !tea.BoolValue(tea.Retryable(_err)) {
       break
@@ -619,7 +621,8 @@ func (client *Client) ExprFunc () (_result []*string, _err error) {
     "str": "string" + tea.ToString(tea.IntValue(num)),
     "str1": "string" + tea.StringValue(req.AccessKey),
   }
-  return _result, _err
+  _result = nil
+  return _result , _err
 }
 
 func PrintNull () (_err error) {
@@ -662,6 +665,7 @@ func (client *Client) ThrowsFunc () (_result *string, _err error) {
 }
 
 func (client *Client) ThrowsFunc1 () (_result *string, _err error) {
+  _result = tea.String("")
   return _result, _err
 }
 

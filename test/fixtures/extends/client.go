@@ -64,6 +64,8 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
         return _result, _err
       }
 
+      _result = nil
+      return _result , _err
     }()
     if !tea.BoolValue(tea.Retryable(_err)) {
       break
@@ -107,8 +109,8 @@ func (client *Client) TryCatchWithReturn () (_result *string) {
       }
     }()
     in := tea.String("try")
-
-    return nil, nil
+    _result = in
+    return _result , _err
   }()
 
   if tryErr != nil {
@@ -120,6 +122,7 @@ func (client *Client) TryCatchWithReturn () (_result *string) {
     }
     tmp := e.Message
   }
+  _result = tea.String("")
   return _result
 }
 

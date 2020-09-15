@@ -12,6 +12,7 @@ api _request(): object {
     }
 } returns {
     retry;
+    return null;
 } runtime {
 
 }
@@ -27,7 +28,9 @@ function tryCatch(): void {
 function tryCatchWithReturn(): string {
     try {
         var in = 'try';
+        return in;
     } catch (e){
         var tmp = e.message;
     }
+    return '';
 }
