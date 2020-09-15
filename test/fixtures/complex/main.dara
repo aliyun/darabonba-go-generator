@@ -143,6 +143,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   hello(null, null, null);
   return {};
   Complex3(null);
+  return null;
 } runtime {
   timeouted = 'retry'
 } 
@@ -224,6 +225,7 @@ async function exprFunc(): [ string ] {
     str = `string${num}`,
     str1 = `string${req.accessKey}`,
   };
+  return null;
 }
 
 static async function printNull(): void {
@@ -252,7 +254,9 @@ function throwsFunc() throws: string {
   return `/${@protocol}`;
 }
 
-function throwsFunc1() throws: string {}
+function throwsFunc1() throws: string {
+  return '';
+}
 
 function throwsFunc2() throws: void {
   throw {

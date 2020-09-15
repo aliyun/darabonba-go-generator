@@ -34,6 +34,8 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
       if _err != nil {
         return _result, _err
       }
+      _result = nil
+      return _result , _err
     }()
     if !tea.BoolValue(tea.Retryable(_err)) {
       break

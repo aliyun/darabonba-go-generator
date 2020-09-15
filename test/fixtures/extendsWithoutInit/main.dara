@@ -3,5 +3,6 @@ extends Source;
 
 api _request(): object {
 } returns {
+    return null;
 } runtime {
 }
