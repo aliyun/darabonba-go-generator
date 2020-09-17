@@ -122,7 +122,6 @@ func (client *Client) TryCatchWithReturn () (_result *string) {
     }
     tmp := e.Message
   }
-  _result = tea.String("")
   return _result
 }
 

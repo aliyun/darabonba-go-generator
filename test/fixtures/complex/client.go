@@ -665,7 +665,6 @@ func (client *Client) ThrowsFunc () (_result *string, _err error) {
 }
 
 func (client *Client) ThrowsFunc1 () (_result *string, _err error) {
-  _result = tea.String("")
   return _result, _err
 }
 
@@ -757,7 +756,6 @@ func ArrayAccess3 (request *ComplexRequest) (_result *string) {
 }
 
 func ArrayAccess4 (requests []*source.Request) (_result *string) {
-  _result = tea.String("")
   return _result
 }
 
@@ -808,7 +806,6 @@ func MapAssign (request *ComplexRequest, name *string) {
 }
 
 func Arrayimport2 (request []*source.Request) (_result *string) {
-  _result = tea.String("")
   return _result
 }
 
