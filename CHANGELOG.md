@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.8 - 2020-10-12
+
+> support type model with module name.
+
 ## 1.0.7 - 2020-09-10
 
 > Support itemType when it's type is model and fix array error.
