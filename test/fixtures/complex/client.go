@@ -642,6 +642,56 @@ func PrintNull () (_err error) {
   return _err
 }
 
+func TestTryWithComplexReturnType () (_result *source.Request, _err error) {
+  defer func() {
+    final := tea.String("ok")
+  }()
+  func()(_r *source.Request, _e error) {
+    str, _err := client.TemplateString()
+    if _err != nil {
+      return _result, _err
+    }
+
+
+    return nil, nil
+  }()
+
+  _result = nil
+  return _result , _err
+}
+
+func TestTryWithComplexReturnTypeWithOutCat () (_result *source.Request, _err error) {
+  defer func() {
+    final := tea.String("ok")
+  }()
+  _, tryErr := func()(_r *source.Request, _e error) {
+    defer func() {
+      if r := tea.Recover(recover()); r != nil {
+        _e = r
+      }
+    }()
+    str, _err := client.TemplateString()
+    if _err != nil {
+      return _result, _err
+    }
+
+
+    return nil, nil
+  }()
+
+  if tryErr != nil {
+    var e = &tea.SDKError{}
+    if _t, ok := tryErr.(*tea.SDKError); ok {
+      e = _t
+    } else {
+      e.SetErrMsg(tryErr.Error())
+    }
+    sim := tea.String("a")
+  }
+  _result = nil
+  return _result , _err
+}
+
 func Array0 (req map[string]interface{}) (_result []interface{}) {
   _result = make([]interface{}, 0)
   tea.Convert([]interface{}{}, &_result)
@@ -751,7 +801,7 @@ func ArrayAccess2 () (_result *string) {
 func ArrayAccess3 (request *ComplexRequest) (_result *string) {
   req := &source.Request{}
   ArrayAccess4([]*source.Request{req})
-  configVal := request.configs.value[0]
+  configVal := request.Configs.Value[0]
   _result = configVal
   return _result
 }
@@ -778,17 +828,17 @@ func ArrayAssign2 (config *string) (_result []*string) {
 }
 
 func ArrayAssign3 (request *ComplexRequest, config *string) {
-  request.configs.value[0] = config
+  request.Configs.Value[0] = config
 }
 
 func MapAccess (request *ComplexRequest) (_result *string) {
-  configInfo := request.configs.extra["name"]
+  configInfo := request.Configs.Extra["name"]
   _result = configInfo
   return _result
 }
 
 func MapAccess2 (request *source.Request) (_result *string) {
-  configInfo := request.configs.extra["name"]
+  configInfo := request.Configs.Extra["name"]
   _result = configInfo
   return _result
 }
@@ -804,7 +854,7 @@ func MapAccess3 () (_result *string) {
 }
 
 func MapAssign (request *ComplexRequest, name *string) {
-  request.configs.extra["name"] = name
+  request.Configs.Extra["name"] = name
 }
 
 func Arrayimport2 (request []*source.Request) (_result *string) {

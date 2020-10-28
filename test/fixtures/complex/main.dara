@@ -238,6 +238,28 @@ static async function printNull(): void {
   }
 }
 
+static async function testTryWithComplexReturnType(): Source.Request {
+  try {
+    var str = templateString();
+  } catch(e) {
+
+  } finally {
+    var final = 'ok';
+  }
+  return null;
+}
+
+static async function testTryWithComplexReturnTypeWithOutCat(): Source.Request {
+  try {
+    var str = templateString();
+  } catch(e) {
+    var sim = 'a';
+  } finally {
+    var final = 'ok';
+  }
+  return null;
+}
+
 static function array0(req: object): [ any ] {
   return [];
 }
