@@ -1,8 +1,12 @@
 # ChangeLog
 
+## 1.0.9 - 2020-10-30
+
+> Fix paramname error and try func response error
+
 ## 1.0.8 - 2020-10-12
 
-> support type model with module name.
+> Support type model with module name.
 
 ## 1.0.7 - 2020-09-10
 
