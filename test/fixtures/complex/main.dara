@@ -401,5 +401,9 @@ static function mapAssign(request: ComplexRequest, name: string): void {
 }  
 
 static function arrayimport2(request: [ Source.Request ]): string {
+  var s = `{
+    "a": "test",
+    "b": "ok"
+  }`;
   return '';
 }
