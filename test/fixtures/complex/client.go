@@ -858,6 +858,10 @@ func MapAssign (request *ComplexRequest, name *string) {
 }
 
 func Arrayimport2 (request []*source.Request) (_result *string) {
+  s := tea.String("{" + 
+"    "a": "test"," + 
+"    "b": "ok"" + 
+"  }")
   _result = tea.String("")
   return _result
 }
