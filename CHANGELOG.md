@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.10 - 2020-11-18
+
+> Support main func
+
 ## 1.0.9 - 2020-10-30
 
 > Fix paramname error and try func response error
