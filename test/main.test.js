@@ -18,7 +18,7 @@ function check(mainFilePath, outputDir, expectedPath, pkgInfo = {}) {
   const dsl = fs.readFileSync(mainFilePath, 'utf8');
   const ast = DSL.parse(dsl, mainFilePath);
   generator.visit(ast);
-  const clientPath = path.join(outputDir, 'client/client.go');
+  const clientPath = path.join(outputDir, pkgInfo.exec ? 'main/main.go':'client/client.go');
   const expected = fs.readFileSync(expectedPath, 'utf8');
   assert.deepStrictEqual(fs.readFileSync(clientPath, 'utf8'), expected);
 }
@@ -154,6 +154,18 @@ describe('new Generator', function() {
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/tea/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/tea'),
+      ...pkg
+    });
+  });
+
+  it('main should ok', function () {
+    const outputDir = path.join(__dirname, 'output/main');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/main/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    const mainFilePath = path.join(__dirname, 'fixtures/main/main.dara');
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/main/main.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/main'),
+      exec: true,
       ...pkg
     });
   });
