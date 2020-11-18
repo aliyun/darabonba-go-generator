@@ -1,0 +1,14 @@
+static async function main(args: [string]) throws : void {
+   throwError();
+   throw {
+     code = 'error',
+   };
+   var tmp = throwError0();
+   tmp = throwError1();
+}
+
+static async function throwError() throws : void;
+
+static async function throwError0() throws : string;
+
+static async function throwError1() throws : string;
