@@ -823,7 +823,7 @@ func ArrayAssign2 (config *string) (_result []*string) {
     "configs": []*string{tea.String("a"), tea.String("b"), tea.String("c")},
   }
   data["configs"][3] = config
-  _result = make([]*string, 0)
+  _result = data["configs"]
   return _result
 }
 
