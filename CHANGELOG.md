@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.12 - 2020-12-14
+
+> Fix ExpandField Error
+
 ## 1.0.10 - 2020-11-18
 
 > Support main func
