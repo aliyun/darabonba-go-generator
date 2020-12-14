@@ -563,7 +563,7 @@ func (client *Client) Complex3(request *ComplexRequest) (_result *ComplexRequest
   response_.StatusCode
   source.Array(tea.ToMap(request), tea.String("1"))
   _result = &ComplexRequest{}
-  _err = tea.Convert(request_.Query, &_result)
+  _err = tea.Convert(tea.Merge(request_.Query), &_result)
   return _result, _err
 }
 
@@ -760,7 +760,7 @@ func (client *Client) ReturnFunc2 () (_result map[string]interface{}) {
     var body io.Reader
     _result = make(map[string]interface{})
     _result.Body = body
-    tea.Convert(tmp, &_result)
+    tea.Convert(tea.ToMap(tmp), &_result)
     return _result
   }
 
