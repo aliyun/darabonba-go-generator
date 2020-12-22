@@ -13,7 +13,7 @@ import (
 */
 type Test struct {
   // Alichange app id 
-  Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
+  Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true" ignore:"true"`
 }
 
 func (s Test) String() string {

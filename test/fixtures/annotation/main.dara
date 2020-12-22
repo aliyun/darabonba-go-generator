@@ -7,7 +7,7 @@ type @a = string
   TestModel
 */
 model Test{
-  test: string(description='Alichange app id ', name='test')
+  test: string(description='Alichange app id ', ignore='true', name='test')
 }
 
 /**
