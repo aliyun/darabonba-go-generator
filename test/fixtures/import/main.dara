@@ -1,12 +1,12 @@
-import Source;
+import String;
 import LocalSource;
 
 init();
 
-type @sourceClient = Source;
+type @sourceClient = String;
 
-function Sample(client: Source): void {
-    var runtime = new Source.RuntimeObject{};
+function Sample(client: String): void {
+    var runtime = new String.RuntimeObject{};
     var request = new LocalSource.Request{
         accesskey = "accesskey",
         region = "region",
