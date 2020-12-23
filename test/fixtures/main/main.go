@@ -43,7 +43,7 @@ func ThrowError1 () (_result *string, _err error) {
 
 
 func main() {
-  err := _main(tea.StringSlice(os.Args))
+  err := _main(tea.StringSlice(os.Args[1:]))
   if err != nil {
     panic(err)
   }
