@@ -29,6 +29,7 @@ func (client *Client) Sample (client *string_.Client) {
     Accesskey: tea.String("accesskey"),
     Region: tea.String("region"),
   }
+  string_.StaticCall()
   client.Print(runtime)
   client.SourceClient.Print(runtime)
 }

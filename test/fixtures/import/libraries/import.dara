@@ -9,3 +9,7 @@ model Request = {
   accesskey?: string(name='accesskey', description='accesskey'),
   region?: string(name='region', description='region'),
 }
+
+static function staticCall(): void {
+  return;
+}
