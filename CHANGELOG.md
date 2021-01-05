@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.15 - 2021-01-05
+
+> Fix Model With Dot Error
+
 ## 1.0.14 - 2020-12-30
 
 > Fix Import Error
