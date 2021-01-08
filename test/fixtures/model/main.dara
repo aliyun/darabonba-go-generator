@@ -20,6 +20,12 @@ model MyModel = {
   numberfield: integer,
   readable: readable,
   request: $Request,
+  lists: [[string]],
+  arrays: [[
+    {
+      name: string,
+    }
+  ]],
   complexList: [ [ string ] ]
 };
 
