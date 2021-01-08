@@ -48,6 +48,8 @@ type MyModel struct {
   Numberfield *int `json:"numberfield,omitempty" xml:"numberfield,omitempty" require:"true"`
   Readable io.Reader `json:"readable,omitempty" xml:"readable,omitempty" require:"true"`
   Request *tea.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
+  Lists [][]*string `json:"lists,omitempty" xml:"lists,omitempty" require:"true" type:"Repeated"`
+  Arrays [][]*MyModelArrays `json:"arrays,omitempty" xml:"arrays,omitempty" require:"true" type:"Repeated"`
   ComplexList [][]*string `json:"complexList,omitempty" xml:"complexList,omitempty" require:"true" type:"Repeated"`
 }
 
@@ -124,6 +126,16 @@ func (s *MyModel) SetRequest(v *tea.Request) *MyModel {
   return s
 }
 
+func (s *MyModel) SetLists(v [][]*string) *MyModel {
+  s.Lists = v
+  return s
+}
+
+func (s *MyModel) SetArrays(v [][]*MyModelArrays) *MyModel {
+  s.Arrays = v
+  return s
+}
+
 func (s *MyModel) SetComplexList(v [][]*string) *MyModel {
   s.ComplexList = v
   return s
@@ -143,6 +155,23 @@ func (s MyModelSubmodel) GoString() string {
 
 func (s *MyModelSubmodel) SetStringfield(v string) *MyModelSubmodel {
   s.Stringfield = &v
+  return s
+}
+
+type MyModelArrays struct     {
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+}
+
+func (s MyModelArrays) String() string {
+  return tea.Prettify(s)
+}
+
+func (s MyModelArrays) GoString() string {
+  return s.String()
+}
+
+func (s *MyModelArrays) SetName(v string) *MyModelArrays {
+  s.Name = &v
   return s
 }
 
