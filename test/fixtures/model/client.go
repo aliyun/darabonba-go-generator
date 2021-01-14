@@ -2,6 +2,7 @@
 package client
 
 import (
+  "io"
   source  "github.com/aliyun/darabonba-go-generator/test"
   "github.com/alibabacloud-go/tea/tea"
 )

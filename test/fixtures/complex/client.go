@@ -3,6 +3,7 @@ package client
 
 import (
   "github.com/alibabacloud-go/tea"
+  "io"
   source  "github.com/aliyun/darabonba-go-generator/test"
   "github.com/alibabacloud-go/tea/tea"
 )
