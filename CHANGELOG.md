@@ -1,5 +1,10 @@
 # ChangeLog
 
+
+## 1.0.16 - 2021-01-14
+
+> Fix io import error
+
 ## 1.0.15 - 2021-01-05
 
 > Fix Model With Dot Error
