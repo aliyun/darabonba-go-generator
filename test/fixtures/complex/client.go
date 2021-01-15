@@ -593,7 +593,7 @@ func Print (reqeust *tea.Request, reqs []*ComplexRequest, response *tea.Response
 
 func AssignWithArray () (_err error) {
   var list []*string
-  list = tea.StringSlice([]*string{tea.String("test")})
+  list = []*string{tea.String("test")}
   var str *string
   str, _err = client.ThrowsFunc()
   if _err != nil {
