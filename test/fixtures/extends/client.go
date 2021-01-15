@@ -55,7 +55,7 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
         if _t, ok := tryErr.(*tea.SDKError); ok {
           e = _t
         } else {
-          e.SetErrMsg(tryErr.Error())
+          e.Message = tea.String(tryErr.Error())
         }
         tmp := e.Message
       }
@@ -94,7 +94,7 @@ func (client *Client) TryCatch () {
     if _t, ok := tryErr.(*tea.SDKError); ok {
       e = _t
     } else {
-      e.SetErrMsg(tryErr.Error())
+      e.Message = tea.String(tryErr.Error())
     }
     tmp := e.Message
   }
@@ -118,7 +118,7 @@ func (client *Client) TryCatchWithReturn () (_result *string) {
     if _t, ok := tryErr.(*tea.SDKError); ok {
       e = _t
     } else {
-      e.SetErrMsg(tryErr.Error())
+      e.Message = tea.String(tryErr.Error())
     }
     tmp := e.Message
   }

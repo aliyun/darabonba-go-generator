@@ -685,7 +685,7 @@ func TestTryWithComplexReturnTypeWithOutCat () (_result *source.Request, _err er
     if _t, ok := tryErr.(*tea.SDKError); ok {
       e = _t
     } else {
-      e.SetErrMsg(tryErr.Error())
+      e.Message = tea.String(tryErr.Error())
     }
     sim := tea.String("a")
   }
