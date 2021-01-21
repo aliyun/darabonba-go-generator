@@ -407,3 +407,11 @@ static function arrayimport2(request: [ Source.Request ]): string {
   }`;
   return '';
 }
+
+static async function defaultReturn(): void {
+  if (true) {
+
+  } else {
+    
+  }
+}  
