@@ -867,3 +867,11 @@ func Arrayimport2 (request []*source.Request) (_result *string) {
   return _result
 }
 
+func DefaultReturn () (_err error) {
+  if true {
+  } else {
+  }
+
+  return _err
+}
+
