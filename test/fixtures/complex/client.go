@@ -375,6 +375,12 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       mapString := map[string]*string{
         "str": request.AccessKey,
       }
+      inte := tea.Int(1)
+      a := tea.Int(1)
+      var b *int32
+      b = tea.ToInt32(a)
+      c := a
+      IntToInt32(tea.ToInt32(a))
       mapVal := map[string]interface{}{
         "read": read,
         "test": "ok",
@@ -402,7 +408,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       req := &ComplexRequest{
         B: tea.Bool(false),
         Num: tea.Int(10),
-        I32: tea.Int32(10000),
+        I32: tea.ToInt32(a),
         IntList: []*int{tea.Int(10), tea.Int(11)},
         StringList: []*string{tea.String("10"), tea.String("11")},
         BooleantList: []*bool{tea.Bool(true), tea.Bool(false)},
@@ -588,6 +594,10 @@ func (client *Client) Hello (request map[string]interface{}, strs []*string, com
 }
 
 func Print (reqeust *tea.Request, reqs []*ComplexRequest, response *tea.Response, val map[string]*string) (_result *source.Request, _err error) {
+  panic("No Support!")
+}
+
+func IntToInt32 (a *int32) {
   panic("No Support!")
 }
 

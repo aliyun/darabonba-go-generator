@@ -71,6 +71,7 @@ async function hello(request: object, strs: [ string ], complexList: [[string]])
 
 static async function print(reqeust: $Request, reqs: [ ComplexRequest ], response: $Response, val: map[string]string): Source.Request;
 
+static function intToInt32(a: int32):void;
 api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var name = 'complex';
   var read : readable = null;
@@ -83,6 +84,12 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var mapString = {
     str = request.accessKey,
   };
+  var inte : integer = 1;
+  var a : integer = 1;
+  var b : int32 = null;
+  b = a;
+  var c : int32 = a;
+  intToInt32(a);
   var mapVal = {
     read = read,
     test = "ok",
@@ -110,7 +117,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   var req = new ComplexRequest{
     b = false,
     num = 10,
-    i32 = 10000,
+    i32 = a,
     intList = [10,11],
     stringList = ['10','11'],
     booleantList = [ true, false ],
