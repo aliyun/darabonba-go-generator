@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.0.18 - 2021-01-22
+
+> Fix Default Return Error
+> Fix Int Type Error
+
 ## 1.0.17 - 2021-01-15
 
 > Fix Array Error
