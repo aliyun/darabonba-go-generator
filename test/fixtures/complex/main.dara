@@ -92,7 +92,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   intToInt32(a);
   var mapVal = {
     read = read,
-    test = "ok",
+    test = '{"test":"ok"}',
     b = request.b,
     num = request.num,
     u16 = request.u16,

@@ -383,7 +383,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       IntToInt32(tea.ToInt32(a))
       mapVal := map[string]interface{}{
         "read": read,
-        "test": "ok",
+        "test": "{\"test\":\"ok\"}",
         "b": tea.BoolValue(request.B),
         "num": tea.IntValue(request.Num),
         "u16": tea.Uint16Value(request.U16),
