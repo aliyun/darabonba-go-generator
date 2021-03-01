@@ -40,6 +40,9 @@ describe('helper', function () {
     type =  _type('bytes');
     expect(type).to.equal('[]byte');
 
+    type =  _type('int64');
+    expect(type).to.equal('int64');
+
     type =  _type('uint64');
     expect(type).to.equal('uint64');
 
@@ -54,6 +57,12 @@ describe('helper', function () {
 
     type =  _type('uint32');
     expect(type).to.equal('uint32');
+
+    type =  _type('int8');
+    expect(type).to.equal('int8');
+
+    type =  _type('uint8');
+    expect(type).to.equal('uint8');
 
     type =  _type('$Response');
     expect(type).to.equal('*tea.Response');
