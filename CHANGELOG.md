@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.19 - 2021-03-02
+
+> Fix Set Function Param Error
+
 ## 1.0.18 - 2021-01-22
 
 > Fix Default Return Error
