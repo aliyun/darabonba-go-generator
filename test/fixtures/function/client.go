@@ -32,3 +32,110 @@ func HelloParams (a *string, b *string) (_err error) {
   return _err
 }
 
+func HelloTest (a *string) (_result *string, _err error) {
+  _result = a
+  return _result , _err
+}
+
+func EqualString (a *string, b *string) (_result *bool, _err error) {
+  _result = tea.Bool(true)
+  return _result, _err
+}
+
+func HelloTestNestReturn (a *string, b *string) (_result *bool, _err error) {
+  helloTestTmp, err := HelloTest(a)
+  if err != nil {
+    _err = err
+    return
+  }
+  helloTestTmp1, err := HelloTest(b)
+  if err != nil {
+    _err = err
+    return
+  }
+  _body, _err := EqualString(helloTestTmp, helloTestTmp1)
+  if _err != nil {
+    return _result, _err
+  }
+  _result = _body
+  return _result, _err
+}
+
+func HelloTestNestDeclar (a *string, b *string) (_result *bool, _err error) {
+  helloTestTmp, err := HelloTest(a)
+  if err != nil {
+    _err = err
+    return
+  }
+  helloTestTmp1, err := HelloTest(b)
+  if err != nil {
+    _err = err
+    return
+  }
+  tmp, _err := EqualString(helloTestTmp, helloTestTmp1)
+  if _err != nil {
+    return _result, _err
+  }
+
+  _result = tmp
+  return _result , _err
+}
+
+func HelloTestNestIf (a *string, b *string) (_result *bool, _err error) {
+  helloTestTmp, err := HelloTest(a)
+  if err != nil {
+    _err = err
+    return
+  }
+  helloTestTmp1, err := HelloTest(b)
+  if err != nil {
+    _err = err
+    return
+  }
+  if tea.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
+    _result = tea.Bool(true)
+    return _result, _err
+  }
+
+  _result = tea.Bool(false)
+  return _result, _err
+}
+
+func HelloTestNestFor (a *string, b *string) (_result *bool, _err error) {
+  helloTestTmp, err := HelloTest(a)
+  if err != nil {
+    _err = err
+    return
+  }
+  helloTestTmp1, err := HelloTest(b)
+  if err != nil {
+    _err = err
+    return
+  }
+  for tea.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
+    _result = tea.Bool(true)
+    return _result, _err
+  }
+  _result = tea.Bool(false)
+  return _result, _err
+}
+
+func HelloTestNestFor1 (a *string, b *string) (_result *bool, _err error) {
+  helloTestTmp, err := HelloTest(a)
+  if err != nil {
+    _err = err
+    return
+  }
+  helloTestTmp1, err := HelloTest(b)
+  if err != nil {
+    _err = err
+    return
+  }
+  for tea.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
+    _result = tea.Bool(true)
+    return _result, _err
+  }
+  _result = tea.Bool(false)
+  return _result, _err
+}
+
