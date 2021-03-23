@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.21 - 2021-03-23
+
+> Fix Api generator failed
+
 ## 1.0.18 - 2021-01-22
 
 > Fix Default Return Error
