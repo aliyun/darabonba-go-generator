@@ -46,12 +46,12 @@ func HelloTestNestReturn (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   _body, _err := EqualString(helloTestTmp, helloTestTmp1)
   if _err != nil {
@@ -65,12 +65,12 @@ func HelloTestNestDeclar (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   tmp, _err := EqualString(helloTestTmp, helloTestTmp1)
   if _err != nil {
@@ -85,12 +85,12 @@ func HelloTestNestIf (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   if tea.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
     _result = tea.Bool(true)
@@ -105,12 +105,12 @@ func HelloTestNestFor (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   for tea.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
     _result = tea.Bool(true)
@@ -124,12 +124,12 @@ func HelloTestNestFor1 (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return
+    return _result, _err
   }
   for tea.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
     _result = tea.Bool(true)
