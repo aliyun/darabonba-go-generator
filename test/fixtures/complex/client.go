@@ -449,7 +449,6 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       if _err != nil {
         return _result, _err
       }
-      _result = &source.RuntimeObject{}
       _err = tea.Convert(map[string]interface{}{}, &_result)
       return _result, _err
       _, _err = client.Complex3(nil)
@@ -569,7 +568,6 @@ func (client *Client) Complex3(request *ComplexRequest) (_result *ComplexRequest
   }
   response_.StatusCode
   source.Array(tea.ToMap(request), tea.String("1"))
-  _result = &ComplexRequest{}
   _err = tea.Convert(tea.Merge(request_.Query), &_result)
   return _result, _err
 }
@@ -587,7 +585,6 @@ func (client *Client) NoReturn() (_err error) {
 
 func (client *Client) Hello (request map[string]interface{}, strs []*string, complexList [][]*string) (_result []*string, _err error) {
   var a [][]*string
-  _result = make([]*string, 0)
   _body := Array1()
   _result = _body
   return _result, _err
@@ -704,13 +701,11 @@ func TestTryWithComplexReturnTypeWithOutCat () (_result *source.Request, _err er
 }
 
 func Array0 (req map[string]interface{}) (_result []interface{}) {
-  _result = make([]interface{}, 0)
   tea.Convert([]interface{}{}, &_result)
   return _result
 }
 
 func Array1 () (_result []*string) {
-  _result = make([]*string, 0)
   tea.Convert([]*string{tea.String("1")}, &_result)
   return _result
 }
@@ -751,8 +746,10 @@ func (client *Client) ReturnFunc () (_result *string) {
 
 func (client *Client) ReturnFunc1 (cfg *source.Config) (_result *source.Client) {
   config := &source.Config{}
-  _result = &source.Client{}
-  _result, _err = source.NewClient(config)
+  _result, _err := source.NewClient(config)
+  if _err != nil {
+    panic(_err)
+  }
   return _result
 }
 
@@ -764,12 +761,10 @@ func (client *Client) ReturnFunc2 () (_result map[string]interface{}) {
     "test": tmp,
   }
   if true {
-    _result = make(map[string]interface{})
     _result = mapVal["test"]
     return _result
   } else {
     var body io.Reader
-    _result = make(map[string]interface{})
     _result.Body = body
     tea.Convert(tea.ToMap(tmp), &_result)
     return _result

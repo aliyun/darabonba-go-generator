@@ -12,7 +12,6 @@ func Hello () {
 
 func HelloMap () (_result map[string]*string) {
   m := make(map[string]*string)
-  _result = make(map[string]*string)
   tea.Convert(tea.Merge(map[string]*string{
     "key": tea.String("value"),
     "key-1": tea.String("value-1"),
@@ -21,7 +20,6 @@ func HelloMap () (_result map[string]*string) {
 }
 
 func HelloArrayMap () (_result []map[string]*string) {
-  _result = make([]map[string]*string, 0)
   tea.Convert([]map[string]*string{map[string]*string{
       "key": tea.String("value"),
     }}, &_result)
