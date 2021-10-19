@@ -1,0 +1,81 @@
+import Source;
+
+init(){}
+
+// api返回一个引用的模型构造
+api apiReturnConstruct(): Source.RuntimeObject {
+
+}returns{
+  return new Source.RuntimeObject{};
+}runtime{
+   timeouted = 'retry'
+}
+
+
+// 返回一个其他方法的调用结果
+function returnInString(a: string): string {
+  return a;
+}
+function returnFuncResult(a: string, b: string): boolean {
+  return returnBoolean(returnInString(a), returnInString(b));
+}
+
+// 返回一个模版字符串
+type @protocol = string
+function returnTemplateString(): string {
+  return `/${@protocol}`;
+}
+
+
+// 返回一个匿名对象
+function returnMap(): map[string]string {
+  var m: map[string]string = {};
+  return {
+    key = 'value',
+    key-1 = 'value-1',
+    ...m,
+  };
+}
+
+// 返回一个集合类型
+function returnItems(): [ string ] {
+  return ["1"];
+}
+
+// 返回一个构造器
+// fixme 这里如果不加throws，生成的代码会有编译错误
+// 确定一下 如果没有throws的话是painc中断，还是要忽略err
+function returnConstruct(cfg: Source.Config): Source {
+  var config = new Source.Config{};
+  return new Source(config);
+}
+
+// 返回一个map的值
+// fixme 如果这里定义map时 只有一种类型的值。会导致生成的golang map类型不是interface，产生编译错误。
+function returnMapValue(): map[string]any {
+  var tmp: map[string]any = {
+    str = 'ok',
+  };
+  var mapVal = {
+    test = tmp,
+  };
+  return mapVal['test'];
+}
+
+// 返回一个基本类型
+function returnBoolean(a: string, b: string): boolean {
+  return true;
+}
+
+// 返回一个模型的构造
+function returnModel(): ComplexRequest {
+  return new ComplexRequest{};
+}
+
+model ComplexRequest = {
+    accessKey: string
+}
+
+
+
+
