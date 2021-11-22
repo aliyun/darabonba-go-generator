@@ -1,0 +1,28 @@
+{
+  "scope": "alibabacloud",
+  "name": "fc-sdk-test",
+  "version": "1.0.0",
+  "main": "./main.tea",
+  "libraries": {
+  },
+  "java": {
+    "package": "com.alibabacloud.fctest"
+  },
+  "php": {
+    "package": "Alibabacloud.FcTest"
+  },
+  "csharp": {
+    "namespace": "Alibabacloud.FcTest"
+  },
+  "typescript": {
+    "package": ""
+  },
+  "go": {
+    "package": "",
+    "interface": true,
+    "clientName": "SPI"
+  },
+  "python": {
+    "package": "alibabacloud_fc_test"
+  }
+}

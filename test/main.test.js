@@ -169,4 +169,16 @@ describe('new Generator', function() {
       ...pkg
     });
   });
+
+  it('interface should ok', function () {
+    const outputDir = path.join(__dirname, 'output/interface');
+    const mainFilePath = path.join(__dirname, 'fixtures/interface/main.tea');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/interface/Teafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/interface/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/interface'),
+      ...pkg
+    });
+  });
+
 });
