@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.22 - 2021-11-24
+
+> Add interface
+
 ## 1.0.21 - 2021-03-23
 
 > Fix Api generator failed
