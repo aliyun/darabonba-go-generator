@@ -6,8 +6,8 @@ import (
 )
 
 type SPIInterface interface {
-  STest (a *string) (_result *string) {
-  Test (a *string) (_result *string) {
+  STest (a *string) (_result *string) 
+  Test (a *string) (_result *string) 
 }
 
 type Client struct {
