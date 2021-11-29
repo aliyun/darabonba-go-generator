@@ -1,6 +1,9 @@
 init()
 
 static async function SATest(a: string): string {
+  var subResourcesMap : map[string]string = {};
+  var key : string = 'key';
+  subResourcesMap[key] = 'value'; 
   return a;
 }
 
