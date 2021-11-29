@@ -26,6 +26,9 @@ func (client *Client)Init()(_err error) {
 
 
 func SATest (a *string) (_result *string, _err error) {
+  subResourcesMap := make(map[string]*string)
+  key := tea.String("key")
+  subResourcesMap[tea.StringValue(key)] = tea.String("value")
   _result = a
   return _result , _err
 }
