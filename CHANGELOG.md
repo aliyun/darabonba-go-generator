@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.0.23 - 2021-11-29
+
+> Fix interface
+> Support put key in map when key is variable
+
 ## 1.0.22 - 2021-11-24
 
 > Add interface
