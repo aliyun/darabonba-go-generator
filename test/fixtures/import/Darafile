@@ -5,6 +5,7 @@
   "main": "./main.dara",
   "libraries": {
     "String": "darabonba:Import:*",
+    "Map": "darabonba:Import:*",
     "LocalSource": "./localLib"
   }
 }
