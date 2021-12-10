@@ -10,16 +10,16 @@ type SPIInterface interface {
   Test (a *string) (_result *string) 
 }
 
-type Client struct {
+type SPI struct {
 }
 
-func NewClient()(*Client, error) {
-  client := new(Client)
+func NewClient()(*SPI, error) {
+  client := new(SPI)
   err := client.Init()
   return client, err
 }
 
-func (client *Client)Init()(_err error) {
+func (client *SPI)Init()(_err error) {
   return nil
 }
 
@@ -33,12 +33,12 @@ func SATest (a *string) (_result *string, _err error) {
   return _result , _err
 }
 
-func (client *Client) STest (a *string) (_result *string, _err error) {
+func (client *SPI) STest (a *string) (_result *string, _err error) {
   _result = a
   return _result , _err
 }
 
-func (client *Client) Test (a *string) (_result *string) {
+func (client *SPI) Test (a *string) (_result *string) {
   _result = a
   return _result
 }

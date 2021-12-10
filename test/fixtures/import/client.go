@@ -3,12 +3,14 @@ package client
 
 import (
   string_  "github.com/aliyun/darabonba-go-generator/test"
+  map_  "github.com/aliyun/darabonba-go-generator/test"
   localsource  "github.com/aliyun/darabonba-go-generator"
   "github.com/alibabacloud-go/tea/tea"
 )
 
 type Client struct {
   SourceClient  *string_.Client
+  SourceMap  *map_.Client
 }
 
 func NewClient()(*Client, error) {
@@ -23,7 +25,7 @@ func (client *Client)Init()(_err error) {
 
 
 
-func (client *Client) Sample (client *string_.Client) {
+func (client *Client) Sample (client *string_.Client, test *map_.Client) {
   runtime := &string_.RuntimeObject{}
   request := &localsource.Request{
     Accesskey: tea.String("accesskey"),
