@@ -1,45 +1,48 @@
 // This file is auto-generated, don't edit it. Thanks.
+/**
+ *
+ */
 package client
 
 import (
+  spi  "github.com/alibabacloud-go/alibabacloud-gateway-spi/client"
+  gatewayclient  "github.com/alibabacloud-go/alibabacloud-gateway-sls/client"
+  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
   "github.com/alibabacloud-go/tea/tea"
 )
 
-type SPIInterface interface {
-  STest (a *string) (_result *string) 
-  Test (a *string) (_result *string) 
+type Client struct {
+  openapi.Client
 }
 
-type SPI struct {
-}
-
-func NewClient()(*SPI, error) {
-  client := new(SPI)
-  err := client.Init()
+func NewClient(config *openapi.Config)(*Client, error) {
+  client := new(Client)
+  err := client.Init(config)
   return client, err
 }
 
-func (client *SPI)Init()(_err error) {
+func (client *Client)Init(config *openapi.Config)(_err error) {
+  _err = client.Client.Init(config  )
+  if _err != nil {
+    return _err
+  }
+  interfaceSPI, _err := gatewayclient.NewClient()
+  if _err != nil {
+    return _err
+  }
+
+  client.Spi =   interfaceSPI.Client
+  client.EndpointRule = tea.String("central")
+  client.EndpointMap = map[string]*string{
+    "cn-hangzhou": tea.String("sls.cn-hangzhou.aliyuncs.com"),
+  }
   return nil
 }
 
 
 
-func SATest (a *string) (_result *string, _err error) {
-  subResourcesMap := make(map[string]*string)
-  key := tea.String("key")
-  subResourcesMap[tea.StringValue(key)] = tea.String("value")
-  _result = a
-  return _result , _err
-}
-
-func (client *SPI) STest (a *string) (_result *string, _err error) {
-  _result = a
-  return _result , _err
-}
-
-func (client *SPI) Test (a *string) (_result *string) {
-  _result = a
-  return _result
+func (client *Client) Test (project *string, logstore *string) (_result *string, _err error) {
+  _result = tea.String("")
+  return _result, _err
 }
 
