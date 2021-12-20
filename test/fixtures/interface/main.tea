@@ -1,16 +1,26 @@
-init()
+/**
+ *
+ */
+import SPI;
+import GatewayClient;
+import OpenApi;
 
-static async function SATest(a: string): string {
-  var subResourcesMap : map[string]string = {};
-  var key : string = 'key';
-  subResourcesMap[key] = 'value'; 
-  return a;
+extends OpenApi;
+
+type @client = SPI
+
+init(config: OpenApi.Config){
+  super(config);
+  @client = new GatewayClient();
+  @spi = @client;
+  @endpointRule = 'central';
+  @endpointMap = {
+    cn-hangzhou = 'sls.cn-hangzhou.aliyuncs.com',
+  };
 }
 
-async function STest(a: string): string {
-  return a;
+async function test(project: string, logstore: string): string {
+  return "";
 }
 
-function Test(a: string): string {
-  return a;
-}
+
