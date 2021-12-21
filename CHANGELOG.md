@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.0.24 - 2021-12-21
+
+> Support clientName
+> Fix map import
+> Fix interface && extends
+
 ## 1.0.23 - 2021-11-29
 
 > Fix interface
