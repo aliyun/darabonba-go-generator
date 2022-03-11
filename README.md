@@ -5,7 +5,7 @@ English | [简体中文](/README-zh-CN.md)
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![codecov][cov-image]][cov-url]
-[![David deps][david-image]][david-url]
+[![dependency status][deps-image]][deps-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/@darabonba/go-generator.svg?style=flat-square
@@ -14,8 +14,8 @@ English | [简体中文](/README-zh-CN.md)
 [travis-url]: https://travis-ci.org/aliyun/darabonba-go-generator
 [cov-image]: https://codecov.io/gh/aliyun/darabonba-go-generator/branch/master/graph/badge.svg
 [cov-url]: https://codecov.io/gh/aliyun/darabonba-go-generator
-[david-image]: https://img.shields.io/david/aliyun/darabonba-go-generator.svg?style=flat-square
-[david-url]: https://david-dm.org/aliyun/darabonba-go-generator
+[deps-image]: https://img.shields.io/librariesio/release/npm/@darabonba/go-generator
+[deps-url]: https://libraries.io/npm/@darabonba%2Fgo-generator
 [download-image]: https://img.shields.io/npm/dm/@darabonba/go-generator.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@darabonba/go-generator
 
