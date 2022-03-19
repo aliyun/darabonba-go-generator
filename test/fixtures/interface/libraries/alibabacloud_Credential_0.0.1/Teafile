@@ -1,0 +1,14 @@
+{
+  "scope": "alibabacloud",
+  "version": "0.0.1",
+  "name": "Credential",
+  "main": "./credential.tea",
+  "libraries": {},
+  "manual": 1,
+  "releases": {
+    "go": "github.com/aliyun/credentials-go/credentials:v1.1.2"
+  },
+  "go": {
+    "clientName": "Credential"
+  }
+}

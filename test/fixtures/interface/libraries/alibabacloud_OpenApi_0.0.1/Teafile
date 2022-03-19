@@ -1,0 +1,23 @@
+{
+  "scope": "alibabacloud",
+  "name": "OpenApi",
+  "version": "0.0.1",
+  "main": "./main.tea",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "SPI": "alibabacloud:GatewaySPI:*"
+  },
+  "releases": {
+    "go": "github.com/alibabacloud-go/darabonba-openapi/client:v0.1.14"
+  },
+  "go": {
+    "package": [
+      "io"
+    ]
+  }
+}

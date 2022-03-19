@@ -33,7 +33,8 @@
 	"libraries": {
 		"OpenApi": "alibabacloud:OpenApi:*",
 		"SPI": "alibabacloud:GatewaySPI:*",
-		"GatewayClient": "alibabacloud:GatewaySLS:*"
+		"GatewayClient": "alibabacloud:GatewaySLS:*",
+		"Credential": "alibabacloud:Credential:*"
 	},
 	"csharp": {
 		"className": "Client",

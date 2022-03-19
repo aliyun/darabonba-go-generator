@@ -1,0 +1,53 @@
+import Credential;
+
+init();
+
+model InterceptorContext = {
+  request: {
+    headers?: map[string]string,
+    query?: map[string]string,
+    body?: any,
+    stream?: readable,
+    hostMap?: map[string]string,
+    pathname: string,
+    productId: string,
+    action: string,
+    version: string,
+    protocol: string,
+    method: string,
+    authType: string,
+    bodyType: string,
+    reqBodyType: string,
+    style?: string,
+    credential: Credential,
+    signatureVersion?: string,
+    signatureAlgorithm?: string,
+    userAgent: string
+  },
+  configuration: {
+    regionId: string,
+    endpoint?: string,
+    endpointRule?: string,
+    endpointMap?: map[string]string,
+    endpointType?: string,
+    network?: string,
+    suffix?: string
+  },
+  response: {
+    statusCode?: number,
+    headers?: map[string]string,
+    body?: readable,
+    deserializedBody?: any,
+  }
+}
+
+model AttributeMap = {
+  attributes: map[string]any,
+  key: map[string]string,
+}
+
+async function modifyConfiguration(context: InterceptorContext, attributeMap: AttributeMap): void
+
+async function modifyRequest(context: InterceptorContext, attributeMap: AttributeMap): void
+
+async function modifyResponse(context: InterceptorContext, attributeMap: AttributeMap): void

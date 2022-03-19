@@ -170,12 +170,22 @@ describe('new Generator', function() {
     });
   });
 
-  it('interface should ok', function () {
+  it('interface access should ok', function () {
     const outputDir = path.join(__dirname, 'output/interface');
     const mainFilePath = path.join(__dirname, 'fixtures/interface/main.tea');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/interface/Teafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/interface/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/interface'),
+      ...pkg
+    });
+  });
+  it('interface should ok', function () {
+    const outputDir = path.join(__dirname, 'output/interface');
+    const mainFilePath = path.join(__dirname, 'fixtures/interface/spi.tea');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/interface/Teafile1'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/interface/spi.go'), {
       pkgDir: path.join(__dirname, 'fixtures/interface'),
       ...pkg
     });

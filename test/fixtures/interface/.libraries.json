@@ -1,0 +1,6 @@
+{
+  "alibabacloud:OpenApi:*": "libraries/alibabacloud_OpenApi_0.0.1",
+  "alibabacloud:GatewaySPI:*": "libraries/alibabacloud_GatewaySPI_0.0.1",
+  "alibabacloud:GatewaySLS:*": "libraries/alibabacloud_GatewaySLS_0.0.1",
+  "alibabacloud:Credential:*": "libraries/alibabacloud_Credential_0.0.1"
+}

@@ -1,0 +1,22 @@
+/**
+ * This is for OpenApi SDK
+ */
+import SPI;
+
+type @endpoint = string
+type @spi = SPI
+
+/**
+ * Model for initing client
+ */
+model Config {
+  endpoint?: string(description='endpoint',example='cs.aliyuncs.com',default=''),
+}
+
+/**
+ * Init client with Config
+ * @param config config contains the necessary information to create a client
+ */
+init(config: Config) {
+  @endpoint = config.endpoint;
+}
