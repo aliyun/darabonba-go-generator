@@ -1,0 +1,25 @@
+{
+  "scope": "alibabacloud",
+  "name": "SPI",
+  "version": "0.0.1",
+  "main": "./spi.tea",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "Credential": "alibabacloud:Credential:*"
+  },
+  "releases": {
+    "go": "github.com/alibabacloud-go/alibabacloud-gateway-spi/client:v0.0.1"
+  },
+  "go": {
+    "package": [
+      "io"
+    ],
+    "interface": true,
+    "clientName": "Client"
+  }
+}

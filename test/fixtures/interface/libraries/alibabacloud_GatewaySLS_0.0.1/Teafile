@@ -1,0 +1,23 @@
+{
+  "scope": "alibabacloud",
+  "name": "GatewaySLS",
+  "version": "0.0.1",
+  "main": "./main.tea",
+  "maintainers": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
+  "libraries": {
+    "SPI": "alibabacloud:GatewaySPI:*"
+  },
+  "releases": {
+    "go": "github.com/alibabacloud-go/alibabacloud-gateway-sls/client:v0.0.1"
+  },
+  "go": {
+    "package": [
+      "io"
+    ]
+  }
+}

@@ -13,10 +13,6 @@ init(config: OpenApi.Config){
   super(config);
   @client = new GatewayClient();
   @spi = @client;
-  @endpointRule = 'central';
-  @endpointMap = {
-    cn-hangzhou = 'sls.cn-hangzhou.aliyuncs.com',
-  };
 }
 
 async function test(project: string, logstore: string): string {
