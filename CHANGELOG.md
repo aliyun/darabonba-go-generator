@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.25 - 2022-03-21
+
+> Fix interface init & access
+
 ## 1.0.24 - 2021-12-21
 
 > Support clientName
