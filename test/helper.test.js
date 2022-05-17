@@ -3,288 +3,296 @@
 const expect = require('expect.js');
 
 const {
-  _name, _string, _type, _format, _initValue, _avoidReserveName, 
-  _setExtendFunc, _pointerType
+  _name, _string, _type, _format, _initValue, _avoidReserveName,
+  _setExtendFunc, _pointerType, _importFilter
 } = require('../lib//helper');
 
 describe('helper', function () {
   it('_name should ok', function () {
-    var name =  _name({lexeme: 'helper'});
+    var name = _name({ lexeme: 'helper' });
     expect(name).to.equal('helper');
 
-    name =  _name({name: 'name'});
+    name = _name({ name: 'name' });
     expect(name).to.equal('name');
   });
 
+  it('_importFilter should ok', function () {
+    expect('test').to.equal(_importFilter('test'));
+    expect('String_').to.equal(_importFilter('String'));
+    expect('string_').to.equal(_importFilter('string'));
+    expect('Map').to.equal(_importFilter('Map'));
+    expect('map_').to.equal(_importFilter('map'));
+  });
+
   it('_string should ok', function () {
-    var name =  _string({string: 'helper'});
+    var name = _string({ string: 'helper' });
     expect(name).to.equal('helper');
   });
 
   it('_type should ok', function () {
-    var type =  _type('object');
+    var type = _type('object');
     expect(type).to.equal('map[string]interface{}');
 
-    type =  _type('integer');
+    type = _type('integer');
     expect(type).to.equal('int');
-    
-    type =  _type('$Error');
+
+    type = _type('$Error');
     expect(type).to.equal('*tea.SDKError');
 
-    type =  _type('number');
+    type = _type('number');
     expect(type).to.equal('int');
 
-    type =  _type('readable');
+    type = _type('readable');
     expect(type).to.equal('io.Reader');
 
-    type =  _type('bytes');
+    type = _type('bytes');
     expect(type).to.equal('[]byte');
 
-    type =  _type('int64');
+    type = _type('int64');
     expect(type).to.equal('int64');
 
-    type =  _type('uint64');
+    type = _type('uint64');
     expect(type).to.equal('uint64');
 
-    type =  _type('int32');
+    type = _type('int32');
     expect(type).to.equal('int32');
 
-    type =  _type('int16');
+    type = _type('int16');
     expect(type).to.equal('int16');
 
-    type =  _type('uint16');
+    type = _type('uint16');
     expect(type).to.equal('uint16');
 
-    type =  _type('uint32');
+    type = _type('uint32');
     expect(type).to.equal('uint32');
 
-    type =  _type('int8');
+    type = _type('int8');
     expect(type).to.equal('int8');
 
-    type =  _type('uint8');
+    type = _type('uint8');
     expect(type).to.equal('uint8');
 
-    type =  _type('$Response');
+    type = _type('$Response');
     expect(type).to.equal('*tea.Response');
 
-    type =  _type('$Request');
+    type = _type('$Request');
     expect(type).to.equal('*tea.Request');
 
-    type =  _type('writeable');
+    type = _type('writeable');
     expect(type).to.equal('io.Writer');
 
-    type =  _type('double');
+    type = _type('double');
     expect(type).to.equal('float64');
 
-    type =  _type('long');
+    type = _type('long');
     expect(type).to.equal('int64');
 
-    type =  _type('int64');
+    type = _type('int64');
     expect(type).to.equal('int64');
 
-    type =  _type('float');
+    type = _type('float');
     expect(type).to.equal('float32');
 
-    type =  _type('boolean');
+    type = _type('boolean');
     expect(type).to.equal('bool');
 
-    type =  _type('any');
+    type = _type('any');
     expect(type).to.equal('interface{}');
 
-    type =  _type('string');
+    type = _type('string');
     expect(type).to.equal('string');
 
-    type =  _type('struct');
+    type = _type('struct');
     expect(type).to.equal('*struct');
   });
 
   it('_format should ok', function () {
-    var name =  _format('a-b');
+    var name = _format('a-b');
     expect(name).to.equal('AB');
   });
 
   it('_initValue should ok', function () {
-    var val =  _initValue('number');
+    var val = _initValue('number');
     expect(val).to.equal('tea.Int(0)');
 
-    val =  _initValue('integer');
+    val = _initValue('integer');
     expect(val).to.equal('tea.Int(0)');
 
-    val =  _initValue('$Error');
+    val = _initValue('$Error');
     expect(val).to.equal('&tea.SDKError{}');
 
-    val =  _initValue('string');
+    val = _initValue('string');
     expect(val).to.equal('tea.String("")');
 
-    val =  _initValue('boolean');
+    val = _initValue('boolean');
     expect(val).to.equal('tea.Bool(false)');
 
-    val =  _initValue('bytes');
+    val = _initValue('bytes');
     expect(val).to.equal('make([]byte, 0)');
 
-    val =  _initValue('any');
+    val = _initValue('any');
     expect(val).to.equal('interface{}(nil)');
 
-    val =  _initValue('float');
+    val = _initValue('float');
     expect(val).to.equal('tea.Float32(0.00)');
 
-    val =  _initValue('null');
+    val = _initValue('null');
     expect(val).to.equal('nil');
 
-    val =  _initValue('$Response');
+    val = _initValue('$Response');
     expect(val).to.equal('&tea.Response{}');
 
-    val =  _initValue('$Request');
+    val = _initValue('$Request');
     expect(val).to.equal('&tea.Request{}');
 
-    val =  _initValue('object');
+    val = _initValue('object');
     expect(val).to.equal('make(map[string]interface{})');
 
-    val =  _initValue('map[string]string');
+    val = _initValue('map[string]string');
     expect(val).to.equal('make(map[string]string)');
 
-    val =  _initValue('[]byte');
+    val = _initValue('[]byte');
     expect(val).to.equal('make([]byte, 1)');
 
-    val =  _initValue('struct');
+    val = _initValue('struct');
     expect(val).to.equal('&struct{}');
   });
 
   it('_setExtendFunc should ok', function () {
-    var val =  _setExtendFunc('number');
+    var val = _setExtendFunc('number');
     expect(val).to.equal('tea.Int(');
 
-    val =  _setExtendFunc('integer');
+    val = _setExtendFunc('integer');
     expect(val).to.equal('tea.Int(');
 
-    val =  _setExtendFunc('int');
+    val = _setExtendFunc('int');
     expect(val).to.equal('tea.Int(');
 
-    val =  _setExtendFunc('long');
+    val = _setExtendFunc('long');
     expect(val).to.equal('tea.Int64(');
 
-    val =  _setExtendFunc('int64');
+    val = _setExtendFunc('int64');
     expect(val).to.equal('tea.Int64(');
 
-    val =  _setExtendFunc('double');
+    val = _setExtendFunc('double');
     expect(val).to.equal('tea.Float64(');
 
-    val =  _setExtendFunc('float');
+    val = _setExtendFunc('float');
     expect(val).to.equal('tea.Float32(');
 
-    val =  _setExtendFunc('[]float64');
+    val = _setExtendFunc('[]float64');
     expect(val).to.equal('tea.Float64Slice(');
 
-    val =  _setExtendFunc('[]float32');
+    val = _setExtendFunc('[]float32');
     expect(val).to.equal('tea.Float32Slice(');
 
-    val =  _setExtendFunc('boolean');
+    val = _setExtendFunc('boolean');
     expect(val).to.equal('tea.Bool(');
 
-    val =  _setExtendFunc('[]bool');
+    val = _setExtendFunc('[]bool');
     expect(val).to.equal('tea.BoolSlice(');
 
-    val =  _setExtendFunc('string');
+    val = _setExtendFunc('string');
     expect(val).to.equal('tea.String(');
 
-    val =  _setExtendFunc('int32');
+    val = _setExtendFunc('int32');
     expect(val).to.equal('tea.Int32(');
-    
-    val =  _setExtendFunc('[]string');
+
+    val = _setExtendFunc('[]string');
     expect(val).to.equal('tea.StringSlice(');
 
-    val =  _setExtendFunc('[]int');
+    val = _setExtendFunc('[]int');
     expect(val).to.equal('tea.IntSlice(');
 
-    val =  _setExtendFunc('[]int32');
+    val = _setExtendFunc('[]int32');
     expect(val).to.equal('tea.Int32Slice(');
 
-    val =  _setExtendFunc('[]int64');
+    val = _setExtendFunc('[]int64');
     expect(val).to.equal('tea.Int64Slice(');
 
-    val =  _setExtendFunc('[]uint');
+    val = _setExtendFunc('[]uint');
     expect(val).to.equal('tea.UintSlice(');
 
-    val =  _setExtendFunc('[]uint32');
+    val = _setExtendFunc('[]uint32');
     expect(val).to.equal('tea.Uint32Slice(');
 
-    val =  _setExtendFunc('[]uint64');
+    val = _setExtendFunc('[]uint64');
     expect(val).to.equal('tea.Uint64Slice(');
-    
-    val =  _setExtendFunc('uint');
+
+    val = _setExtendFunc('uint');
     expect(val).to.equal('tea.Uint(');
 
-    val =  _setExtendFunc('uint32');
+    val = _setExtendFunc('uint32');
     expect(val).to.equal('tea.Uint32(');
 
-    val =  _setExtendFunc('uint64');
+    val = _setExtendFunc('uint64');
     expect(val).to.equal('tea.Uint64(');
 
-    val =  _setExtendFunc('struct');
+    val = _setExtendFunc('struct');
     expect(val).to.equal('');
   });
 
   it('_pointerType should ok', function () {
-    var val =  _pointerType('object');
+    var val = _pointerType('object');
     expect(val).to.equal('map[string]interface{}');
 
-    val =  _pointerType('integer');
+    val = _pointerType('integer');
     expect(val).to.equal('*int');
 
-    val =  _pointerType('number');
+    val = _pointerType('number');
     expect(val).to.equal('*int');
 
-    val =  _pointerType('readable');
+    val = _pointerType('readable');
     expect(val).to.equal('io.Reader');
 
-    val =  _pointerType('bytes');
+    val = _pointerType('bytes');
     expect(val).to.equal('[]byte');
 
-    val =  _pointerType('uint64');
+    val = _pointerType('uint64');
     expect(val).to.equal('*uint64');
 
-    val =  _pointerType('int32');
+    val = _pointerType('int32');
     expect(val).to.equal('*int32');
 
-    val =  _pointerType('uint32');
+    val = _pointerType('uint32');
     expect(val).to.equal('*uint32');
 
-    val =  _pointerType('$Response');
+    val = _pointerType('$Response');
     expect(val).to.equal('*tea.Response');
 
-    val =  _pointerType('$Request');
+    val = _pointerType('$Request');
     expect(val).to.equal('*tea.Request');
 
-    val =  _pointerType('writeable');
+    val = _pointerType('writeable');
     expect(val).to.equal('io.Writer');
 
-    val =  _pointerType('double');
+    val = _pointerType('double');
     expect(val).to.equal('*float64');
 
-    val =  _pointerType('long');
-    expect(val).to.equal('*int64');
-    
-    val =  _pointerType('int64');
+    val = _pointerType('long');
     expect(val).to.equal('*int64');
 
-    val =  _pointerType('float');
+    val = _pointerType('int64');
+    expect(val).to.equal('*int64');
+
+    val = _pointerType('float');
     expect(val).to.equal('*float32');
 
-    val =  _pointerType('boolean');
+    val = _pointerType('boolean');
     expect(val).to.equal('*bool');
 
-    val =  _pointerType('any');
+    val = _pointerType('any');
     expect(val).to.equal('interface{}');
 
-    val =  _pointerType('string');
+    val = _pointerType('string');
     expect(val).to.equal('*string');
 
-    val =  _pointerType('struct');
+    val = _pointerType('struct');
     expect(val).to.equal('*struct');
   });
 
   it('_avoidReserveName should ok', function () {
-    var val =  _avoidReserveName('function');
+    var val = _avoidReserveName('function');
     expect(val).to.equal('_function');
   });
 });
