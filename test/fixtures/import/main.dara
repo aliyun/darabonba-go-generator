@@ -7,14 +7,20 @@ init();
 type @sourceClient = String;
 type @sourceMap = Map;
 
-function Sample(client: String, test: Map): void {
+model M {
+    a?: Map.Request,
+    b?: String.Request
+}
+
+function Sample(str: String, m: Map): void {
     var runtime = new String.RuntimeObject{};
     var request = new LocalSource.Request{
         accesskey = "accesskey",
         region = "region",
     };
     String.staticCall();
-    client.print(runtime);
+    Map.staticCall();
+    str.print(runtime);
     @sourceClient.print(runtime);
 }
 
