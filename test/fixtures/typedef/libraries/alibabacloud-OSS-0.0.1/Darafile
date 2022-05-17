@@ -1,0 +1,16 @@
+{
+    "name": "OSS",
+    "main": "./oss.dara",
+    "libraries": {},
+    "releases": {
+      "go": "github.com/aliyun/darabonba-go-generator"
+    },
+    "go": {
+      "typedef": {
+        "HttpRequest": {
+          "import": "net/http",
+          "type": "http.Request"
+        }
+      }
+    }
+}

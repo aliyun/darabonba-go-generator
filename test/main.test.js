@@ -18,16 +18,16 @@ function check(mainFilePath, outputDir, expectedPath, pkgInfo = {}) {
   const dsl = fs.readFileSync(mainFilePath, 'utf8');
   const ast = DSL.parse(dsl, mainFilePath);
   generator.visit(ast);
-  const clientPath = path.join(outputDir, pkgInfo.exec ? 'main/main.go':'client/client.go');
+  const clientPath = path.join(outputDir, pkgInfo.exec ? 'main/main.go' : 'client/client.go');
   const expected = fs.readFileSync(expectedPath, 'utf8');
   assert.deepStrictEqual(fs.readFileSync(clientPath, 'utf8'), expected);
 }
 
-describe('new Generator', function() {
+describe('new Generator', function () {
   it('must pass in outputDir', function () {
     assert.throws(function () {
       new Generator({});
-    }, function(err) {
+    }, function (err) {
       assert.deepStrictEqual(err.message, '`option.outputDir` should not empty');
       return true;
     });
@@ -82,7 +82,7 @@ describe('new Generator', function() {
     const mainFilePath = path.join(__dirname, 'fixtures/import/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/import/client.go'),{
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/import/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/import'),
       ...pkg
     });
@@ -93,7 +93,7 @@ describe('new Generator', function() {
     const mainFilePath = path.join(__dirname, 'fixtures/extends/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extends/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extends/client.go'),{
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extends/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/extends'),
       ...pkg
     });
@@ -104,7 +104,7 @@ describe('new Generator', function() {
     const mainFilePath = path.join(__dirname, 'fixtures/extendsWithoutInit/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extendsWithoutInit/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extendsWithoutInit/client.go'),{
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extendsWithoutInit/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/extendsWithoutInit'),
       ...pkg
     });
@@ -115,7 +115,7 @@ describe('new Generator', function() {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     const mainFilePath = path.join(__dirname, 'fixtures/complex/main.dara');
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/complex/client.go') , {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/complex/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
       package: ['github.com/alibabacloud-go/tea'],
       ...pkg
@@ -187,6 +187,17 @@ describe('new Generator', function() {
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/interface/spi.go'), {
       pkgDir: path.join(__dirname, 'fixtures/interface'),
+      ...pkg
+    });
+  });
+  it('typedef should ok', function () {
+    const outputDir = path.join(__dirname, 'output/typedef');
+    const mainFilePath = path.join(__dirname, 'fixtures/typedef/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/typedef/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/typedef/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/typedef'),
+      package: ['net/http'],
       ...pkg
     });
   });
