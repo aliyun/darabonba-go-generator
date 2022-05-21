@@ -50,6 +50,8 @@ model ComplexRequest = {
   req: $Request,
   resp: $Response,
   map: map[string]string,
+  numMap: map[string]number,
+  modelMap: map[string]Source.Request,
   request: Source.Request,
   client: Source,
   instance: Source.Request.instance,
@@ -385,12 +387,12 @@ static function arrayAssign3(request: ComplexRequest, config: string): void {
 }
 
 static function mapAccess(request: ComplexRequest): string {
-   var configInfo = request.configs.extra['name'];
+  var configInfo = request.configs.extra['name'];
   return configInfo;
 }
 
 static function mapAccess2(request: Source.Request): string {
-   var configInfo = request.configs.extra['name'];
+  var configInfo = request.configs.extra['name'];
   return configInfo;
 }
 
@@ -403,8 +405,19 @@ static function mapAccess3(): string {
   return data.configs['value'];
 }
 
+static function mapAccess4(request: ComplexRequest): string {
+  var key : string = 'name';
+  var model = request.modelMap[key];
+  var configInfo = request.configs.extra[key];
+  return configInfo;
+}
+
 static function mapAssign(request: ComplexRequest, name: string): void {
   request.configs.extra['name'] = name;
+  var key : string = 'name';
+  request.configs.extra[key] = name;
+  request.map[key] = name;
+  request.numMap[key] = 1;
 }  
 
 static function arrayimport2(request: [ Source.Request ]): string {

@@ -45,6 +45,8 @@ type ComplexRequest struct {
   Req *tea.Request `json:"req,omitempty" xml:"req,omitempty" require:"true"`
   Resp *tea.Response `json:"resp,omitempty" xml:"resp,omitempty" require:"true"`
   Map map[string]*string `json:"map,omitempty" xml:"map,omitempty" require:"true"`
+  NumMap map[string]*int `json:"numMap,omitempty" xml:"numMap,omitempty" require:"true"`
+  ModelMap map[string]*source.Request `json:"modelMap,omitempty" xml:"modelMap,omitempty" require:"true"`
   Request *source.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
   Client *source.Client `json:"client,omitempty" xml:"client,omitempty" require:"true"`
   Instance *source.RequestInstance `json:"instance,omitempty" xml:"instance,omitempty" require:"true"`
@@ -218,6 +220,16 @@ func (s *ComplexRequest) SetResp(v *tea.Response) *ComplexRequest {
 
 func (s *ComplexRequest) SetMap(v map[string]*string) *ComplexRequest {
   s.Map = v
+  return s
+}
+
+func (s *ComplexRequest) SetNumMap(v map[string]*int) *ComplexRequest {
+  s.NumMap = v
+  return s
+}
+
+func (s *ComplexRequest) SetModelMap(v map[string]*source.Request) *ComplexRequest {
+  s.ModelMap = v
   return s
 }
 
@@ -864,8 +876,20 @@ func MapAccess3 () (_result *string) {
   return _result
 }
 
+func MapAccess4 (request *ComplexRequest) (_result *string) {
+  key := tea.String("name")
+  model := request.ModelMap[tea.StringValue(key)]
+  configInfo := request.Configs.Extra[tea.StringValue(key)]
+  _result = configInfo
+  return _result
+}
+
 func MapAssign (request *ComplexRequest, name *string) {
   request.Configs.Extra["name"] = name
+  key := tea.String("name")
+  request.Configs.Extra[tea.StringValue(key)] = name
+  request.Map[tea.StringValue(key)] = name
+  request.NumMap[tea.StringValue(key)] = tea.Int(1)
 }
 
 func Arrayimport2 (request []*source.Request) (_result *string) {
