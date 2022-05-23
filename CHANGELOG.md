@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.1.0 - 2022-05-23
+
+> Fix map keyWord for import
+> Fix map accessing when keys are variable
+> Support typedef
+
 ## 1.0.25 - 2022-03-21
 
 > Fix interface init & access
