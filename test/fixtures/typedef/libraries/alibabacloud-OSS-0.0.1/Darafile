@@ -10,6 +10,10 @@
         "HttpRequest": {
           "import": "net/http",
           "type": "http.Request"
+        },
+        "HttpResponse": {
+          "import": "net/http",
+          "type": "http.Response"
         }
       }
     }
