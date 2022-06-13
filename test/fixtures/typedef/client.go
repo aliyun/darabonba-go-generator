@@ -66,7 +66,6 @@ func (client *Client) Main (test1 *http.Request, test2 *url.URL) (_err error) {
 }
 
 func (client *Client) TestHttpRequest (req *http.Request) (_result *http.Response, _err error) {
-  _result = *http.Response
   _body := TestHttpRequestWith(tea.String("test"), req)
   _result = _body
   return _result, _err
@@ -76,7 +75,13 @@ func TestHttpRequestWith (method *string, req *http.Request) (_result *http.Resp
   panic("No Support!")
 }
 
-func TestHttpHeader (method *string, headers *http.Header) (_result *http.Response) {
+func TestHttpHeader (method *string, headers *http.Header) (_result *http.Request) {
   panic("No Support!")
+}
+
+func (client *Client) TestHttpHeaderWith (headers *http.Header) (_result *http.Request, _err error) {
+  _body := TestHttpHeader(tea.String("test"), headers)
+  _result = _body
+  return _result, _err
 }
 

@@ -35,4 +35,8 @@ async function testHttpRequest(req: OSS.HttpRequest): HttpResponse {
 
 static function testHttpRequestWith(method: string, req: OSS.HttpRequest): HttpResponse
 
-static function testHttpHeader(method: string, headers: HttpHeader): HttpResponse
+static function testHttpHeader(method: string, headers: HttpHeader): OSS.HttpRequest
+
+async function testHttpHeaderWith(headers: HttpHeader): OSS.HttpRequest {
+    return testHttpHeader("test", headers);
+}
