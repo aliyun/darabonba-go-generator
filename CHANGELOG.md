@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.1 - 2022-06-13
+
+> Resolve typedef for return type
+
 ## 1.1.0 - 2022-05-23
 
 > Fix map keyWord for import
