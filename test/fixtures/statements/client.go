@@ -82,5 +82,11 @@ func HelloDeclare () {
   hello := tea.String("world")
   var helloNull *string
   hello = tea.String("hehe")
+  num := []*int{tea.Int(1234567890)}
+  num = []*int64{tea.Int64(1234567890)}
+  longNum := []*int64{tea.Int64(1234567890)}
+  intNum := []*int32{tea.Int(1234567890)}
+  floatNum := []*float32{tea.Float32(0.123456789)}
+  doubleNum := []*float64{tea.Float64(0.123456789)}
 }
 

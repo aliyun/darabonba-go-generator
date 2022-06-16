@@ -31,6 +31,24 @@ static function helloDeclare() : void {
   var hello = "world";
   var helloNull: string = null;
   hello = "hehe";
+  var num : [number] = [
+    1234567890
+  ];
+  num = [
+    1234567890L
+  ];
+  var longNum : [long] = [
+    1234567890L
+  ];
+  var intNum : [int32] = [
+    1234567890
+  ];
+  var floatNum : [float] = [
+    0.1234567890
+  ];
+  var doubleNum : [double] = [
+    0.1234567890d
+  ];
 }
 model Config = {};
 init(config: Config);
