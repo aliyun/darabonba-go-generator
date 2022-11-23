@@ -33,6 +33,7 @@ type ComplexRequest struct {
   Int32List []*int32 `json:"int32List,omitempty" xml:"int32List,omitempty" require:"true" type:"Repeated"`
   Int16List []*int16 `json:"int16List,omitempty" xml:"int16List,omitempty" require:"true" type:"Repeated"`
   Int64List []*int64 `json:"int64List,omitempty" xml:"int64List,omitempty" require:"true" type:"Repeated"`
+  LongList []*int64 `json:"longList,omitempty" xml:"longList,omitempty" require:"true" type:"Repeated"`
   Uint64List []*uint64 `json:"uint64List,omitempty" xml:"uint64List,omitempty" require:"true" type:"Repeated"`
   Uint32List []*uint32 `json:"uint32List,omitempty" xml:"uint32List,omitempty" require:"true" type:"Repeated"`
   Uint16List []*uint16 `json:"uint16List,omitempty" xml:"uint16List,omitempty" require:"true" type:"Repeated"`
@@ -160,6 +161,11 @@ func (s *ComplexRequest) SetInt16List(v []*int16) *ComplexRequest {
 
 func (s *ComplexRequest) SetInt64List(v []*int64) *ComplexRequest {
   s.Int64List = v
+  return s
+}
+
+func (s *ComplexRequest) SetLongList(v []*int64) *ComplexRequest {
+  s.LongList = v
   return s
 }
 
@@ -422,9 +428,16 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
         Num: tea.Int(10),
         I32: tea.ToInt32(a),
         IntList: []*int{tea.Int(10), tea.Int(11)},
+        Int16List: []*int16{tea.Int16(10), tea.Int16(11)},
+        Int32List: []*int32{tea.Int32(10), tea.Int32(11)},
+        Int64List: []*int64{tea.Int64(10), tea.Int64(11)},
+        LongList: []*int64{tea.Int64(10), tea.Int64(11)},
+        FloatList: []*float32{tea.Float32(0.1), tea.Float32(0.2)},
         StringList: []*string{tea.String("10"), tea.String("11")},
         BooleantList: []*bool{tea.Bool(true), tea.Bool(false)},
       }
+      longList := []*int64{tea.Int64(432435)}
+      anyList := []interface{}{tea.Int64(432435), tea.String("str"), tea.Bool(true), tea.Int(10), tea.Float32(0.1)}
       client.Strs = request.Strs
       client.EndpointMap[tea.StringValue(client.Protocol)]
       client.EndpointMap["test"] = tea.String("ok")
