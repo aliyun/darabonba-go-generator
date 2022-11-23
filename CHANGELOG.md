@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.2 - 2022-11-23
+
+> Fix items type in array
+
 ## 1.1.1 - 2022-06-13
 
 > Resolve typedef for return type
