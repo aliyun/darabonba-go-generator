@@ -38,6 +38,7 @@ model ComplexRequest = {
   int32List: [ int32 ],
   int16List: [ int16 ],
   int64List: [ int64 ],
+  longList: [ long ],
   uint64List: [ uint64 ],
   uint32List: [ uint32 ],
   uint16List: [ uint16 ],
@@ -121,9 +122,24 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
     num = 10,
     i32 = a,
     intList = [10,11],
+    int16List = [10, 11],
+    int32List = [10, 11],
+    int64List = [10, 11],
+    longList = [10L, 11L],
+    floatList = [ 0.1f, 0.2f ],
     stringList = ['10','11'],
     booleantList = [ true, false ],
   };
+  var longList : [long] = [
+    432435L 
+  ];
+  var anyList : [any] = [
+    432435L,
+    "str",
+    true,
+    10,
+    0.1f
+  ];
   @Strs = request.strs;
   @endpointMap[@protocol];
   @endpointMap['test'] = 'ok';
