@@ -140,6 +140,40 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
     10,
     0.1f
   ];
+  var floatMap : map[string]float = {
+    key1 = 0.1f,
+    key2 = 0.2
+  };
+  var doubleMap : map[string]double = {
+    key1 = 0.1d,
+    key2 = 0.2d
+  };
+  var intMap : map[string]integer = {
+    key1 = 1,
+    key2 = 2
+  };
+  var longMap : map[string]long = {
+    key1 = 1,
+    key2 = 2
+  };
+  var int16Map : map[string]int16 = {
+    key1 = 1,
+    key2 = 2
+  };
+  var int32Map : map[string]int32 = {
+    key1 = 1,
+    key2 = 2
+  };
+  var int64Map : map[string]int64 = {
+    key1 = 1,
+    key2 = 2
+  };
+  var anyMap : map[string]any = {
+    key1 = 0.1,
+    key2 = 1,
+    key3 = 'test',
+    key4 = true
+  };
   @Strs = request.strs;
   @endpointMap[@protocol];
   @endpointMap['test'] = 'ok';

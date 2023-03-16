@@ -438,6 +438,40 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       }
       longList := []*int64{tea.Int64(432435)}
       anyList := []interface{}{tea.Int64(432435), tea.String("str"), tea.Bool(true), tea.Int(10), tea.Float32(0.1)}
+      floatMap := map[string]*float32{
+        "key1": tea.Float32(0.1),
+        "key2": tea.Float32(0.2),
+      }
+      doubleMap := map[string]*float64{
+        "key1": tea.Float64(0.1),
+        "key2": tea.Float64(0.2),
+      }
+      intMap := map[string]*int{
+        "key1": tea.Int(1),
+        "key2": tea.Int(2),
+      }
+      longMap := map[string]*int64{
+        "key1": tea.Int64(1),
+        "key2": tea.Int64(2),
+      }
+      int16Map := map[string]*int16{
+        "key1": tea.Int16(1),
+        "key2": tea.Int16(2),
+      }
+      int32Map := map[string]*int32{
+        "key1": tea.Int32(1),
+        "key2": tea.Int32(2),
+      }
+      int64Map := map[string]*int64{
+        "key1": tea.Int64(1),
+        "key2": tea.Int64(2),
+      }
+      anyMap := map[string]interface{}{
+        "key1": 0.1,
+        "key2": 1,
+        "key3": "test",
+        "key4": true,
+      }
       client.Strs = request.Strs
       client.EndpointMap[tea.StringValue(client.Protocol)]
       client.EndpointMap["test"] = tea.String("ok")
