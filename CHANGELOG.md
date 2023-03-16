@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.3 - 2023-03-16
+
+> Support any style for number value in map
+
 ## 1.1.2 - 2022-11-23
 
 > Fix items type in array
