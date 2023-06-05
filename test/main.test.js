@@ -42,6 +42,13 @@ describe('new Generator', function () {
       pkgDir: path.join(__dirname, 'fixtures/model'),
       ...pkg
     });
+    pkg.go = {
+      mapAndSliceWithoutOmitempty: true,
+    };
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/client_no_omit.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/model'),
+      ...pkg
+    });
   });
 
   it('one api should ok', function () {
