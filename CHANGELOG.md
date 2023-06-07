@@ -1,5 +1,10 @@
 # ChangeLog
 
+## 1.1.4 - 2023-06-07
+
+> Support map & slice whitout omitempty tag
+
+
 ## 1.1.3 - 2023-03-16
 
 > Support any style for number value in map
