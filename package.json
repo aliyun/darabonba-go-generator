@@ -24,6 +24,7 @@
     "codecov": "^3"
   },
   "dependencies": {
+    "@darabonba/annotation-parser": "^1.0.0",
     "@darabonba/parser": "^1.4.0"
   },
   "author": "Alibaba Cloud OpenAPI Team",

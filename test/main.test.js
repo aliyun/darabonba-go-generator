@@ -139,7 +139,8 @@ describe('new Generator', function () {
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/annotation/client.go'), {
       pkgDir: path.join(__dirname, 'fixtures/annotation'),
-      ...pkg
+      ...pkg,
+      editable: true
     });
   });
 
