@@ -1,16 +1,15 @@
-// This file is auto-generated, don't edit it. Thanks.
-/**
- top annotation
-*/
+// Description:
+// 
+// top annotation
 package client
 
 import (
   "github.com/alibabacloud-go/tea/tea"
 )
 
-/**
-  TestModel
-*/
+// Description:
+// 
+// TestModel
 type Test struct {
   // Alichange app id 
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
@@ -33,9 +32,9 @@ type Client struct {
   A  *string
 }
 
-/**
-  Init Func
-*/
+// Description:
+// 
+// Init Func
 func NewClient()(*Client, error) {
   client := new(Client)
   err := client.Init()
@@ -47,9 +46,9 @@ func (client *Client)Init()(_err error) {
 }
 
 
-/**
-  testAPI
-*/
+// Description:
+// 
+// testAPI
 func (client *Client) TestAPI() (_err error) {
   _runtime := map[string]interface{}{}
 
@@ -78,10 +77,60 @@ func (client *Client) TestAPI() (_err error) {
 }
 
 
-/**
-  testFunc
-*/
+// Description:
+// 
+// testFunc
 func TestFunc () (_err error) {
+  return _err
+}
+
+// Deprecated: annotation test deprecated
+// 
+// Summary:
+// 
+// annotation test summary
+// 
+// Description:
+// 
+// annotation test description
+// 
+// 	- description1 test for typescript
+// 
+// 	- description2 test for typescript
+// 
+// 	- test link: [Limits](https://help.aliyun.com/document_detail/25412.html#SecurityGroupQuota).
+// 
+// @param test - string param1
+// 
+// @param _test - string param2
+// 
+// @return void
+// 
+// @throws InternalError Server error. 500 服务器端出现未知异常。
+// 
+// @throws StackNotFound The Stack (%(stack_name)s) could not be found.  404 资源栈不存在。
+func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
+  // empty comment1
+  // empty comment2
+  return _err
+}
+
+// Summary:
+// 
+// annotation test summary
+// 
+// summary for annotation
+// 
+// @param test - string param1
+// 
+// @param _test - string param2
+// 
+// @return void
+// 
+// @throws InternalError Server error. 500 服务器端出现未知异常。
+func TestFuncWithAnnotation2 (test *string, _test *string) (_err error) {
+  // empty comment1
+  // empty comment2
   return _err
 }
 

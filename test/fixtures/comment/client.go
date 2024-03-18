@@ -1,8 +1,8 @@
 // This file is auto-generated, don't edit it. Thanks.
 // top comment
-/**
- top annotation
-*/
+// Description:
+// 
+// top annotation
 package client
 
 import (
@@ -10,9 +10,9 @@ import (
   "github.com/alibabacloud-go/tea/tea"
 )
 
-/**
-  TestModel
-*/
+// Description:
+// 
+// TestModel
 type Test1 struct {
   // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
@@ -40,9 +40,9 @@ func (s *Test1) SetTest2(v string) *Test1 {
   return s
 }
 
-/**
-  TestModel2
-*/
+// Description:
+// 
+// TestModel2
 type Test2 struct {
   // model的test front comment
   // test desc
@@ -70,9 +70,9 @@ func (s *Test2) SetTest2(v string) *Test2 {
   return s
 }
 
-/**
-  TestModel3
-*/
+// Description:
+// 
+// TestModel3
 type Test3 struct {
   // empty comment1
   // empy comment2
@@ -91,9 +91,9 @@ type Client struct {
   A  []*string
 }
 
-/**
-  Init Func
-*/
+// Description:
+// 
+// Init Func
 // comment between init and annotation
 func NewClient()(*Client, error) {
   client := new(Client)
@@ -121,9 +121,9 @@ func (client *Client)Init()(_err error) {
 }
 
 
-/**
-  testAPI
-*/
+// Description:
+// 
+// testAPI
 //testAPI comment one
 //testAPI comment two
 func (client *Client) TestAPI() (_err error) {
@@ -231,9 +231,9 @@ func StaticFunc () {
   }
 }
 
-/**
-  testFunc
-*/
+// Description:
+// 
+// testFunc
 func TestFunc () (_err error) {
   // empty comment1
   // empty comment2
