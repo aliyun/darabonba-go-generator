@@ -31,6 +31,14 @@ type ComplexRequest struct {
   // header
   Header *ComplexRequestHeader `json:"header,omitempty" xml:"header,omitempty" require:"true" type:"Struct"`
   Configs *ComplexRequestConfigs `json:"configs,omitempty" xml:"configs,omitempty" require:"true" type:"Struct"`
+  // check if is blank:
+  // false
+  // 
+  // if can be null:
+  // false
+  // 
+  // if sensitive:
+  // true
   Num *int `json:"num,omitempty" xml:"num,omitempty" require:"true"`
   I64 *int64 `json:"i64,omitempty" xml:"i64,omitempty" require:"true"`
   F64 *float64 `json:"f64,omitempty" xml:"f64,omitempty" require:"true"`
@@ -290,7 +298,7 @@ type ComplexRequestHeader struct {
   // true
   // 
   // if sensitive:
-  // true
+  // false
   // 
   // example:
   // 
