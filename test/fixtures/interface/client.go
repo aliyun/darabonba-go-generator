@@ -10,6 +10,9 @@ import (
 
 type Client struct {
   openapi.Client
+  Client_  spi.Client
+  A  *string
+  B  *int
 }
 
 func NewClient(config *openapi.Config)(*Client, error) {
@@ -23,12 +26,10 @@ func (client *Client)Init(config *openapi.Config)(_err error) {
   if _err != nil {
     return _err
   }
-  interfaceSPI, _err := gatewayclient.NewClient()
-  if _err != nil {
-    return _err
-  }
-
-  client.Spi = interfaceSPI
+  client.Client_ = gatewayclient.NewClient()
+  client.Spi = client.Client_
+  client.A = tea.String("test")
+  client.B = tea.Int(1)
   return nil
 }
 
