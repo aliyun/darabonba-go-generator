@@ -8,11 +8,15 @@ import OpenApi;
 extends OpenApi;
 
 type @client = SPI
+type @a = string
+type @b = integer
 
 init(config: OpenApi.Config){
   super(config);
   @client = new GatewayClient();
   @spi = @client;
+  @a = "test";
+  @b = 1;
 }
 
 async function test(project: string, logstore: string): string {
