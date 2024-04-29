@@ -1,5 +1,12 @@
 # ChangeLog
 
+## 1.1.5 - 2024-04-29
+
+> Pretty api reference doc
+> Fix extends interface
+> Solve the problem of generating any structure under the map and the situation where the key is a variable when assigning a value to the map
+
+
 ## 1.1.4 - 2023-06-07
 
 > Support map & slice whitout omitempty tag
