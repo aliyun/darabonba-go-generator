@@ -3,6 +3,7 @@ English | [简体中文](/README-zh-CN.md)
 # Darabonba Code Generator for Go
 
 [![NPM version][npm-image]][npm-url]
+![CI Build][action-url]
 [![codecov][cov-image]][cov-url]
 [![dependency status][deps-image]][deps-url]
 [![npm download][download-image]][download-url]
@@ -15,6 +16,7 @@ English | [简体中文](/README-zh-CN.md)
 [deps-url]: https://libraries.io/npm/@darabonba%2Fgo-generator
 [download-image]: https://img.shields.io/npm/dm/@darabonba/go-generator.svg?style=flat-square
 [download-url]: https://npmjs.org/package/@darabonba/go-generator
+[action-url]: https://github.com/aliyun/darabonba-go-generator/actions/workflows/node.js.yml/badge.svg
 
 ## Installation
 
