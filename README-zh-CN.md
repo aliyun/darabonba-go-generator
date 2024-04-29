@@ -3,15 +3,12 @@
 # Darabonba Go 生成器
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
 [![codecov][cov-image]][cov-url]
 [![dependency status][deps-image]][deps-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/@darabonba/go-generator.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/@darabonba/go-generator
-[travis-image]: https://img.shields.io/travis/aliyun/darabonba-go-generator.svg?style=flat-square
-[travis-url]: https://travis-ci.org/aliyun/darabonba-go-generator
 [cov-image]: https://codecov.io/gh/aliyun/darabonba-go-generator/branch/master/graph/badge.svg
 [cov-url]: https://codecov.io/gh/aliyun/darabonba-go-generator
 [deps-image]: https://img.shields.io/librariesio/release/npm/@darabonba/go-generator
