@@ -26,7 +26,11 @@ func (client *Client)Init(config *openapi.Config)(_err error) {
   if _err != nil {
     return _err
   }
-  client.Client_ = gatewayclient.NewClient()
+  client.Client_, _err = gatewayclient.NewClient()
+  if _err != nil {
+    return _err
+  }
+
   client.Spi = client.Client_
   client.A = tea.String("test")
   client.B = tea.Int(1)
