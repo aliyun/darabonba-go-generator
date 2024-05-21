@@ -54,7 +54,12 @@ static async function testFuncWithAnnotation1(test: string, _test: string): void
 
 /**
  * @summary annotation test summary
- * summary for annotation
+ * summary description1
+ * summary description2
+ *
+ * @deprecated test is deprecated, use xxx instead.
+ * deprecated description1
+ * deprecated description2
  * 
  * @param test string param1
  * @param _test string param2
@@ -62,6 +67,21 @@ static async function testFuncWithAnnotation1(test: string, _test: string): void
  * @throws InternalError Server error. 500 服务器端出现未知异常。
 */
 static async function testFuncWithAnnotation2(test: string, _test: string): void {
+    // empty comment1
+    // empty comment2
+}
+
+
+/**
+ * @deprecated 
+ * deprecated test for line break.
+ * 
+ * @param test string param1
+ * @param _test string param2
+ * @return void
+ * @throws InternalError Server error. 500 服务器端出现未知异常。
+*/
+static async function testFuncWithAnnotation3(test: string, _test: string): void {
     // empty comment1
     // empty comment2
 }
