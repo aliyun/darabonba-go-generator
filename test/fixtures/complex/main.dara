@@ -182,8 +182,22 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
     key1 = 0.1,
     key2 = 1,
     key3 = 'test',
-    key4 = true
+    key4 = true,
+    key5 = ['test', 1, true, ['test']],
+    key6 = [
+      {
+        a = "test",
+        b = 1,
+        c = true,
+        d = ['test'],
+      }
+    ],
   };
+  for (var item : ["1","2"]) {
+    var anyMap : map[string]string = {};
+    anyMap[item] = 'test';
+    break;
+  }
   @Strs = request.strs;
   @endpointMap[@protocol];
   @endpointMap['test'] = 'ok';

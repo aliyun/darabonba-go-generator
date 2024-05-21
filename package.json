@@ -1,6 +1,6 @@
 {
   "name": "@darabonba/go-generator",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "The SDK generator for Golang",
   "main": "lib/generator",
   "directories": {
@@ -19,8 +19,8 @@
   "devDependencies": {
     "eslint": "^6",
     "expect.js": "^0.3.1",
-    "mocha": "^6.2.2",
-    "nyc": "^14.1.1",
+    "mocha": "^10.4.0",
+    "nyc": "^15.1.0",
     "codecov": "^3"
   },
   "dependencies": {

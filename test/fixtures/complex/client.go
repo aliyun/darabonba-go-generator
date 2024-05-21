@@ -517,6 +517,18 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
         "key2": 1,
         "key3": "test",
         "key4": true,
+        "key5": []interface{}{tea.String("test"), tea.Int(1), tea.Bool(true), []*string{tea.String("test")}},
+        "key6": []map[string]interface{}{map[string]interface{}{
+            "a": "test",
+            "b": 1,
+            "c": true,
+            "d": []*string{tea.String("test")},
+          }},
+      }
+      for _, item := range []*string{tea.String("1"), tea.String("2")} {
+        anyMap := make(map[string]*string)
+        anyMap[tea.StringValue(item)] = tea.String("test")
+        break
       }
       client.Strs = request.Strs
       client.EndpointMap[tea.StringValue(client.Protocol)]
