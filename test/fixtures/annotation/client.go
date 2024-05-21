@@ -115,11 +115,19 @@ func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
   return _err
 }
 
+// Deprecated: test is deprecated, use xxx instead.
+//
+// deprecated description1
+//
+// deprecated description2
+// 
 // Summary:
 // 
 // annotation test summary
 // 
-// summary for annotation
+// summary description1
+// 
+// summary description2
 // 
 // @param test - string param1
 // 

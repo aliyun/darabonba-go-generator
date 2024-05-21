@@ -54,7 +54,12 @@ static async function testFuncWithAnnotation1(test: string, _test: string): void
 
 /**
  * @summary annotation test summary
- * summary for annotation
+ * summary description1
+ * summary description2
+ *
+ * @deprecated test is deprecated, use xxx instead.
+ * deprecated description1
+ * deprecated description2
  * 
  * @param test string param1
  * @param _test string param2
