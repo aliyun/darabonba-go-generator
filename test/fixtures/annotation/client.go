@@ -115,11 +115,19 @@ func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
   return _err
 }
 
+// Deprecated: test is deprecated, use xxx instead.
+//
+// deprecated description1
+//
+// deprecated description2
+// 
 // Summary:
 // 
 // annotation test summary
 // 
-// summary for annotation
+// summary description1
+// 
+// summary description2
 // 
 // @param test - string param1
 // 
@@ -129,6 +137,21 @@ func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
 // 
 // @throws InternalError Server error. 500 服务器端出现未知异常。
 func TestFuncWithAnnotation2 (test *string, _test *string) (_err error) {
+  // empty comment1
+  // empty comment2
+  return _err
+}
+
+// Deprecated: deprecated test for line break.
+// 
+// @param test - string param1
+// 
+// @param _test - string param2
+// 
+// @return void
+// 
+// @throws InternalError Server error. 500 服务器端出现未知异常。
+func TestFuncWithAnnotation3 (test *string, _test *string) (_err error) {
   // empty comment1
   // empty comment2
   return _err
