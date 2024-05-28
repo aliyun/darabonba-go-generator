@@ -404,6 +404,11 @@ func NewClient(config *source.Config)(*Client, error) {
 
 func (client *Client)Init(config *source.Config)(_err error) {
   client.Configs[0] = config
+  test, _err := source.NewClient(config)
+  if _err != nil {
+    return _err
+  }
+
   return nil
 }
 
