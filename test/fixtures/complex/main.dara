@@ -9,6 +9,7 @@ type @configs = [ Source.Config ];
 
 init(config: Source.Config){
   @configs[0] = config;
+  var test : Source = new Source(config);
 }
 
 model ComplexRequest = {
