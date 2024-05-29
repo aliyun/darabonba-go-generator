@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.7 - 2024-05-29
+
+> Resolve return type
+
 ## 1.1.6 - 2024-04-30
 
 > Rollback the handling of construct initialization
