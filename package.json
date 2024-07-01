@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@darabonba/annotation-parser": "^1.0.0",
-    "@darabonba/parser": "^1.4.0"
+    "@darabonba/parser": "^2.0.6"
   },
   "author": "Alibaba Cloud OpenAPI Team",
   "license": "Apache-2.0"
