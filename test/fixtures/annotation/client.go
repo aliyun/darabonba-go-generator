@@ -136,6 +136,7 @@ func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
 // @return void
 // 
 // @throws InternalError Server error. 500 服务器端出现未知异常。
+// 
 func TestFuncWithAnnotation2 (test *string, _test *string) (_err error) {
   // empty comment1
   // empty comment2
@@ -146,14 +147,19 @@ func TestFuncWithAnnotation2 (test *string, _test *string) (_err error) {
 // 
 // @param test - string param1
 // 
+// param test for line break.
+// 
 // @param _test - string param2
 // 
 // @return void
 // 
+// return test for line break.
+// 
 // @throws InternalError Server error. 500 服务器端出现未知异常。
-func TestFuncWithAnnotation3 (test *string, _test *string) (_err error) {
-  // empty comment1
-  // empty comment2
+// 
+// throws test for line break.
+// 
+func LineBreakAnnotation (test *string, _test *string) (_err error) {
   return _err
 }
 
