@@ -1,0 +1,132 @@
+import Source;
+type @configs = [ Source.Config ];
+
+init(config: Source.Config){
+  @configs[0] = config;
+  var test : Source = new Source(config);
+}
+
+exception Err1 = {
+  data: map[string]string
+}
+
+exception Err2 = {
+  accessErrMessage: string
+}
+
+
+
+async function tryMultiCatch(a: number): number {
+  try {
+    if(a > 0) {
+      a = 20;
+      throw new Err1 {
+        name = "str",
+        code = "str",
+        data = {
+          key1 = "str",
+        }
+      };
+    } else if(a == 0) {
+      throw new Err2 {
+        name = "str",
+        code = "str",
+        accessErrMessage = "str2",
+      };
+    } else if(a == -10) {
+      throw new Source.Err3 {
+        name = "str",
+        code = "str",
+      };
+    } else {
+      throw new $Error{
+        name = "str",
+        code = "str",
+      }
+    }
+    return a + 100;
+  } catch(err: Err1) {
+    $Logger.log(err.name);
+    return null;
+  } catch(err: Err2) {
+    $Logger.log(err.name);
+    return null;
+  } catch(err: Source.Err3) {
+    $Logger.log(err.name);
+    return null;
+  } catch(err) {
+    $Logger.log(err.name);
+    return null;
+  } finally {
+    var final = 'ok';
+  }
+}
+
+
+async function multiTryCatch(a: number): map[string] string {
+  var name = "str";
+  var code = "str";
+  var data = {
+    key1 = "str",
+  };
+  try {
+    if(a > 0) {
+      throw new Err1 {
+        name = name,
+        code = code,
+        data = data,
+      };
+    }
+  } catch(err: Err1) {
+    name = "str1";
+    code = "str1";
+    data = {
+      key1 = "str1",
+    };
+    $Logger.log(err.name);
+  } finally{
+    return data;
+  }
+
+  try {
+    var accessErrMessage = "str2";
+    if(a == 0) {
+      throw new Err2 {
+        name = name,
+        code = code,
+        accessErrMessage = accessErrMessage,
+      };
+    }
+  } catch(err: Err2) {
+    name = "str2";
+    code = "str2";
+    data = {
+      key1 = "str2",
+    };
+    $Logger.log(err.name);
+  } finally{
+    return data;
+  }
+  
+  try {
+    if(a == -10) {
+      throw new Source.Err3 {
+        name = name,
+        code = code,
+        accessErrMessage = data['key1']
+      };
+    } else if(a == -100) {
+      throw new $Error{
+        name = name,
+        code = code,
+      }
+    }
+  } catch(err: Source.Err3) {
+    $Logger.log(err.name);
+  } catch(err) {
+    $Logger.log(err.name);
+  } finally {
+    var final = 'ok';
+    return data;
+  }
+}

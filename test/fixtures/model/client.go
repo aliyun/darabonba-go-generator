@@ -3,8 +3,9 @@ package client
 
 import (
   "io"
-  source  "github.com/aliyun/darabonba-go-generator/test"
-  "github.com/alibabacloud-go/tea/tea"
+  source "github.com/aliyun/darabonba-go-generator/test"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
 type M struct {
@@ -12,7 +13,7 @@ type M struct {
 }
 
 func (s M) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s M) GoString() string {
@@ -28,7 +29,7 @@ type MSubM struct {
 }
 
 func (s MSubM) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MSubM) GoString() string {
@@ -56,14 +57,14 @@ type MyModel struct {
   Int8field *int8 `json:"int8field,omitempty" xml:"int8field,omitempty" require:"true"`
   Uint8field *uint8 `json:"uint8field,omitempty" xml:"uint8field,omitempty" require:"true"`
   Readable io.Reader `json:"readable,omitempty" xml:"readable,omitempty" require:"true"`
-  Request *tea.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
+  Request *dara.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
   Lists [][]*string `json:"lists,omitempty" xml:"lists,omitempty" require:"true" type:"Repeated"`
   Arrays [][]*MyModelArrays `json:"arrays,omitempty" xml:"arrays,omitempty" require:"true" type:"Repeated"`
   ComplexList [][]*string `json:"complexList,omitempty" xml:"complexList,omitempty" require:"true" type:"Repeated"`
 }
 
 func (s MyModel) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MyModel) GoString() string {
@@ -170,7 +171,7 @@ func (s *MyModel) SetReadable(v io.Reader) *MyModel {
   return s
 }
 
-func (s *MyModel) SetRequest(v *tea.Request) *MyModel {
+func (s *MyModel) SetRequest(v *dara.Request) *MyModel {
   s.Request = v
   return s
 }
@@ -195,7 +196,7 @@ type MyModelSubmodel struct {
 }
 
 func (s MyModelSubmodel) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MyModelSubmodel) GoString() string {
@@ -207,12 +208,12 @@ func (s *MyModelSubmodel) SetStringfield(v string) *MyModelSubmodel {
   return s
 }
 
-type MyModelArrays struct     {
+type MyModelArrays struct {
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
 
 func (s MyModelArrays) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MyModelArrays) GoString() string {
@@ -220,6 +221,196 @@ func (s MyModelArrays) GoString() string {
 }
 
 func (s *MyModelArrays) SetName(v string) *MyModelArrays {
+  s.Name = &v
+  return s
+}
+
+type MyErr struct {
+  dara.SDKError
+  Stringfield *string ` require:"true"`
+  Stringarrayfield []*string ` require:"true" type:"Repeated"`
+  Mapfield map[string]*string ` require:"true"`
+  Name *string ` require:"true"`
+  Submodel *MyErrSubmodel ` require:"true" type:"Struct"`
+  ModuleModelMap map[string]*source.Request ` require:"true"`
+  SubModelMap map[string]*MSubM ` require:"true"`
+  ModelMap map[string]*M ` require:"true"`
+  ModuleMap map[string]*source.Client ` require:"true"`
+  Object map[string]interface{} ` require:"true"`
+  Numberfield *int ` require:"true"`
+  Int64field *int64 ` require:"true"`
+  Uint64field *uint64 ` require:"true"`
+  Int32field *int32 ` require:"true"`
+  Uint32field *uint32 ` require:"true"`
+  Int16field *int16 ` require:"true"`
+  Uint16field *uint16 ` require:"true"`
+  Int8field *int8 ` require:"true"`
+  Uint8field *uint8 ` require:"true"`
+  Readable io.Reader ` require:"true"`
+  Request *dara.Request ` require:"true"`
+  Lists [][]*string ` require:"true" type:"Repeated"`
+  Arrays [][]*MyErrArrays ` require:"true" type:"Repeated"`
+  ComplexList [][]*string ` require:"true" type:"Repeated"`
+}
+
+func (s MyErr) String() string {
+  return dara.Prettify(s)
+}
+
+func (s MyErr) GoString() string {
+  return s.String()
+}
+
+func (s *MyErr) SetStringfield(v string) *MyErr {
+  s.Stringfield = &v
+  return s
+}
+
+func (s *MyErr) SetStringarrayfield(v []*string) *MyErr {
+  s.Stringarrayfield = v
+  return s
+}
+
+func (s *MyErr) SetMapfield(v map[string]*string) *MyErr {
+  s.Mapfield = v
+  return s
+}
+
+func (s *MyErr) SetName(v string) *MyErr {
+  s.Name = &v
+  return s
+}
+
+func (s *MyErr) SetSubmodel(v *MyErrSubmodel) *MyErr {
+  s.Submodel = v
+  return s
+}
+
+func (s *MyErr) SetModuleModelMap(v map[string]*source.Request) *MyErr {
+  s.ModuleModelMap = v
+  return s
+}
+
+func (s *MyErr) SetSubModelMap(v map[string]*MSubM) *MyErr {
+  s.SubModelMap = v
+  return s
+}
+
+func (s *MyErr) SetModelMap(v map[string]*M) *MyErr {
+  s.ModelMap = v
+  return s
+}
+
+func (s *MyErr) SetModuleMap(v map[string]*source.Client) *MyErr {
+  s.ModuleMap = v
+  return s
+}
+
+func (s *MyErr) SetObject(v map[string]interface{}) *MyErr {
+  s.Object = v
+  return s
+}
+
+func (s *MyErr) SetNumberfield(v int) *MyErr {
+  s.Numberfield = &v
+  return s
+}
+
+func (s *MyErr) SetInt64field(v int64) *MyErr {
+  s.Int64field = &v
+  return s
+}
+
+func (s *MyErr) SetUint64field(v uint64) *MyErr {
+  s.Uint64field = &v
+  return s
+}
+
+func (s *MyErr) SetInt32field(v int32) *MyErr {
+  s.Int32field = &v
+  return s
+}
+
+func (s *MyErr) SetUint32field(v uint32) *MyErr {
+  s.Uint32field = &v
+  return s
+}
+
+func (s *MyErr) SetInt16field(v int16) *MyErr {
+  s.Int16field = &v
+  return s
+}
+
+func (s *MyErr) SetUint16field(v uint16) *MyErr {
+  s.Uint16field = &v
+  return s
+}
+
+func (s *MyErr) SetInt8field(v int8) *MyErr {
+  s.Int8field = &v
+  return s
+}
+
+func (s *MyErr) SetUint8field(v uint8) *MyErr {
+  s.Uint8field = &v
+  return s
+}
+
+func (s *MyErr) SetReadable(v io.Reader) *MyErr {
+  s.Readable = v
+  return s
+}
+
+func (s *MyErr) SetRequest(v *dara.Request) *MyErr {
+  s.Request = v
+  return s
+}
+
+func (s *MyErr) SetLists(v [][]*string) *MyErr {
+  s.Lists = v
+  return s
+}
+
+func (s *MyErr) SetArrays(v [][]*MyErrArrays) *MyErr {
+  s.Arrays = v
+  return s
+}
+
+func (s *MyErr) SetComplexList(v [][]*string) *MyErr {
+  s.ComplexList = v
+  return s
+}
+
+type MyErrSubmodel struct {
+  Stringfield *string `json:"stringfield,omitempty" xml:"stringfield,omitempty" require:"true"`
+}
+
+func (s MyErrSubmodel) String() string {
+  return dara.Prettify(s)
+}
+
+func (s MyErrSubmodel) GoString() string {
+  return s.String()
+}
+
+func (s *MyErrSubmodel) SetStringfield(v string) *MyErrSubmodel {
+  s.Stringfield = &v
+  return s
+}
+
+type MyErrArrays struct {
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+}
+
+func (s MyErrArrays) String() string {
+  return dara.Prettify(s)
+}
+
+func (s MyErrArrays) GoString() string {
+  return s.String()
+}
+
+func (s *MyErrArrays) SetName(v string) *MyErrArrays {
   s.Name = &v
   return s
 }

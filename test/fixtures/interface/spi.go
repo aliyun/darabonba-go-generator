@@ -3,8 +3,9 @@ package client
 
 import (
   "io"
-  credential  "github.com/aliyun/credentials-go/credentials"
-  "github.com/alibabacloud-go/tea/tea"
+  credential "github.com/aliyun/credentials-go/credentials"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
 type InterceptorContext struct {
@@ -14,7 +15,7 @@ type InterceptorContext struct {
 }
 
 func (s InterceptorContext) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContext) GoString() string {
@@ -59,7 +60,7 @@ type InterceptorContextRequest struct {
 }
 
 func (s InterceptorContextRequest) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContextRequest) GoString() string {
@@ -172,7 +173,7 @@ type InterceptorContextConfiguration struct {
 }
 
 func (s InterceptorContextConfiguration) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContextConfiguration) GoString() string {
@@ -222,7 +223,7 @@ type InterceptorContextResponse struct {
 }
 
 func (s InterceptorContextResponse) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContextResponse) GoString() string {
@@ -255,7 +256,7 @@ type AttributeMap struct {
 }
 
 func (s AttributeMap) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s AttributeMap) GoString() string {
