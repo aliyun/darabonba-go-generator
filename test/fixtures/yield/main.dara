@@ -1,0 +1,47 @@
+init()
+
+function test1(): [ string ] {
+    return ['string', 'string1', 'string2'];
+}
+
+
+function test2(name: string): iterator[string] {
+  var arr = test1();
+  name = 'test';
+  for(var str : arr) {
+    yield str;
+  }
+}
+
+api test3(name: string): asyncIterator[any] {
+  __request.protocol = "https";
+  __request.method = 'DELETE';
+  __request.pathname = "/";
+  __request.headers = {
+    host = "test.aliyun.com",
+    accept = 'application/json',
+  };
+  __request.query = {
+    nextToken = "100",
+    maxResults = "200",
+  };
+} returns {
+  var resp = {
+    nextToken = "100",
+    truncated = false,
+    replicaPairs = "sdfs",
+  };
+  if(__response.statusCode > 400) {
+    throw {
+      code = 'sdfsd',
+      message = 'sdfs',
+    };
+  }
+  name = 'test';
+  var it = $Stream.readAsSSE(__response.body);
+  for(var i : it) {
+    yield $JSON.parseJSON(i.data);
+  }
+} runtime {
+  timeouted = 'retry',
+}

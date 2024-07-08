@@ -34,6 +34,33 @@ model Test3{
 }
 
 /**
+  TestErr
+*/
+model TestErr1{
+  test: string(description='test desc', name='test'), //error的test back comment
+  test2: string(description='test2 desc', name='test2'), //error的test2 back comment
+}
+
+/**
+  TestErr2
+*/
+model TestErr2{
+  // model的test front comment
+  test: string(description='test desc', name='test'),
+  // model的test front comment
+  test2: string(description='test2 desc', name='test2'),
+}
+
+/**
+  TestErr3
+*/
+model TestErr3{
+  // empty comment1
+  // empy comment2
+}
+
+
+/**
   Init Func
 */
 // comment between init and annotation

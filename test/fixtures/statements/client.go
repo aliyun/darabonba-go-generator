@@ -2,14 +2,22 @@
 package client
 
 import (
-  "github.com/alibabacloud-go/tea/tea"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
+type iConfig interface {
+  dara.Model
+  String() string
+  GoString() string
+}
+
 type Config struct {
+  dara.Model
 }
 
 func (s Config) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s Config) GoString() string {
@@ -31,22 +39,23 @@ func (client *Client)Init(config *Config)(_err error) {
 
 
 func (client *Client) Hello() (_err error) {
-  request_ := tea.NewRequest()
-  request_.Method = tea.String("GET")
-  request_.Pathname = tea.String("/")
+  request_ := dara.NewRequest()
+  request_.Method = dara.String("GET")
+  request_.Pathname = dara.String("/")
   request_.Headers = map[string]*string{
-    "host": tea.String("www.test.com"),
+    "host": dara.String("www.test.com"),
   }
   if true {
-    request_.Headers["host"] = tea.String("www.test2.com")
+    request_.Headers["host"] = dara.String("www.test2.com")
   }
 
-  response_, _err := tea.DoRequest(request_, nil)
+  response_, _err := dara.DoRequest(request_, nil)
   if _err != nil {
     return _err
   }
+
   HelloIf()
-  return _err
+  return
 }
 
 
@@ -62,12 +71,12 @@ func HelloIf () {
 }
 
 func HelloThrow () {
-  _err = tea.NewSDKError(map[string]interface{}{})
+  _err = dara.NewSDKError(map[string]interface{}{})
   return
 }
 
 func HelloForBreak () {
-  for _, item := range []*string{tea.String("1"), tea.String("2")} {
+  for _, item := range []*string{dara.String("1"), dara.String("2")} {
     break
   }
 }
@@ -79,8 +88,8 @@ func HelloWhile () {
 }
 
 func HelloDeclare () {
-  hello := tea.String("world")
-  var helloNull *string
-  hello = tea.String("hehe")
+  hello := "world"
+  var helloNull string
+  hello = "hehe"
 }
 

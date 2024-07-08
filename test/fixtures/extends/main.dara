@@ -4,6 +4,34 @@ init(config: Source.Config){
    super(config);
 }
 
+model Base {
+    name: string,
+    age: number
+}
+
+model Sub extends Base {
+    name: string,
+    code: string
+}
+
+model SubModel extends Source.Config {
+    name: string,
+}
+
+async function newModels(): void {
+    var s = new Sub{
+        name = "str",
+        code = "str",
+        age = 123,
+    };
+
+    var sm = new SubModel{
+        name = "str",
+        maxAttemp = 32,
+        maxRetry = 32,
+    };
+}
+
 api _request(): object {
     try {
         var in = 'try';
