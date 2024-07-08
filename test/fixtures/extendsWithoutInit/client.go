@@ -2,8 +2,9 @@
 package client
 
 import (
-  source  "github.com/aliyun/darabonba-go-generator/test"
-  "github.com/alibabacloud-go/tea/tea"
+  source "github.com/aliyun/darabonba-go-generator/test"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
 type Client struct {
@@ -17,32 +18,41 @@ func NewClient(config *source.Config)(*Client, error) {
 }
 
 func (client *Client) _request() (_result map[string]interface{}, _err error) {
-  _runtime := map[string]interface{}{}
+  _runtime := dara.NewRuntimeObject(map[string]interface{}{})
 
-  _resp := make(map[string]interface{})
-  for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
-    if _retryTimes > 0 {
-      _backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
-      if tea.IntValue(_backoffTime) > 0 {
-        tea.Sleep(_backoffTime)
-      }
-    }
-
-    _resp, _err = func()(map[string]interface{}, error){
-      request_ := tea.NewRequest()
-      response_, _err := tea.DoRequest(request_, _runtime)
-      if _err != nil {
-        return _result, _err
-      }
-      _result = nil
-      return _result , _err
-    }()
-    if !tea.BoolValue(tea.Retryable(_err)) {
-      break
-    }
+  var retryPolicyContext *dara.RetryPolicyContext
+  var request_ *dara.Request
+  var response_ *dara.Response
+  var _resultErr error
+  retriesAttempted := int(0)
+  retryPolicyContext = &dara.RetryPolicyContext{
+    RetriesAttempted: retriesAttempted,
   }
 
-  return _resp, _err
+  _result = make(map[string]interface{})
+  for dara.ShouldRetry(_runtime.RetryOptions, retryPolicyContext) {
+    _resultErr = nil
+    _backoffDelayTime := dara.GetBackoffDelay(_runtime.RetryOptions, retryPolicyContext)
+    dara.Sleep(_backoffDelayTime)
+
+    request_ = dara.NewRequest()
+    response_, _err := dara.DoRequest(request_, _runtime)
+    if _err != nil {
+      retriesAttempted++
+      retryPolicyContext = &dara.RetryPolicyContext{
+        RetriesAttempted: retriesAttempted,
+        HttpRequest:      request_,
+        HttpResponse:     response_,
+        Exception:        _err,
+      }
+      _resultErr = _err
+      continue
+    }
+
+    _result = nil
+    return _result , _err
+  }
+  return _result, _resultErr
 }
 
 

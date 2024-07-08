@@ -24,10 +24,12 @@ api helloRuntime(): void {
     key = 'value',
   };
 } returns {
+  var testStr = getHost();
   return;
 } runtime {
 
 }
+
 
 model M = {};
 api helloVirtualCall(m: M): void {
@@ -38,4 +40,32 @@ api helloVirtualCall(m: M): void {
   };
 } returns {
   return;
+}
+
+async function getHost() throws: string {
+  return 'www.test.com';
+}
+
+api helloComplex(): any {
+  var host = getHost();
+  __request.method = 'GET';
+  __request.pathname = '/';
+  __request.headers = {
+    host = host,
+  };
+  var test : map[string]any = null;
+  test = {
+    key = 'value',
+  };
+} returns {
+  if(__response.statusCode != 200) {
+    throw {
+      code = `${__response.statusCode}`,
+      message = `httpCode: ${__response.statusCode} `,
+    };
+  }
+  var obj = $Stream.readAsJSON(__response.body);
+  return obj;
+} runtime {
+
 }

@@ -2,23 +2,43 @@
 package client
 
 import (
-  string_  "github.com/aliyun/darabonba-go-generator/test"
-  map_  "github.com/aliyun/darabonba-go-generator/test"
-  localsource  "github.com/aliyun/darabonba-go-generator"
-  "github.com/alibabacloud-go/tea/tea"
+  string_ "github.com/aliyun/darabonba-go-generator/test"
+  map_ "github.com/aliyun/darabonba-go-generator/test"
+  localsource "github.com/aliyun/darabonba-go-generator"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
+type iM interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetA(v *map_.Request) *M
+  GetA() *map_.Request 
+  SetB(v *string_.Request) *M
+  GetB() *string_.Request 
+}
+
 type M struct {
+  dara.Model
   A *map_.Request `json:"a,omitempty" xml:"a,omitempty"`
   B *string_.Request `json:"b,omitempty" xml:"b,omitempty"`
 }
 
 func (s M) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s M) GoString() string {
   return s.String()
+}
+
+func (s *M) GetA() *map_.Request  {
+  return s.A
+}
+
+func (s *M) GetB() *string_.Request  {
+  return s.B
 }
 
 func (s *M) SetA(v *map_.Request) *M {
@@ -51,8 +71,8 @@ func (client *Client)Init()(_err error) {
 func (client *Client) Sample (str *string_.Client, m *map_.Client) {
   runtime := &string_.RuntimeObject{}
   request := &localsource.Request{
-    Accesskey: tea.String("accesskey"),
-    Region: tea.String("region"),
+    Accesskey: dara.String("accesskey"),
+    Region: dara.String("region"),
   }
   string_.StaticCall()
   map_.StaticCall()

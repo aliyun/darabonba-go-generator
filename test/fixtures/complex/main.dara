@@ -12,6 +12,15 @@ init(config: Source.Config){
   var test : Source = new Source(config);
 }
 
+exception Err1 = {
+  data: map[string]string
+}
+
+exception Err2 = {
+  accessErrMessage: string
+}
+
+
 model ComplexRequest = {
   accessKey: string,
   body: readable(name='Body', example='Body', description='Body'),
@@ -200,6 +209,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
     break;
   }
   @Strs = request.strs;
+  @protocol = 'test';
   @endpointMap[@protocol];
   @endpointMap['test'] = 'ok';
   request.strs = @Strs;
@@ -226,7 +236,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   hello(request, ["1","2"], null);
   hello(null, null, null);
   return {};
-  Complex3(null);
+  Complex3(null, 'test');
   return null;
 } runtime {
   timeouted = 'retry'
@@ -252,8 +262,8 @@ api ComplexMap(): map[string]any {
   
 }
 
-api Complex3(request: ComplexRequest): ComplexRequest {
-  var name = 'complex';
+api Complex3(request: ComplexRequest, name: string): ComplexRequest {
+  name = 'complex';
   __request.protocol = templateString();
   __request.port = 80;
   __request.method = 'GET';
@@ -264,6 +274,7 @@ api Complex3(request: ComplexRequest): ComplexRequest {
   };
   var tmp : ComplexRequest = null;
   tmp = returnModel();
+  name = @protocol;
 } returns {
   var resp = __response;
   var req = new Source.Request{
@@ -490,7 +501,9 @@ static function mapAccess4(request: ComplexRequest): string {
 static function mapAssign(request: ComplexRequest, name: string): void {
   request.configs.extra['name'] = name;
   var key : string = 'name';
+  name = key;
   request.configs.extra[key] = name;
+  name = request.configs.extra['name'];
   request.map[key] = name;
   request.numMap[key] = 1;
 }  
@@ -510,3 +523,43 @@ static async function defaultReturn(): void {
     
   }
 }  
+
+async function multiTryCatch(a: number): void {
+  try {
+    if(a > 0) {
+      throw new Err1 {
+        name = "str",
+        code = "str",
+        data = {
+          key1 = "str",
+        }
+      };
+    } else if(a == 0) {
+      throw new Err2 {
+        name = "str",
+        code = "str",
+        accessErrMessage = "str2",
+      };
+    } else if(a == -10) {
+      throw new Source.Err3 {
+        name = "str",
+        code = "str",
+      };
+    } else {
+      throw new $Error{
+        name = "str",
+        code = "str",
+      }
+    }
+  } catch(err: Err1) {
+    $Logger.log(err.name);
+  } catch(err: Err2) {
+    $Logger.log(err.name);
+  } catch(err: Source.Err3) {
+    $Logger.log(err.name);
+  } catch(err) {
+    $Logger.log(err.name);
+  } finally {
+    var final = 'ok';
+  }
+}

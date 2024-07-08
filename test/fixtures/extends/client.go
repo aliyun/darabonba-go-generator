@@ -2,9 +2,144 @@
 package client
 
 import (
-  source  "github.com/aliyun/darabonba-go-generator/test"
-  "github.com/alibabacloud-go/tea/tea"
+  source "github.com/aliyun/darabonba-go-generator/test"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
+
+type iBase interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetName(v string) *Base
+  GetName() *string 
+  SetAge(v int) *Base
+  GetAge() *int 
+}
+
+type Base struct {
+  dara.Model
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+  Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
+}
+
+func (s Base) String() string {
+  return dara.Prettify(s)
+}
+
+func (s Base) GoString() string {
+  return s.String()
+}
+
+func (s *Base) GetName() *string  {
+  return s.Name
+}
+
+func (s *Base) GetAge() *int  {
+  return s.Age
+}
+
+func (s *Base) SetName(v string) *Base {
+  s.Name = &v
+  return s
+}
+
+func (s *Base) SetAge(v int) *Base {
+  s.Age = &v
+  return s
+}
+
+type iSub interface {
+  iBase
+  String() string
+  GoString() string
+  SetName(v string) *Sub
+  GetName() *string 
+  SetCode(v string) *Sub
+  GetCode() *string 
+}
+
+type Sub struct {
+  iBase
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+  Code *string `json:"code,omitempty" xml:"code,omitempty" require:"true"`
+  Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
+}
+
+func (s Sub) String() string {
+  return dara.Prettify(s)
+}
+
+func (s Sub) GoString() string {
+  return s.String()
+}
+
+func (s *Sub) GetName() *string  {
+  return s.Name
+}
+
+func (s *Sub) GetCode() *string  {
+  return s.Code
+}
+
+func (s *Sub) GetAge() *int  {
+  return s.Age
+}
+
+func (s *Sub) SetName(v string) *Sub {
+  s.Name = &v
+  return s
+}
+
+func (s *Sub) SetCode(v string) *Sub {
+  s.Code = &v
+  return s
+}
+
+func (s *Sub) SetAge(v int) *Sub {
+  s.Age = &v
+  return s
+}
+
+type iSubModel interface {
+  source.iConfig
+  String() string
+  GoString() string
+  SetName(v string) *SubModel
+  GetName() *string 
+}
+
+type SubModel struct {
+  source.iConfig
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+  MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
+}
+
+func (s SubModel) String() string {
+  return dara.Prettify(s)
+}
+
+func (s SubModel) GoString() string {
+  return s.String()
+}
+
+func (s *SubModel) GetName() *string  {
+  return s.Name
+}
+
+func (s *SubModel) GetMaxAttemp() *int  {
+  return s.MaxAttemp
+}
+
+func (s *SubModel) SetName(v string) *SubModel {
+  s.Name = &v
+  return s
+}
+
+func (s *SubModel) SetMaxAttemp(v int) *SubModel {
+  s.MaxAttemp = &v
+  return s
+}
 
 type Client struct {
   source.Client
@@ -26,103 +161,69 @@ func (client *Client)Init(config *source.Config)(_err error) {
 
 
 func (client *Client) _request() (_result map[string]interface{}, _err error) {
-  _runtime := map[string]interface{}{}
+  _runtime := dara.NewRuntimeObject(map[string]interface{}{})
 
-  _resp := make(map[string]interface{})
-  for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
-    if _retryTimes > 0 {
-      _backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
-      if tea.IntValue(_backoffTime) > 0 {
-        tea.Sleep(_backoffTime)
-      }
-    }
-
-    _resp, _err = func()(map[string]interface{}, error){
-      request_ := tea.NewRequest()
-      _, tryErr := func()(_r map[string]interface{}, _e error) {
-        defer func() {
-          if r := tea.Recover(recover()); r != nil {
-            _e = r
-          }
-        }()
-        in := tea.String("try")
-
-        return nil, nil
-      }()
-
-      if tryErr != nil {
-        var e = &tea.SDKError{}
-        if _t, ok := tryErr.(*tea.SDKError); ok {
-          e = _t
-        } else {
-          e.Message = tea.String(tryErr.Error())
-        }
-        tmp := e.Message
-      }
-      response_, _err := tea.DoRequest(request_, _runtime)
-      if _err != nil {
-        return _result, _err
-      }
-
-      _result = nil
-      return _result , _err
-    }()
-    if !tea.BoolValue(tea.Retryable(_err)) {
-      break
-    }
+  var retryPolicyContext *dara.RetryPolicyContext
+  var request_ *dara.Request
+  var response_ *dara.Response
+  var _resultErr error
+  retriesAttempted := int(0)
+  retryPolicyContext = &dara.RetryPolicyContext{
+    RetriesAttempted: retriesAttempted,
   }
 
-  return _resp, _err
+  _result = make(map[string]interface{})
+  for dara.ShouldRetry(_runtime.RetryOptions, retryPolicyContext) {
+    _resultErr = nil
+    _backoffDelayTime := dara.GetBackoffDelay(_runtime.RetryOptions, retryPolicyContext)
+    dara.Sleep(_backoffDelayTime)
+
+    request_ = dara.NewRequest()
+    in := "try"
+    response_, _err := dara.DoRequest(request_, _runtime)
+    if _err != nil {
+      retriesAttempted++
+      retryPolicyContext = &dara.RetryPolicyContext{
+        RetriesAttempted: retriesAttempted,
+        HttpRequest:      request_,
+        HttpResponse:     response_,
+        Exception:        _err,
+      }
+      _resultErr = _err
+      continue
+    }
+
+
+    _result = nil
+    return _result , _err
+  }
+  return _result, _resultErr
 }
 
 
-func (client *Client) TryCatch () {
-  var _err error
-  tryErr := func()(_e error) {
-    defer func() {
-      if r := tea.Recover(recover()); r != nil {
-        _e = r
-      }
-    }()
-    in := tea.String("try")
-
-    return nil
-  }()
-
-  if tryErr != nil {
-    var e = &tea.SDKError{}
-    if _t, ok := tryErr.(*tea.SDKError); ok {
-      e = _t
-    } else {
-      e.Message = tea.String(tryErr.Error())
-    }
-    tmp := e.Message
+func (client *Client) NewModels () (_err error) {
+  s := &Sub{
+    Name: dara.String("str"),
+    Code: dara.String("str"),
+    Age: dara.Int(123),
   }
+  sm := &SubModel{
+    Name: dara.String("str"),
+    MaxAttemp: dara.Int(32),
+    MaxRetry: dara.Int(32),
+  }
+  return _err
+}
+
+func (client *Client) TryCatch () {
+  in := "try"
 }
 
 func (client *Client) TryCatchWithReturn () (_result *string) {
-  var _err error
-  _, tryErr := func()(_r *string, _e error) {
-    defer func() {
-      if r := tea.Recover(recover()); r != nil {
-        _e = r
-      }
-    }()
-    in := tea.String("try")
-    _result = in
-    return _result , _err
-  }()
-
-  if tryErr != nil {
-    var e = &tea.SDKError{}
-    if _t, ok := tryErr.(*tea.SDKError); ok {
-      e = _t
-    } else {
-      e.Message = tea.String(tryErr.Error())
-    }
-    tmp := e.Message
-  }
-  _result = tea.String("")
+  in := "try"
+  _result = dara.String(in)
+  return _result
+  _result = dara.String("")
   return _result
 }
 

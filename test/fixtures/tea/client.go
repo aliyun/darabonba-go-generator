@@ -2,17 +2,18 @@
 package client
 
 import (
-  source  "github.com/aliyun/darabonba-go-generator"
-  localsource  "github.com/aliyun/darabonba-go-generator"
-  "github.com/alibabacloud-go/tea/tea"
+  source "github.com/aliyun/darabonba-go-generator"
+  localsource "github.com/aliyun/darabonba-go-generator"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
 
 func Sample (client *source.Client) {
   runtime := &source.RuntimeObject{}
   request := &localsource.Request{
-    Accesskey: tea.String("accesskey"),
-    Region: tea.String("region"),
+    Accesskey: dara.String("accesskey"),
+    Region: dara.String("region"),
   }
   client.Print(runtime)
 }

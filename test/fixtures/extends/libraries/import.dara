@@ -1,5 +1,14 @@
-model Config = {}
-model RuntimeObject = {}
+
+model RuntimeObject = {
+  maxRetry: number,
+}
+
+
+model Config extends RuntimeObject {
+  maxAttemp: number,
+}
+
+
 init(config: Config);
 function print(runtime: RuntimeObject): void {
   return;
