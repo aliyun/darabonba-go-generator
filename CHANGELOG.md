@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.8 - 2024-07-15
+
+> Resolve description line
+
 ## 1.1.7 - 2024-05-29
 
 > Resolve return type
