@@ -1,0 +1,12 @@
+{
+	"scope": "darabonba",
+	"name": "Util",
+	"version": "0.2.10",
+	"main": "./sdk.dara",
+	"releases": {
+		"go": "darabonba.com/multi/client:v1.0.0"
+	},
+	"libraries": {
+		"DARAUtil": "darabonba:Util:*"
+	}
+}

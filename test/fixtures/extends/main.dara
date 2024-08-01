@@ -4,6 +4,18 @@ init(config: Source.Config){
    super(config);
 }
 
+model Base {
+    name: string
+}
+
+model Sub extends Base {
+    name: string
+}
+
+model SubModel extends Source.Config {
+    name: string,
+}
+
 api _request(): object {
     try {
         var in = 'try';

@@ -2,10 +2,11 @@
 package client
 
 import (
-  spi  "github.com/alibabacloud-go/alibabacloud-gateway-spi/client"
-  gatewayclient  "github.com/alibabacloud-go/alibabacloud-gateway-sls/client"
-  openapi  "github.com/alibabacloud-go/darabonba-openapi/client"
-  "github.com/alibabacloud-go/tea/tea"
+  spi "github.com/alibabacloud-go/alibabacloud-gateway-spi/client"
+  gatewayclient "github.com/alibabacloud-go/alibabacloud-gateway-sls/client"
+  openapi "github.com/alibabacloud-go/darabonba-openapi/client"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
 type Client struct {
@@ -32,15 +33,15 @@ func (client *Client)Init(config *openapi.Config)(_err error) {
   }
 
   client.Spi = client.Client_
-  client.A = tea.String("test")
-  client.B = tea.Int(1)
+  client.A = dara.String("test")
+  client.B = dara.Int(1)
   return nil
 }
 
 
 
 func (client *Client) Test (project *string, logstore *string) (_result *string, _err error) {
-  _result = tea.String("")
+  _result = dara.String("")
   return _result, _err
 }
 

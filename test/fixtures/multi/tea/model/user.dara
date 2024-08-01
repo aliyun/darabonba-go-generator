@@ -1,0 +1,16 @@
+import DARAUtil;
+import "../lib/util" Util;
+
+model Info {
+    name: string,
+    age: integer,
+}
+
+
+static async function test(): asyncIterator[string]{
+ var it:iterator[string] = Util.test1();
+ for(var test : it) {
+    yield test;
+ }
+
+}
