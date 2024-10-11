@@ -188,6 +188,7 @@ describe('new Generator', function () {
       ...pkg
     });
   });
+
   it('interface should ok', function () {
     const outputDir = path.join(__dirname, 'output/interface');
     const mainFilePath = path.join(__dirname, 'fixtures/interface/spi.tea');
@@ -198,6 +199,7 @@ describe('new Generator', function () {
       ...pkg
     });
   });
+
   it('typedef should ok', function () {
     const outputDir = path.join(__dirname, 'output/typedef');
     const mainFilePath = path.join(__dirname, 'fixtures/typedef/main.dara');
@@ -210,4 +212,81 @@ describe('new Generator', function () {
     });
   });
 
+  it('builtin should ok', function () {
+    const outputDir = path.join(__dirname, 'output/builtin');
+    const mainFilePath = path.join(__dirname, 'fixtures/builtin/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/builtin/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/builtin/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/builtin'),
+      ...pkg
+    });
+  });
+
+  it('try should ok', function () {
+    const outputDir = path.join(__dirname, 'output/try');
+    const mainFilePath = path.join(__dirname, 'fixtures/try/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/try/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/try/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/try'),
+      ...pkg
+    });
+  });
+
+  it('multi should ok', function () {
+    const outputDir = path.join(__dirname, 'output/multi');
+    const mainFilePath = path.join(__dirname, 'fixtures/multi/tea/sdk.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/multi/tea/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    const generator = new Generator({
+      outputDir,
+      pkgDir: path.join(__dirname, 'fixtures/multi/tea'),
+      ...pkg,
+    });
+  
+    const dsl = fs.readFileSync(mainFilePath, 'utf8');
+    const ast = DSL.parse(dsl, mainFilePath);
+    generator.visit(ast);
+    const mainPath = path.join(outputDir, 'client/client.go');
+    const apiPath = path.join(outputDir, 'api/client.go');
+    const modelPath = path.join(outputDir, 'model/user/client.go');
+    const utilPath = path.join(outputDir, 'lib/util/client.go');
+    const expectedMainPath = path.join(__dirname, 'fixtures/multi/sdk/client.go');
+    const expectedModelPath = path.join(__dirname, 'fixtures/multi/sdk/user.go');
+    const expectedUtilPath = path.join(__dirname, 'fixtures/multi/sdk/util.go');
+    const expectedApiPath = path.join(__dirname, 'fixtures/multi/sdk/api.go');
+    const expectedMain = fs.readFileSync(expectedMainPath, 'utf8');
+    assert.deepStrictEqual(fs.readFileSync(mainPath, 'utf8'), expectedMain);
+    const expectedModel = fs.readFileSync(expectedModelPath, 'utf8');
+    assert.deepStrictEqual(fs.readFileSync(modelPath, 'utf8'), expectedModel);
+    const expectedUtil = fs.readFileSync(expectedUtilPath, 'utf8');
+    assert.deepStrictEqual(fs.readFileSync(utilPath, 'utf8'), expectedUtil);
+    const expectedApi = fs.readFileSync(expectedApiPath, 'utf8');
+    assert.deepStrictEqual(fs.readFileSync(apiPath, 'utf8'), expectedApi);
+  });
+
+
+  it('yield should ok', function () {
+    const outputDir = path.join(__dirname, 'output/yield');
+    const mainFilePath = path.join(__dirname, 'fixtures/yield/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/yield/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/yield/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/yield'),
+      ...pkg
+    });
+  });
+
+  it('exception should ok', function () {
+    const outputDir = path.join(__dirname, 'output/exception');
+    const mainFilePath = path.join(__dirname, 'fixtures/exception/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/exception/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/exception/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/exception'),
+      ...pkg
+    });
+  
+  });
 });

@@ -3,20 +3,34 @@ package client
 
 import (
   "io"
-  source  "github.com/aliyun/darabonba-go-generator/test"
-  "github.com/alibabacloud-go/tea/tea"
+  source "github.com/aliyun/darabonba-go-generator/test"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
+type iM interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetSubM(v *MSubM) *M
+  GetSubM() *M 
+}
+
 type M struct {
+  dara.Model
   SubM *MSubM `json:"subM,omitempty" xml:"subM,omitempty" require:"true" type:"Struct"`
 }
 
 func (s M) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s M) GoString() string {
   return s.String()
+}
+
+func (s *M) GetSubM() *M  {
+  return s.SubM
 }
 
 func (s *M) SetSubM(v *MSubM) *M {
@@ -28,14 +42,69 @@ type MSubM struct {
 }
 
 func (s MSubM) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MSubM) GoString() string {
   return s.String()
 }
 
+type iMyModel interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetStringfield(v string) *MyModel
+  GetStringfield() *string 
+  SetStringarrayfield(v []*string) *MyModel
+  GetStringarrayfield() []*string 
+  SetMapfield(v map[string]*string) *MyModel
+  GetMapfield() map[string]*string 
+  SetName(v string) *MyModel
+  GetName() *string 
+  SetSubmodel(v *MyModelSubmodel) *MyModel
+  GetSubmodel() *MyModel 
+  SetModuleModelMap(v map[string]*source.Request) *MyModel
+  GetModuleModelMap() map[string]*source.Request 
+  SetSubModelMap(v map[string]*MSubM) *MyModel
+  GetSubModelMap() map[string]*MSubM 
+  SetModelMap(v map[string]*M) *MyModel
+  GetModelMap() map[string]*M 
+  SetModuleMap(v map[string]*source.Client) *MyModel
+  GetModuleMap() map[string]*source.Client 
+  SetObject(v map[string]interface{}) *MyModel
+  GetObject() map[string]interface{} 
+  SetNumberfield(v int) *MyModel
+  GetNumberfield() *int 
+  SetInt64field(v int64) *MyModel
+  GetInt64field() *int64 
+  SetUint64field(v uint64) *MyModel
+  GetUint64field() *uint64 
+  SetInt32field(v int32) *MyModel
+  GetInt32field() *int32 
+  SetUint32field(v uint32) *MyModel
+  GetUint32field() *uint32 
+  SetInt16field(v int16) *MyModel
+  GetInt16field() *int16 
+  SetUint16field(v uint16) *MyModel
+  GetUint16field() *uint16 
+  SetInt8field(v int8) *MyModel
+  GetInt8field() *int8 
+  SetUint8field(v uint8) *MyModel
+  GetUint8field() *uint8 
+  SetReadable(v io.Reader) *MyModel
+  GetReadable() io.Reader 
+  SetRequest(v *dara.Request) *MyModel
+  GetRequest() *dara.Request 
+  SetLists(v [][]*string) *MyModel
+  GetLists() [][]*string 
+  SetArrays(v [][]*MyModelArrays) *MyModel
+  GetArrays() [][]*MyModel 
+  SetComplexList(v [][]*string) *MyModel
+  GetComplexList() [][]*string 
+}
+
 type MyModel struct {
+  dara.Model
   Stringfield *string `json:"stringfield,omitempty" xml:"stringfield,omitempty" require:"true"`
   Stringarrayfield []*string `json:"stringarrayfield" xml:"stringarrayfield" require:"true" type:"Repeated"`
   Mapfield map[string]*string `json:"mapfield" xml:"mapfield" require:"true"`
@@ -56,18 +125,114 @@ type MyModel struct {
   Int8field *int8 `json:"int8field,omitempty" xml:"int8field,omitempty" require:"true"`
   Uint8field *uint8 `json:"uint8field,omitempty" xml:"uint8field,omitempty" require:"true"`
   Readable io.Reader `json:"readable,omitempty" xml:"readable,omitempty" require:"true"`
-  Request *tea.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
+  Request *dara.Request `json:"request,omitempty" xml:"request,omitempty" require:"true"`
   Lists [][]*string `json:"lists" xml:"lists" require:"true" type:"Repeated"`
   Arrays [][]*MyModelArrays `json:"arrays" xml:"arrays" require:"true" type:"Repeated"`
   ComplexList [][]*string `json:"complexList" xml:"complexList" require:"true" type:"Repeated"`
 }
 
 func (s MyModel) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MyModel) GoString() string {
   return s.String()
+}
+
+func (s *MyModel) GetStringfield() *string  {
+  return s.Stringfield
+}
+
+func (s *MyModel) GetStringarrayfield() []*string  {
+  return s.Stringarrayfield
+}
+
+func (s *MyModel) GetMapfield() map[string]*string  {
+  return s.Mapfield
+}
+
+func (s *MyModel) GetName() *string  {
+  return s.Name
+}
+
+func (s *MyModel) GetSubmodel() *MyModel  {
+  return s.Submodel
+}
+
+func (s *MyModel) GetModuleModelMap() map[string]*source.Request  {
+  return s.ModuleModelMap
+}
+
+func (s *MyModel) GetSubModelMap() map[string]*MSubM  {
+  return s.SubModelMap
+}
+
+func (s *MyModel) GetModelMap() map[string]*M  {
+  return s.ModelMap
+}
+
+func (s *MyModel) GetModuleMap() map[string]*source.Client  {
+  return s.ModuleMap
+}
+
+func (s *MyModel) GetObject() map[string]interface{}  {
+  return s.Object
+}
+
+func (s *MyModel) GetNumberfield() *int  {
+  return s.Numberfield
+}
+
+func (s *MyModel) GetInt64field() *int64  {
+  return s.Int64field
+}
+
+func (s *MyModel) GetUint64field() *uint64  {
+  return s.Uint64field
+}
+
+func (s *MyModel) GetInt32field() *int32  {
+  return s.Int32field
+}
+
+func (s *MyModel) GetUint32field() *uint32  {
+  return s.Uint32field
+}
+
+func (s *MyModel) GetInt16field() *int16  {
+  return s.Int16field
+}
+
+func (s *MyModel) GetUint16field() *uint16  {
+  return s.Uint16field
+}
+
+func (s *MyModel) GetInt8field() *int8  {
+  return s.Int8field
+}
+
+func (s *MyModel) GetUint8field() *uint8  {
+  return s.Uint8field
+}
+
+func (s *MyModel) GetReadable() io.Reader  {
+  return s.Readable
+}
+
+func (s *MyModel) GetRequest() *dara.Request  {
+  return s.Request
+}
+
+func (s *MyModel) GetLists() [][]*string  {
+  return s.Lists
+}
+
+func (s *MyModel) GetArrays() [][]*MyModel  {
+  return s.Arrays
+}
+
+func (s *MyModel) GetComplexList() [][]*string  {
+  return s.ComplexList
 }
 
 func (s *MyModel) SetStringfield(v string) *MyModel {
@@ -170,7 +335,7 @@ func (s *MyModel) SetReadable(v io.Reader) *MyModel {
   return s
 }
 
-func (s *MyModel) SetRequest(v *tea.Request) *MyModel {
+func (s *MyModel) SetRequest(v *dara.Request) *MyModel {
   s.Request = v
   return s
 }
@@ -195,11 +360,15 @@ type MyModelSubmodel struct {
 }
 
 func (s MyModelSubmodel) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MyModelSubmodel) GoString() string {
   return s.String()
+}
+
+func (s *MyModelSubmodel) GetStringfield() *string  {
+  return s.Stringfield
 }
 
 func (s *MyModelSubmodel) SetStringfield(v string) *MyModelSubmodel {
@@ -207,16 +376,20 @@ func (s *MyModelSubmodel) SetStringfield(v string) *MyModelSubmodel {
   return s
 }
 
-type MyModelArrays struct     {
+type MyModelArrays struct {
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
 
 func (s MyModelArrays) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s MyModelArrays) GoString() string {
   return s.String()
+}
+
+func (s *MyModelArrays) GetName() *string  {
+  return s.Name
 }
 
 func (s *MyModelArrays) SetName(v string) *MyModelArrays {

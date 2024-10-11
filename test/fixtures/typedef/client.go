@@ -4,21 +4,41 @@ package client
 import (
   "net/http"
   "net/url"
-  oss  "github.com/aliyun/darabonba-go-generator"
-  "github.com/alibabacloud-go/tea/tea"
+  oss "github.com/aliyun/darabonba-go-generator"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
+type iM interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetA(v *http.Request) *M
+  GetA() *http.Request 
+  SetB(v *url.URL) *M
+  GetB() *url.URL 
+}
+
 type M struct {
+  dara.Model
   A *http.Request `json:"a,omitempty" xml:"a,omitempty"`
   B *url.URL `json:"b,omitempty" xml:"b,omitempty"`
 }
 
 func (s M) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s M) GoString() string {
   return s.String()
+}
+
+func (s *M) GetA() *http.Request  {
+  return s.A
+}
+
+func (s *M) GetB() *url.URL  {
+  return s.B
 }
 
 func (s *M) SetA(v *http.Request) *M {
@@ -66,7 +86,7 @@ func (client *Client) Main (test1 *http.Request, test2 *url.URL) (_err error) {
 }
 
 func (client *Client) TestHttpRequest (req *http.Request) (_result *http.Response, _err error) {
-  _body := TestHttpRequestWith(tea.String("test"), req)
+  _body := TestHttpRequestWith(dara.String("test"), req)
   _result = _body
   return _result, _err
 }
@@ -80,7 +100,7 @@ func TestHttpHeader (method *string, headers *http.Header) (_result *http.Reques
 }
 
 func (client *Client) TestHttpHeaderWith (headers *http.Header) (_result *http.Request, _err error) {
-  _body := TestHttpHeader(tea.String("test"), headers)
+  _body := TestHttpHeader(dara.String("test"), headers)
   _result = _body
   return _result, _err
 }

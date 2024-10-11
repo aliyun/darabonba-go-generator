@@ -3,22 +3,48 @@ package client
 
 import (
   "io"
-  credential  "github.com/aliyun/credentials-go/credentials"
-  "github.com/alibabacloud-go/tea/tea"
+  credential "github.com/aliyun/credentials-go/credentials"
+  dara "github.com/alibabacloud-go/tea/tea"
+  
 )
 
+type iInterceptorContext interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetRequest(v *InterceptorContextRequest) *InterceptorContext
+  GetRequest() *InterceptorContext 
+  SetConfiguration(v *InterceptorContextConfiguration) *InterceptorContext
+  GetConfiguration() *InterceptorContext 
+  SetResponse(v *InterceptorContextResponse) *InterceptorContext
+  GetResponse() *InterceptorContext 
+}
+
 type InterceptorContext struct {
+  dara.Model
   Request *InterceptorContextRequest `json:"request,omitempty" xml:"request,omitempty" require:"true" type:"Struct"`
   Configuration *InterceptorContextConfiguration `json:"configuration,omitempty" xml:"configuration,omitempty" require:"true" type:"Struct"`
   Response *InterceptorContextResponse `json:"response,omitempty" xml:"response,omitempty" require:"true" type:"Struct"`
 }
 
 func (s InterceptorContext) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContext) GoString() string {
   return s.String()
+}
+
+func (s *InterceptorContext) GetRequest() *InterceptorContext  {
+  return s.Request
+}
+
+func (s *InterceptorContext) GetConfiguration() *InterceptorContext  {
+  return s.Configuration
+}
+
+func (s *InterceptorContext) GetResponse() *InterceptorContext  {
+  return s.Response
 }
 
 func (s *InterceptorContext) SetRequest(v *InterceptorContextRequest) *InterceptorContext {
@@ -59,11 +85,87 @@ type InterceptorContextRequest struct {
 }
 
 func (s InterceptorContextRequest) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContextRequest) GoString() string {
   return s.String()
+}
+
+func (s *InterceptorContextRequest) GetHeaders() map[string]*string  {
+  return s.Headers
+}
+
+func (s *InterceptorContextRequest) GetQuery() map[string]*string  {
+  return s.Query
+}
+
+func (s *InterceptorContextRequest) GetBody() interface{}  {
+  return s.Body
+}
+
+func (s *InterceptorContextRequest) GetStream() io.Reader  {
+  return s.Stream
+}
+
+func (s *InterceptorContextRequest) GetHostMap() map[string]*string  {
+  return s.HostMap
+}
+
+func (s *InterceptorContextRequest) GetPathname() *string  {
+  return s.Pathname
+}
+
+func (s *InterceptorContextRequest) GetProductId() *string  {
+  return s.ProductId
+}
+
+func (s *InterceptorContextRequest) GetAction() *string  {
+  return s.Action
+}
+
+func (s *InterceptorContextRequest) GetVersion() *string  {
+  return s.Version
+}
+
+func (s *InterceptorContextRequest) GetProtocol() *string  {
+  return s.Protocol
+}
+
+func (s *InterceptorContextRequest) GetMethod() *string  {
+  return s.Method
+}
+
+func (s *InterceptorContextRequest) GetAuthType() *string  {
+  return s.AuthType
+}
+
+func (s *InterceptorContextRequest) GetBodyType() *string  {
+  return s.BodyType
+}
+
+func (s *InterceptorContextRequest) GetReqBodyType() *string  {
+  return s.ReqBodyType
+}
+
+func (s *InterceptorContextRequest) GetStyle() *string  {
+  return s.Style
+}
+
+func (s *InterceptorContextRequest) GetCredential() credential.Credential  {
+  return s.Credential
+}
+
+func (s *InterceptorContextRequest) GetSignatureVersion() *string  {
+  return s.SignatureVersion
+}
+
+func (s *InterceptorContextRequest) GetSignatureAlgorithm() *string  {
+  return s.SignatureAlgorithm
+}
+
+func (s *InterceptorContextRequest) GetUserAgent() *string  {
+  return s.UserAgent
 }
 
 func (s *InterceptorContextRequest) SetHeaders(v map[string]*string) *InterceptorContextRequest {
@@ -172,11 +274,39 @@ type InterceptorContextConfiguration struct {
 }
 
 func (s InterceptorContextConfiguration) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContextConfiguration) GoString() string {
   return s.String()
+}
+
+func (s *InterceptorContextConfiguration) GetRegionId() *string  {
+  return s.RegionId
+}
+
+func (s *InterceptorContextConfiguration) GetEndpoint() *string  {
+  return s.Endpoint
+}
+
+func (s *InterceptorContextConfiguration) GetEndpointRule() *string  {
+  return s.EndpointRule
+}
+
+func (s *InterceptorContextConfiguration) GetEndpointMap() map[string]*string  {
+  return s.EndpointMap
+}
+
+func (s *InterceptorContextConfiguration) GetEndpointType() *string  {
+  return s.EndpointType
+}
+
+func (s *InterceptorContextConfiguration) GetNetwork() *string  {
+  return s.Network
+}
+
+func (s *InterceptorContextConfiguration) GetSuffix() *string  {
+  return s.Suffix
 }
 
 func (s *InterceptorContextConfiguration) SetRegionId(v string) *InterceptorContextConfiguration {
@@ -222,11 +352,27 @@ type InterceptorContextResponse struct {
 }
 
 func (s InterceptorContextResponse) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s InterceptorContextResponse) GoString() string {
   return s.String()
+}
+
+func (s *InterceptorContextResponse) GetStatusCode() *int  {
+  return s.StatusCode
+}
+
+func (s *InterceptorContextResponse) GetHeaders() map[string]*string  {
+  return s.Headers
+}
+
+func (s *InterceptorContextResponse) GetBody() io.Reader  {
+  return s.Body
+}
+
+func (s *InterceptorContextResponse) GetDeserializedBody() interface{}  {
+  return s.DeserializedBody
 }
 
 func (s *InterceptorContextResponse) SetStatusCode(v int) *InterceptorContextResponse {
@@ -249,17 +395,36 @@ func (s *InterceptorContextResponse) SetDeserializedBody(v interface{}) *Interce
   return s
 }
 
+type iAttributeMap interface {
+  dara.Model
+  String() string
+  GoString() string
+  SetAttributes(v map[string]interface{}) *AttributeMap
+  GetAttributes() map[string]interface{} 
+  SetKey(v map[string]*string) *AttributeMap
+  GetKey() map[string]*string 
+}
+
 type AttributeMap struct {
+  dara.Model
   Attributes map[string]interface{} `json:"attributes,omitempty" xml:"attributes,omitempty" require:"true"`
   Key map[string]*string `json:"key,omitempty" xml:"key,omitempty" require:"true"`
 }
 
 func (s AttributeMap) String() string {
-  return tea.Prettify(s)
+  return dara.Prettify(s)
 }
 
 func (s AttributeMap) GoString() string {
   return s.String()
+}
+
+func (s *AttributeMap) GetAttributes() map[string]interface{}  {
+  return s.Attributes
+}
+
+func (s *AttributeMap) GetKey() map[string]*string  {
+  return s.Key
 }
 
 func (s *AttributeMap) SetAttributes(v map[string]interface{}) *AttributeMap {

@@ -4,6 +4,7 @@ model M {
   subM: {}
 }
 
+
 model MyModel = {
   stringfield: string,
   stringarrayfield: [ string ],

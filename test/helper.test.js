@@ -37,7 +37,7 @@ describe('helper', function () {
     expect(type).to.equal('int');
 
     type = _type('$Error');
-    expect(type).to.equal('*tea.SDKError');
+    expect(type).to.equal('dara.BaseError');
 
     type = _type('number');
     expect(type).to.equal('int');
@@ -73,10 +73,10 @@ describe('helper', function () {
     expect(type).to.equal('uint8');
 
     type = _type('$Response');
-    expect(type).to.equal('*tea.Response');
+    expect(type).to.equal('*dara.Response');
 
     type = _type('$Request');
-    expect(type).to.equal('*tea.Request');
+    expect(type).to.equal('*dara.Request');
 
     type = _type('writeable');
     expect(type).to.equal('io.Writer');
@@ -113,19 +113,19 @@ describe('helper', function () {
 
   it('_initValue should ok', function () {
     var val = _initValue('number');
-    expect(val).to.equal('tea.Int(0)');
+    expect(val).to.equal('dara.Int(0)');
 
     val = _initValue('integer');
-    expect(val).to.equal('tea.Int(0)');
+    expect(val).to.equal('dara.Int(0)');
 
     val = _initValue('$Error');
-    expect(val).to.equal('&tea.SDKError{}');
+    expect(val).to.equal('&dara.SDKError{}');
 
     val = _initValue('string');
-    expect(val).to.equal('tea.String("")');
+    expect(val).to.equal('dara.String("")');
 
     val = _initValue('boolean');
-    expect(val).to.equal('tea.Bool(false)');
+    expect(val).to.equal('dara.Bool(false)');
 
     val = _initValue('bytes');
     expect(val).to.equal('make([]byte, 0)');
@@ -134,16 +134,16 @@ describe('helper', function () {
     expect(val).to.equal('interface{}(nil)');
 
     val = _initValue('float');
-    expect(val).to.equal('tea.Float32(0.00)');
+    expect(val).to.equal('dara.Float32(0.00)');
 
     val = _initValue('null');
     expect(val).to.equal('nil');
 
     val = _initValue('$Response');
-    expect(val).to.equal('&tea.Response{}');
+    expect(val).to.equal('&dara.Response{}');
 
     val = _initValue('$Request');
-    expect(val).to.equal('&tea.Request{}');
+    expect(val).to.equal('&dara.Request{}');
 
     val = _initValue('object');
     expect(val).to.equal('make(map[string]interface{})');
@@ -160,73 +160,73 @@ describe('helper', function () {
 
   it('_setExtendFunc should ok', function () {
     var val = _setExtendFunc('number');
-    expect(val).to.equal('tea.Int(');
+    expect(val).to.equal('dara.Int(');
 
     val = _setExtendFunc('integer');
-    expect(val).to.equal('tea.Int(');
+    expect(val).to.equal('dara.Int(');
 
     val = _setExtendFunc('int');
-    expect(val).to.equal('tea.Int(');
+    expect(val).to.equal('dara.Int(');
 
     val = _setExtendFunc('long');
-    expect(val).to.equal('tea.Int64(');
+    expect(val).to.equal('dara.Int64(');
 
     val = _setExtendFunc('int64');
-    expect(val).to.equal('tea.Int64(');
+    expect(val).to.equal('dara.Int64(');
 
     val = _setExtendFunc('double');
-    expect(val).to.equal('tea.Float64(');
+    expect(val).to.equal('dara.Float64(');
 
     val = _setExtendFunc('float');
-    expect(val).to.equal('tea.Float32(');
+    expect(val).to.equal('dara.Float32(');
 
     val = _setExtendFunc('[]float64');
-    expect(val).to.equal('tea.Float64Slice(');
+    expect(val).to.equal('dara.Float64Slice(');
 
     val = _setExtendFunc('[]float32');
-    expect(val).to.equal('tea.Float32Slice(');
+    expect(val).to.equal('dara.Float32Slice(');
 
     val = _setExtendFunc('boolean');
-    expect(val).to.equal('tea.Bool(');
+    expect(val).to.equal('dara.Bool(');
 
     val = _setExtendFunc('[]bool');
-    expect(val).to.equal('tea.BoolSlice(');
+    expect(val).to.equal('dara.BoolSlice(');
 
     val = _setExtendFunc('string');
-    expect(val).to.equal('tea.String(');
+    expect(val).to.equal('dara.String(');
 
     val = _setExtendFunc('int32');
-    expect(val).to.equal('tea.Int32(');
+    expect(val).to.equal('dara.Int32(');
 
     val = _setExtendFunc('[]string');
-    expect(val).to.equal('tea.StringSlice(');
+    expect(val).to.equal('dara.StringSlice(');
 
     val = _setExtendFunc('[]int');
-    expect(val).to.equal('tea.IntSlice(');
+    expect(val).to.equal('dara.IntSlice(');
 
     val = _setExtendFunc('[]int32');
-    expect(val).to.equal('tea.Int32Slice(');
+    expect(val).to.equal('dara.Int32Slice(');
 
     val = _setExtendFunc('[]int64');
-    expect(val).to.equal('tea.Int64Slice(');
+    expect(val).to.equal('dara.Int64Slice(');
 
     val = _setExtendFunc('[]uint');
-    expect(val).to.equal('tea.UintSlice(');
+    expect(val).to.equal('dara.UintSlice(');
 
     val = _setExtendFunc('[]uint32');
-    expect(val).to.equal('tea.Uint32Slice(');
+    expect(val).to.equal('dara.Uint32Slice(');
 
     val = _setExtendFunc('[]uint64');
-    expect(val).to.equal('tea.Uint64Slice(');
+    expect(val).to.equal('dara.Uint64Slice(');
 
     val = _setExtendFunc('uint');
-    expect(val).to.equal('tea.Uint(');
+    expect(val).to.equal('dara.Uint(');
 
     val = _setExtendFunc('uint32');
-    expect(val).to.equal('tea.Uint32(');
+    expect(val).to.equal('dara.Uint32(');
 
     val = _setExtendFunc('uint64');
-    expect(val).to.equal('tea.Uint64(');
+    expect(val).to.equal('dara.Uint64(');
 
     val = _setExtendFunc('struct');
     expect(val).to.equal('');
@@ -258,10 +258,10 @@ describe('helper', function () {
     expect(val).to.equal('*uint32');
 
     val = _pointerType('$Response');
-    expect(val).to.equal('*tea.Response');
+    expect(val).to.equal('*dara.Response');
 
     val = _pointerType('$Request');
-    expect(val).to.equal('*tea.Request');
+    expect(val).to.equal('*dara.Request');
 
     val = _pointerType('writeable');
     expect(val).to.equal('io.Writer');

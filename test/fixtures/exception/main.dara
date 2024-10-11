@@ -1,0 +1,50 @@
+import Source;
+
+model M {
+  subM: {}
+}
+
+
+exception MyErr = {
+  stringfield: string,
+  stringarrayfield: [ string ],
+  mapfield: map[string]string,
+  name: number(name='realName'),
+  submodel: {
+    stringfield: string,
+  },
+  moduleModelMap: map[string]Source.Request,
+  subModelMap: map[string]M.subM,
+  modelMap: map[string]M,
+  moduleMap: map[string]Source,
+  object: object,
+  numberfield: integer,
+  int64field: int64,
+  uint64field: uint64,
+  int32field: int32,
+  uint32field: uint32,
+  int16field: int16,
+  uint16field: uint16,
+  int8field: int8,
+  uint8field: uint8,
+  readable: readable,
+  request: $Request,
+  lists: [[string]],
+  arrays: [[
+    {
+      name: string,
+    }
+  ]],
+  complexList: [ [ string ] ]
+};
+
+
+exception SubRespErr extends $ResponseError {
+  testField: string,
+  retryAtfter: string,
+};
+
+exception SubMyErr extends MyErr {
+  testField: string,
+  retryAtfter: string,
+};
