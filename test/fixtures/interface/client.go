@@ -5,7 +5,7 @@ import (
   spi "github.com/alibabacloud-go/alibabacloud-gateway-spi/client"
   gatewayclient "github.com/alibabacloud-go/alibabacloud-gateway-sls/client"
   openapi "github.com/alibabacloud-go/darabonba-openapi/client"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

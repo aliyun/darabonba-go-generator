@@ -5,7 +5,7 @@ import (
   "net/http"
   "net/url"
   oss "github.com/aliyun/darabonba-go-generator"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

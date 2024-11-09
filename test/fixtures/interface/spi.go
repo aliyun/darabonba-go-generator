@@ -4,7 +4,7 @@ package client
 import (
   "io"
   credential "github.com/aliyun/credentials-go/credentials"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 
@@ -13,11 +13,11 @@ type iInterceptorContext interface {
   String() string
   GoString() string
   SetRequest(v *InterceptorContextRequest) *InterceptorContext
-  GetRequest() *InterceptorContext 
+  GetRequest() *InterceptorContextRequest 
   SetConfiguration(v *InterceptorContextConfiguration) *InterceptorContext
-  GetConfiguration() *InterceptorContext 
+  GetConfiguration() *InterceptorContextConfiguration 
   SetResponse(v *InterceptorContextResponse) *InterceptorContext
-  GetResponse() *InterceptorContext 
+  GetResponse() *InterceptorContextResponse 
 }
 
 type InterceptorContext struct {
@@ -35,15 +35,15 @@ func (s InterceptorContext) GoString() string {
   return s.String()
 }
 
-func (s *InterceptorContext) GetRequest() *InterceptorContext  {
+func (s *InterceptorContext) GetRequest() *InterceptorContextRequest  {
   return s.Request
 }
 
-func (s *InterceptorContext) GetConfiguration() *InterceptorContext  {
+func (s *InterceptorContext) GetConfiguration() *InterceptorContextConfiguration  {
   return s.Configuration
 }
 
-func (s *InterceptorContext) GetResponse() *InterceptorContext  {
+func (s *InterceptorContext) GetResponse() *InterceptorContextResponse  {
   return s.Response
 }
 

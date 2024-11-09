@@ -3,7 +3,7 @@ package client
 
 import (
   source "github.com/aliyun/darabonba-go-generator/test"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

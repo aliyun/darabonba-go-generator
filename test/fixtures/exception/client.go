@@ -4,7 +4,7 @@ package client
 import (
   "io"
   source "github.com/aliyun/darabonba-go-generator/test"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   "fmt"
 )
 
@@ -13,7 +13,7 @@ type iM interface {
   String() string
   GoString() string
   SetSubM(v *MSubM) *M
-  GetSubM() *M 
+  GetSubM() *MSubM 
 }
 
 type M struct {
@@ -29,7 +29,7 @@ func (s M) GoString() string {
   return s.String()
 }
 
-func (s *M) GetSubM() *M  {
+func (s *M) GetSubM() *MSubM  {
   return s.SubM
 }
 
@@ -49,13 +49,13 @@ func (s MSubM) GoString() string {
   return s.String()
 }
 
-type iMyErr interface {
+type iMyErrError interface {
   dara.BaseError
   GetStringfield() *string 
   GetStringarrayfield() []*string 
   GetMapfield() map[string]*string 
   GetName() *int 
-  GetSubmodel() *MyErr 
+  GetSubmodel() *MyErrSubmodel 
   GetModuleModelMap() map[string]*source.Request 
   GetSubModelMap() map[string]*MSubM 
   GetModelMap() map[string]*M 
@@ -73,11 +73,11 @@ type iMyErr interface {
   GetReadable() io.Reader 
   GetRequest() *dara.Request 
   GetLists() [][]*string 
-  GetArrays() [][]*MyErr 
+  GetArrays() [][]*MyErrArrays 
   GetComplexList() [][]*string 
 }
 
-type MyErr struct {
+type MyErrError struct {
   dara.BaseError
   Message *string ``
   Code *string ``
@@ -108,120 +108,120 @@ type MyErr struct {
   ComplexList [][]*string ` require:"true" type:"Repeated"`
 }
 
-func (err MyErr) Error() string {
+func (err MyErrError) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("MyErr:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("MyErrError:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *MyErr) GetMessage() *string  {
+func (s *MyErrError) GetMessage() *string  {
   return s.Message
 }
 
-func (s *MyErr) GetCode() *string  {
+func (s *MyErrError) GetCode() *string  {
   return s.Code
 }
 
-func (s *MyErr) GetStack() *string  {
+func (s *MyErrError) GetStack() *string  {
   return s.Stack
 }
 
-func (s *MyErr) GetStringfield() *string  {
+func (s *MyErrError) GetStringfield() *string  {
   return s.Stringfield
 }
 
-func (s *MyErr) GetStringarrayfield() []*string  {
+func (s *MyErrError) GetStringarrayfield() []*string  {
   return s.Stringarrayfield
 }
 
-func (s *MyErr) GetMapfield() map[string]*string  {
+func (s *MyErrError) GetMapfield() map[string]*string  {
   return s.Mapfield
 }
 
-func (s *MyErr) GetName() *int  {
+func (s *MyErrError) GetName() *int  {
   return s.Name
 }
 
-func (s *MyErr) GetSubmodel() *MyErr  {
+func (s *MyErrError) GetSubmodel() *MyErrSubmodel  {
   return s.Submodel
 }
 
-func (s *MyErr) GetModuleModelMap() map[string]*source.Request  {
+func (s *MyErrError) GetModuleModelMap() map[string]*source.Request  {
   return s.ModuleModelMap
 }
 
-func (s *MyErr) GetSubModelMap() map[string]*MSubM  {
+func (s *MyErrError) GetSubModelMap() map[string]*MSubM  {
   return s.SubModelMap
 }
 
-func (s *MyErr) GetModelMap() map[string]*M  {
+func (s *MyErrError) GetModelMap() map[string]*M  {
   return s.ModelMap
 }
 
-func (s *MyErr) GetModuleMap() map[string]*source.Client  {
+func (s *MyErrError) GetModuleMap() map[string]*source.Client  {
   return s.ModuleMap
 }
 
-func (s *MyErr) GetObject() map[string]interface{}  {
+func (s *MyErrError) GetObject() map[string]interface{}  {
   return s.Object
 }
 
-func (s *MyErr) GetNumberfield() *int  {
+func (s *MyErrError) GetNumberfield() *int  {
   return s.Numberfield
 }
 
-func (s *MyErr) GetInt64field() *int64  {
+func (s *MyErrError) GetInt64field() *int64  {
   return s.Int64field
 }
 
-func (s *MyErr) GetUint64field() *uint64  {
+func (s *MyErrError) GetUint64field() *uint64  {
   return s.Uint64field
 }
 
-func (s *MyErr) GetInt32field() *int32  {
+func (s *MyErrError) GetInt32field() *int32  {
   return s.Int32field
 }
 
-func (s *MyErr) GetUint32field() *uint32  {
+func (s *MyErrError) GetUint32field() *uint32  {
   return s.Uint32field
 }
 
-func (s *MyErr) GetInt16field() *int16  {
+func (s *MyErrError) GetInt16field() *int16  {
   return s.Int16field
 }
 
-func (s *MyErr) GetUint16field() *uint16  {
+func (s *MyErrError) GetUint16field() *uint16  {
   return s.Uint16field
 }
 
-func (s *MyErr) GetInt8field() *int8  {
+func (s *MyErrError) GetInt8field() *int8  {
   return s.Int8field
 }
 
-func (s *MyErr) GetUint8field() *uint8  {
+func (s *MyErrError) GetUint8field() *uint8  {
   return s.Uint8field
 }
 
-func (s *MyErr) GetReadable() io.Reader  {
+func (s *MyErrError) GetReadable() io.Reader  {
   return s.Readable
 }
 
-func (s *MyErr) GetRequest() *dara.Request  {
+func (s *MyErrError) GetRequest() *dara.Request  {
   return s.Request
 }
 
-func (s *MyErr) GetLists() [][]*string  {
+func (s *MyErrError) GetLists() [][]*string  {
   return s.Lists
 }
 
-func (s *MyErr) GetArrays() [][]*MyErr  {
+func (s *MyErrError) GetArrays() [][]*MyErrArrays  {
   return s.Arrays
 }
 
-func (s *MyErr) GetComplexList() [][]*string  {
+func (s *MyErrError) GetComplexList() [][]*string  {
   return s.ComplexList
 }
 
@@ -267,13 +267,13 @@ func (s *MyErrArrays) SetName(v string) *MyErrArrays {
   return s
 }
 
-type iSubRespErr interface {
+type iSubRespErrError interface {
   dara.IResponseError
   GetTestField() *string 
   GetRetryAtfter() *string 
 }
 
-type SubRespErr struct {
+type SubRespErrError struct {
   dara.IResponseError
   StatusCode *int ``
   RetryAfter *int ``
@@ -285,55 +285,55 @@ type SubRespErr struct {
   RetryAtfter *string ` require:"true"`
 }
 
-func (err SubRespErr) Error() string {
+func (err SubRespErrError) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("SubRespErr:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("SubRespErrError:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *SubRespErr) GetStatusCode() *int  {
+func (s *SubRespErrError) GetStatusCode() *int  {
   return s.StatusCode
 }
 
-func (s *SubRespErr) GetRetryAfter() *int  {
+func (s *SubRespErrError) GetRetryAfter() *int  {
   return s.RetryAfter
 }
 
-func (s *SubRespErr) GetName() *string  {
+func (s *SubRespErrError) GetName() *string  {
   return s.Name
 }
 
-func (s *SubRespErr) GetMessage() *string  {
+func (s *SubRespErrError) GetMessage() *string  {
   return s.Message
 }
 
-func (s *SubRespErr) GetCode() *string  {
+func (s *SubRespErrError) GetCode() *string  {
   return s.Code
 }
 
-func (s *SubRespErr) GetStack() *string  {
+func (s *SubRespErrError) GetStack() *string  {
   return s.Stack
 }
 
-func (s *SubRespErr) GetTestField() *string  {
+func (s *SubRespErrError) GetTestField() *string  {
   return s.TestField
 }
 
-func (s *SubRespErr) GetRetryAtfter() *string  {
+func (s *SubRespErrError) GetRetryAtfter() *string  {
   return s.RetryAtfter
 }
 
-type iSubMyErr interface {
-  iMyErr
+type iSubMyErrError interface {
+  iMyErrError
   GetTestField() *string 
   GetRetryAtfter() *string 
 }
 
-type SubMyErr struct {
-  iMyErr
+type SubMyErrError struct {
+  iMyErrError
   Stringfield *string ` require:"true"`
   Stringarrayfield []*string ` require:"true" type:"Repeated"`
   Mapfield map[string]*string ` require:"true"`
@@ -362,116 +362,116 @@ type SubMyErr struct {
   RetryAtfter *string ` require:"true"`
 }
 
-func (err SubMyErr) Error() string {
+func (err SubMyErrError) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("SubMyErr:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("SubMyErrError:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *SubMyErr) GetStringfield() *string  {
+func (s *SubMyErrError) GetStringfield() *string  {
   return s.Stringfield
 }
 
-func (s *SubMyErr) GetStringarrayfield() []*string  {
+func (s *SubMyErrError) GetStringarrayfield() []*string  {
   return s.Stringarrayfield
 }
 
-func (s *SubMyErr) GetMapfield() map[string]*string  {
+func (s *SubMyErrError) GetMapfield() map[string]*string  {
   return s.Mapfield
 }
 
-func (s *SubMyErr) GetName() *int  {
+func (s *SubMyErrError) GetName() *int  {
   return s.Name
 }
 
-func (s *SubMyErr) GetSubmodel() *SubMyErr  {
+func (s *SubMyErrError) GetSubmodel() *SubMyErrSubmodel  {
   return s.Submodel
 }
 
-func (s *SubMyErr) GetModuleModelMap() map[string]*source.Request  {
+func (s *SubMyErrError) GetModuleModelMap() map[string]*source.Request  {
   return s.ModuleModelMap
 }
 
-func (s *SubMyErr) GetSubModelMap() map[string]*MSubM  {
+func (s *SubMyErrError) GetSubModelMap() map[string]*MSubM  {
   return s.SubModelMap
 }
 
-func (s *SubMyErr) GetModelMap() map[string]*M  {
+func (s *SubMyErrError) GetModelMap() map[string]*M  {
   return s.ModelMap
 }
 
-func (s *SubMyErr) GetModuleMap() map[string]*source.Client  {
+func (s *SubMyErrError) GetModuleMap() map[string]*source.Client  {
   return s.ModuleMap
 }
 
-func (s *SubMyErr) GetObject() map[string]interface{}  {
+func (s *SubMyErrError) GetObject() map[string]interface{}  {
   return s.Object
 }
 
-func (s *SubMyErr) GetNumberfield() *int  {
+func (s *SubMyErrError) GetNumberfield() *int  {
   return s.Numberfield
 }
 
-func (s *SubMyErr) GetInt64field() *int64  {
+func (s *SubMyErrError) GetInt64field() *int64  {
   return s.Int64field
 }
 
-func (s *SubMyErr) GetUint64field() *uint64  {
+func (s *SubMyErrError) GetUint64field() *uint64  {
   return s.Uint64field
 }
 
-func (s *SubMyErr) GetInt32field() *int32  {
+func (s *SubMyErrError) GetInt32field() *int32  {
   return s.Int32field
 }
 
-func (s *SubMyErr) GetUint32field() *uint32  {
+func (s *SubMyErrError) GetUint32field() *uint32  {
   return s.Uint32field
 }
 
-func (s *SubMyErr) GetInt16field() *int16  {
+func (s *SubMyErrError) GetInt16field() *int16  {
   return s.Int16field
 }
 
-func (s *SubMyErr) GetUint16field() *uint16  {
+func (s *SubMyErrError) GetUint16field() *uint16  {
   return s.Uint16field
 }
 
-func (s *SubMyErr) GetInt8field() *int8  {
+func (s *SubMyErrError) GetInt8field() *int8  {
   return s.Int8field
 }
 
-func (s *SubMyErr) GetUint8field() *uint8  {
+func (s *SubMyErrError) GetUint8field() *uint8  {
   return s.Uint8field
 }
 
-func (s *SubMyErr) GetReadable() io.Reader  {
+func (s *SubMyErrError) GetReadable() io.Reader  {
   return s.Readable
 }
 
-func (s *SubMyErr) GetRequest() *dara.Request  {
+func (s *SubMyErrError) GetRequest() *dara.Request  {
   return s.Request
 }
 
-func (s *SubMyErr) GetLists() [][]*string  {
+func (s *SubMyErrError) GetLists() [][]*string  {
   return s.Lists
 }
 
-func (s *SubMyErr) GetArrays() [][]*SubMyErr  {
+func (s *SubMyErrError) GetArrays() [][]*SubMyErrArrays  {
   return s.Arrays
 }
 
-func (s *SubMyErr) GetComplexList() [][]*string  {
+func (s *SubMyErrError) GetComplexList() [][]*string  {
   return s.ComplexList
 }
 
-func (s *SubMyErr) GetTestField() *string  {
+func (s *SubMyErrError) GetTestField() *string  {
   return s.TestField
 }
 
-func (s *SubMyErr) GetRetryAtfter() *string  {
+func (s *SubMyErrError) GetRetryAtfter() *string  {
   return s.RetryAtfter
 }
 

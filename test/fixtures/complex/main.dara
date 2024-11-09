@@ -367,6 +367,14 @@ async function templateString(): string {
   return `/${@protocol}`;
 }
 
+function intOp(a: integer): void {
+  var b = a;
+  b++;
+  ++b;
+  b--;
+  --b;
+}
+
 function throwsFunc() throws: string {
   return `/${@protocol}`;
 }

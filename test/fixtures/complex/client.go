@@ -5,7 +5,7 @@ import (
   "github.com/alibabacloud-go/tea"
   "io"
   source "github.com/aliyun/darabonba-go-generator/test"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   "fmt"
 )
 
@@ -22,9 +22,9 @@ type iComplexRequest interface {
   SetMapList(v []map[string]interface{}) *ComplexRequest
   GetMapList() []map[string]interface{} 
   SetHeader(v *ComplexRequestHeader) *ComplexRequest
-  GetHeader() *ComplexRequest 
+  GetHeader() *ComplexRequestHeader 
   SetConfigs(v *ComplexRequestConfigs) *ComplexRequest
-  GetConfigs() *ComplexRequest 
+  GetConfigs() *ComplexRequestConfigs 
   SetNum(v int) *ComplexRequest
   GetNum() *int 
   SetI64(v int64) *ComplexRequest
@@ -90,7 +90,7 @@ type iComplexRequest interface {
   SetInstance(v *source.RequestInstance) *ComplexRequest
   GetInstance() *source.RequestInstance 
   SetPart(v []*ComplexRequestPart) *ComplexRequest
-  GetPart() []*ComplexRequest 
+  GetPart() []*ComplexRequestPart 
 }
 
 type ComplexRequest struct {
@@ -187,11 +187,11 @@ func (s *ComplexRequest) GetMapList() []map[string]interface{}  {
   return s.MapList
 }
 
-func (s *ComplexRequest) GetHeader() *ComplexRequest  {
+func (s *ComplexRequest) GetHeader() *ComplexRequestHeader  {
   return s.Header
 }
 
-func (s *ComplexRequest) GetConfigs() *ComplexRequest  {
+func (s *ComplexRequest) GetConfigs() *ComplexRequestConfigs  {
   return s.Configs
 }
 
@@ -323,7 +323,7 @@ func (s *ComplexRequest) GetInstance() *source.RequestInstance  {
   return s.Instance
 }
 
-func (s *ComplexRequest) GetPart() []*ComplexRequest  {
+func (s *ComplexRequest) GetPart() []*ComplexRequestPart  {
   return s.Part
 }
 
@@ -662,12 +662,12 @@ func (s *Response) SetInstance(v *ComplexRequestPart) *Response {
   return s
 }
 
-type iErr1 interface {
+type iErr1Error interface {
   dara.BaseError
   GetData() map[string]*string 
 }
 
-type Err1 struct {
+type Err1Error struct {
   dara.BaseError
   Name *string ``
   Message *string ``
@@ -676,41 +676,41 @@ type Err1 struct {
   Data map[string]*string ` require:"true"`
 }
 
-func (err Err1) Error() string {
+func (err Err1Error) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("Err1:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("Err1Error:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *Err1) GetName() *string  {
+func (s *Err1Error) GetName() *string  {
   return s.Name
 }
 
-func (s *Err1) GetMessage() *string  {
+func (s *Err1Error) GetMessage() *string  {
   return s.Message
 }
 
-func (s *Err1) GetCode() *string  {
+func (s *Err1Error) GetCode() *string  {
   return s.Code
 }
 
-func (s *Err1) GetStack() *string  {
+func (s *Err1Error) GetStack() *string  {
   return s.Stack
 }
 
-func (s *Err1) GetData() map[string]*string  {
+func (s *Err1Error) GetData() map[string]*string  {
   return s.Data
 }
 
-type iErr2 interface {
+type iErr2Error interface {
   dara.BaseError
   GetAccessErrMessage() *string 
 }
 
-type Err2 struct {
+type Err2Error struct {
   dara.BaseError
   Name *string ``
   Message *string ``
@@ -719,32 +719,32 @@ type Err2 struct {
   AccessErrMessage *string ` require:"true"`
 }
 
-func (err Err2) Error() string {
+func (err Err2Error) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("Err2:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("Err2Error:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *Err2) GetName() *string  {
+func (s *Err2Error) GetName() *string  {
   return s.Name
 }
 
-func (s *Err2) GetMessage() *string  {
+func (s *Err2Error) GetMessage() *string  {
   return s.Message
 }
 
-func (s *Err2) GetCode() *string  {
+func (s *Err2Error) GetCode() *string  {
   return s.Code
 }
 
-func (s *Err2) GetStack() *string  {
+func (s *Err2Error) GetStack() *string  {
   return s.Stack
 }
 
-func (s *Err2) GetAccessErrMessage() *string  {
+func (s *Err2Error) GetAccessErrMessage() *string  {
   return s.AccessErrMessage
 }
 
@@ -1155,6 +1155,14 @@ func (client *Client) TemplateString () (_result *string, _err error) {
   return _result, _err
 }
 
+func (client *Client) IntOp (a *int) {
+  b := dara.IntValue(a)
+  b++
+  ++b
+  b--
+  --b
+}
+
 func (client *Client) ThrowsFunc () (_result *string, _err error) {
   _result = dara.String("/" + dara.StringValue(client.Protocol))
   return _result, _err
@@ -1335,15 +1343,15 @@ func (client *Client) MultiTryCatch (a *int) (_err error) {
   _result, _err  = multiTryCatch_opTryFunc(a)
   final := "ok"
   if _err != nil {
-    if _t, ok := _err.(*Err1); ok {
+    if _t, ok := _err.(*Err1Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
-    if _t, ok := _err.(*Err2); ok {
+    if _t, ok := _err.(*Err2Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
-    if _t, ok := _err.(*source.Err3); ok {
+    if _t, ok := _err.(*source.Err3Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
@@ -1409,7 +1417,7 @@ func complex3_opResponse (response_ *dara.Response, request *ComplexRequest, cli
 
 func multiTryCatch_opTryFunc (a *int)(_err error) {
   if dara.IntValue(a) > 0 {
-    _err = &Err1{
+    _err = &Err1Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
       Data: map[string]*string{
@@ -1418,14 +1426,14 @@ func multiTryCatch_opTryFunc (a *int)(_err error) {
     }
     return _err
   } else if dara.IntValue(a) == 0 {
-    _err = &Err2{
+    _err = &Err2Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
       AccessErrMessage: dara.String("str2"),
     }
     return _err
   } else if dara.IntValue(a) == -10 {
-    _err = &source.Err3{
+    _err = &source.Err3Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
     }

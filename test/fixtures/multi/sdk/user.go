@@ -4,7 +4,7 @@ package user
 import (
   darautil "github.com/alibabacloud-go/tea-utils/v2/service"
   util "darabonba.com/multi/lib/util"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 
