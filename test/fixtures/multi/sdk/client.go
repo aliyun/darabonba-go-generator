@@ -5,7 +5,7 @@ import (
   user "darabonba.com/multi/model/user"
   util "darabonba.com/multi/lib/util"
   api "darabonba.com/multi/api"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

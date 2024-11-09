@@ -1,7 +1,7 @@
 package client
 
 import (
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

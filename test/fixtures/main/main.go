@@ -3,7 +3,7 @@ package main
 
 import (
   "os"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

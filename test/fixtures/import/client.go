@@ -5,7 +5,7 @@ import (
   string_ "github.com/aliyun/darabonba-go-generator/test"
   map_ "github.com/aliyun/darabonba-go-generator/test"
   localsource "github.com/aliyun/darabonba-go-generator"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 

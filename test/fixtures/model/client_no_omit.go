@@ -4,7 +4,7 @@ package client
 import (
   "io"
   source "github.com/aliyun/darabonba-go-generator/test"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 
@@ -13,7 +13,7 @@ type iM interface {
   String() string
   GoString() string
   SetSubM(v *MSubM) *M
-  GetSubM() *M 
+  GetSubM() *MSubM 
 }
 
 type M struct {
@@ -29,7 +29,7 @@ func (s M) GoString() string {
   return s.String()
 }
 
-func (s *M) GetSubM() *M  {
+func (s *M) GetSubM() *MSubM  {
   return s.SubM
 }
 
@@ -62,7 +62,7 @@ type iMyModel interface {
   SetName(v string) *MyModel
   GetName() *string 
   SetSubmodel(v *MyModelSubmodel) *MyModel
-  GetSubmodel() *MyModel 
+  GetSubmodel() *MyModelSubmodel 
   SetModuleModelMap(v map[string]*source.Request) *MyModel
   GetModuleModelMap() map[string]*source.Request 
   SetSubModelMap(v map[string]*MSubM) *MyModel
@@ -98,7 +98,7 @@ type iMyModel interface {
   SetLists(v [][]*string) *MyModel
   GetLists() [][]*string 
   SetArrays(v [][]*MyModelArrays) *MyModel
-  GetArrays() [][]*MyModel 
+  GetArrays() [][]*MyModelArrays 
   SetComplexList(v [][]*string) *MyModel
   GetComplexList() [][]*string 
 }
@@ -155,7 +155,7 @@ func (s *MyModel) GetName() *string  {
   return s.Name
 }
 
-func (s *MyModel) GetSubmodel() *MyModel  {
+func (s *MyModel) GetSubmodel() *MyModelSubmodel  {
   return s.Submodel
 }
 
@@ -227,7 +227,7 @@ func (s *MyModel) GetLists() [][]*string  {
   return s.Lists
 }
 
-func (s *MyModel) GetArrays() [][]*MyModel  {
+func (s *MyModel) GetArrays() [][]*MyModelArrays  {
   return s.Arrays
 }
 

@@ -3,16 +3,16 @@ package client
 
 import (
   source "github.com/aliyun/darabonba-go-generator/test"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   "fmt"
 )
 
-type iErr1 interface {
+type iErr1Error interface {
   dara.BaseError
   GetData() map[string]*string 
 }
 
-type Err1 struct {
+type Err1Error struct {
   dara.BaseError
   Name *string ``
   Message *string ``
@@ -21,41 +21,41 @@ type Err1 struct {
   Data map[string]*string ` require:"true"`
 }
 
-func (err Err1) Error() string {
+func (err Err1Error) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("Err1:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("Err1Error:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *Err1) GetName() *string  {
+func (s *Err1Error) GetName() *string  {
   return s.Name
 }
 
-func (s *Err1) GetMessage() *string  {
+func (s *Err1Error) GetMessage() *string  {
   return s.Message
 }
 
-func (s *Err1) GetCode() *string  {
+func (s *Err1Error) GetCode() *string  {
   return s.Code
 }
 
-func (s *Err1) GetStack() *string  {
+func (s *Err1Error) GetStack() *string  {
   return s.Stack
 }
 
-func (s *Err1) GetData() map[string]*string  {
+func (s *Err1Error) GetData() map[string]*string  {
   return s.Data
 }
 
-type iErr2 interface {
+type iErr2Error interface {
   dara.BaseError
   GetAccessErrMessage() *string 
 }
 
-type Err2 struct {
+type Err2Error struct {
   dara.BaseError
   Name *string ``
   Message *string ``
@@ -64,32 +64,32 @@ type Err2 struct {
   AccessErrMessage *string ` require:"true"`
 }
 
-func (err Err2) Error() string {
+func (err Err2Error) Error() string {
   if err.Message == nil {
-    str := fmt.Sprintf("Err2:\n   Name: %s\n   Code: %s\n",
+    str := fmt.Sprintf("Err2Error:\n   Name: %s\n   Code: %s\n",
       dara.StringValue(err.Name), dara.StringValue(err.Code))
     err.Message = dara.String(str)
   }
   return dara.StringValue(err.Message)
 }
 
-func (s *Err2) GetName() *string  {
+func (s *Err2Error) GetName() *string  {
   return s.Name
 }
 
-func (s *Err2) GetMessage() *string  {
+func (s *Err2Error) GetMessage() *string  {
   return s.Message
 }
 
-func (s *Err2) GetCode() *string  {
+func (s *Err2Error) GetCode() *string  {
   return s.Code
 }
 
-func (s *Err2) GetStack() *string  {
+func (s *Err2Error) GetStack() *string  {
   return s.Stack
 }
 
-func (s *Err2) GetAccessErrMessage() *string  {
+func (s *Err2Error) GetAccessErrMessage() *string  {
   return s.AccessErrMessage
 }
 
@@ -119,19 +119,19 @@ func (client *Client) TryMultiCatch (a *int) (_result *int, _err error) {
   _result, _err  = tryMultiCatch_opTryFunc(a)
   final := "ok"
   if _err != nil {
-    if _t, ok := _err.(*Err1); ok {
+    if _t, ok := _err.(*Err1Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
       _result = nil
       return _result , _err
     }
-    if _t, ok := _err.(*Err2); ok {
+    if _t, ok := _err.(*Err2Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
       _result = nil
       return _result , _err
     }
-    if _t, ok := _err.(*source.Err3); ok {
+    if _t, ok := _err.(*source.Err3Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
       _result = nil
@@ -154,14 +154,14 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
     "key1": dara.String("str"),
   }
   if dara.IntValue(a) > 0 {
-    _err = &Err1{
+    _err = &Err1Error{
       Name: dara.String(name),
       Code: dara.String(code),
       Data: data,
     }
     _result = data
     if _err != nil {
-      if _t, ok := _err.(*Err1); ok {
+      if _t, ok := _err.(*Err1Error); ok {
         err := _t;
         name = "str1"
         code = "str1"
@@ -175,14 +175,14 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
 
   accessErrMessage := "str2"
   if dara.IntValue(a) == 0 {
-    _err = &Err2{
+    _err = &Err2Error{
       Name: dara.String(name),
       Code: dara.String(code),
       AccessErrMessage: dara.String(accessErrMessage),
     }
     _result = data
     if _err != nil {
-      if _t, ok := _err.(*Err2); ok {
+      if _t, ok := _err.(*Err2Error); ok {
         err := _t;
         name = "str2"
         code = "str2"
@@ -198,7 +198,7 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
   final := "ok"
   _result = data
   if _err != nil {
-    if _t, ok := _err.(*source.Err3); ok {
+    if _t, ok := _err.(*source.Err3Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
@@ -213,7 +213,7 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
 func tryMultiCatch_opTryFunc (a *int)( _result *int, _err error) {
   if dara.IntValue(a) > 0 {
     a = dara.Int(20)
-    _err = &Err1{
+    _err = &Err1Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
       Data: map[string]*string{
@@ -222,14 +222,14 @@ func tryMultiCatch_opTryFunc (a *int)( _result *int, _err error) {
     }
     return _result, _err
   } else if dara.IntValue(a) == 0 {
-    _err = &Err2{
+    _err = &Err2Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
       AccessErrMessage: dara.String("str2"),
     }
     return _result, _err
   } else if dara.IntValue(a) == -10 {
-    _err = &source.Err3{
+    _err = &source.Err3Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
     }
@@ -248,7 +248,7 @@ func tryMultiCatch_opTryFunc (a *int)( _result *int, _err error) {
 
 func multiTryCatch_opTryFunc (a *int, name string, code string, data map[string]*string)(_err error) {
   if dara.IntValue(a) == -10 {
-    _err = &source.Err3{
+    _err = &source.Err3Error{
       Name: dara.String(name),
       Code: dara.String(code),
       AccessErrMessage: data["key1"],

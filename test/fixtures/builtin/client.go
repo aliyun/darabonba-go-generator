@@ -3,7 +3,7 @@ package client
 
 import (
   "io"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   "encoding/hex"
   "encoding/base64"
   "fmt"
@@ -538,16 +538,16 @@ func Main (args []*string) (_err error) {
   }
   b := dara.ToString(a) + dara.StringValue(args[1]) + dara.ToString(dara.IntValue(md.B)) + dara.ToString(ReturnAny())
   c := dara.ForceInt(b) + dara.ForceInt(a) + dara.ForceInt(ReturnAny())
-  d := dara.ToInt8(b) + dara.ToInt8(a) + dara.ToInt8(ReturnAny())
-  e := dara.ToInt16(b) + dara.ToInt16(a) + dara.ToInt16(ReturnAny())
-  f := dara.ToInt32(b) + dara.ToInt32(a) + dara.ToInt32(ReturnAny())
-  g := dara.ToInt64(b) + dara.ToInt64(a) + dara.ToInt64(ReturnAny())
+  d := dara.ForceInt8(b) + dara.ForceInt8(a) + dara.ForceInt8(ReturnAny())
+  e := dara.ForceInt16(b) + dara.ForceInt16(a) + dara.ForceInt16(ReturnAny())
+  f := dara.ForceInt32(b) + dara.ForceInt32(a) + dara.ForceInt32(ReturnAny())
+  g := dara.ForceInt64(b) + dara.ForceInt64(a) + dara.ForceInt64(ReturnAny())
   h := dara.ForceInt64(b) + dara.ForceInt64(a) + dara.ForceInt64(ReturnAny())
   i := dara.ForceUint64(b) + dara.ForceUint64(a) + dara.ForceUint64(ReturnAny())
-  j := dara.ToUint8(b) + dara.ToUint8(a) + dara.ToUint8(ReturnAny())
-  k := dara.ToUint16(b) + dara.ToUint16(a) + dara.ToUint16(ReturnAny())
-  l := dara.ToUint32(b) + dara.ToUint32(a) + dara.ToUint32(ReturnAny())
-  m := dara.ToUint64(b) + dara.ToUint64(a) + dara.ToUint64(ReturnAny())
+  j := dara.ForceUint8(b) + dara.ForceUint8(a) + dara.ForceUint8(ReturnAny())
+  k := dara.ForceUint16(b) + dara.ForceUint16(a) + dara.ForceUint16(ReturnAny())
+  l := dara.ForceUint32(b) + dara.ForceUint32(a) + dara.ForceUint32(ReturnAny())
+  m := dara.ForceUint64(b) + dara.ForceUint64(a) + dara.ForceUint64(ReturnAny())
   n := dara.ForceFloat32(b) + dara.ForceFloat32(a) + dara.ForceFloat32(ReturnAny())
   o := dara.ForceFloat64(b) + dara.ForceFloat64(a) + dara.ForceFloat64(ReturnAny())
   if dara.ForceBoolean(dara.StringValue(args[2])) {

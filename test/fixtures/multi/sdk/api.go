@@ -4,7 +4,7 @@ package api
 import (
   user "darabonba.com/multi/model/user"
   util "darabonba.com/multi/lib/util"
-  dara "github.com/alibabacloud-go/tea/tea"
+  "github.com/alibabacloud-go/tea/dara"
   
 )
 
