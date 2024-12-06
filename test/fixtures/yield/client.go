@@ -81,9 +81,9 @@ func (client *Client) Test3(name *string) (_result <-chan interface{}, _err erro
     }
 
     _result = _yield
-    return _result, _err
+    return _result, nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 

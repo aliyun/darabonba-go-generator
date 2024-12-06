@@ -42,6 +42,6 @@ func (client *Client)Init(config *openapi.Config)(_err error) {
 
 func (client *Client) Test (project *string, logstore *string) (_result *string, _err error) {
   _result = dara.String("")
-  return _result, _err
+  return _result, nil
 }
 

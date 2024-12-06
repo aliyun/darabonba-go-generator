@@ -939,9 +939,9 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
       continue
     }
 
-    return _result, _err
+    return _result, nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 func (client *Client) Complex2(request *ComplexRequest, str []*string, val map[string]*string) (_result map[string]interface{}, _err error) {
@@ -950,7 +950,7 @@ func (client *Client) Complex2(request *ComplexRequest, str []*string, val map[s
   config := &source.Config{}
   client, _err := source.NewClient(config)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
 
   configArray := []*source.Config{config}
@@ -1006,7 +1006,7 @@ func (client *Client) ComplexMap() (_result map[string]interface{}, _err error) 
 
     return nil, nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 func (client *Client) Complex3(request *ComplexRequest, name *string) (_result *ComplexRequest, _err error) {
@@ -1014,7 +1014,7 @@ func (client *Client) Complex3(request *ComplexRequest, name *string) (_result *
   name = dara.String("complex")
   request_.Protocol, _err = client.TemplateString()
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
 
   request_.Port = dara.Int(80)
@@ -1056,7 +1056,7 @@ func (client *Client) Hello (request map[string]interface{}, strs []*string, com
   var a [][]*string
   _body := Array1()
   _result = _body
-  return _result, _err
+  return _result, nil
 }
 
 func Print (reqeust *dara.Request, reqs []*ComplexRequest, response *dara.Response, val map[string]*string) (_result *source.Request, _err error) {
@@ -1077,7 +1077,7 @@ func AssignWithArray () (_err error) {
     return _err
   }
 
-  return _err
+  return nil
 }
 
 func (client *Client) MapAcess () {
@@ -1099,8 +1099,7 @@ func (client *Client) ExprFunc () (_result []*string, _err error) {
     "str": "string" + dara.ToString(num),
     "str1": "string" + dara.StringValue(req.AccessKey),
   }
-  _result = nil
-  return _result , _err
+  return nil , nil
 }
 
 func PrintNull () (_err error) {
@@ -1111,7 +1110,7 @@ func PrintNull () (_err error) {
     if _t, ok := _err.(dara.BaseError); ok {
     }
   }
-  return _err
+  return nil
 }
 
 func TestTryWithComplexReturnType () (_result *source.Request, _err error) {
@@ -1122,8 +1121,7 @@ func TestTryWithComplexReturnType () (_result *source.Request, _err error) {
     if _t, ok := _err.(dara.BaseError); ok {
     }
   }
-  _result = nil
-  return _result , _err
+  return nil , nil
 }
 
 func TestTryWithComplexReturnTypeWithOutCat () (_result *source.Request, _err error) {
@@ -1136,8 +1134,7 @@ func TestTryWithComplexReturnTypeWithOutCat () (_result *source.Request, _err er
       sim := "a"
     }
   }
-  _result = nil
-  return _result , _err
+  return nil , nil
 }
 
 func Array0 (req map[string]interface{}) (_result []interface{}) {
@@ -1152,7 +1149,7 @@ func Array1 () (_result []*string) {
 
 func (client *Client) TemplateString () (_result *string, _err error) {
   _result = dara.String("/" + dara.StringValue(client.Protocol))
-  return _result, _err
+  return _result, nil
 }
 
 func (client *Client) IntOp (a *int) {
@@ -1165,12 +1162,12 @@ func (client *Client) IntOp (a *int) {
 
 func (client *Client) ThrowsFunc () (_result *string, _err error) {
   _result = dara.String("/" + dara.StringValue(client.Protocol))
-  return _result, _err
+  return _result, nil
 }
 
 func (client *Client) ThrowsFunc1 () (_result *string, _err error) {
   _result = dara.String("")
-  return _result, _err
+  return _result, nil
 }
 
 func (client *Client) ThrowsFunc2 () (_err error) {
@@ -1184,12 +1181,11 @@ func (client *Client) ThrowsFunc3 () (_result *string, _err error) {
   _err = dara.NewSDKError(map[string]interface{}{
     "code": "",
   })
-  return _result, _err
+  return nil, _err
 }
 
 func (client *Client) ReturnFunc () (_result *string) {
-  _result = nil
-  return _result
+  return nil
 }
 
 func (client *Client) ReturnFunc1 (cfg *source.Config) (_result *source.Client) {
@@ -1336,7 +1332,7 @@ func DefaultReturn () (_err error) {
   } else {
   }
 
-  return _err
+  return nil
 }
 
 func (client *Client) MultiTryCatch (a *int) (_err error) {
@@ -1360,35 +1356,33 @@ func (client *Client) MultiTryCatch (a *int) (_err error) {
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
   }
-  return _err
+  return nil
 }
 
 func complex1_opResponse (request *ComplexRequest, client *Client)( _result *source.RuntimeObject, _err error) {
   if true && true {
-    _result = nil
-    return _result , _err
+    return nil , nil
   } else if true || false {
-    return _result, _err
+    return _result, nil
   }
 
   client.Print(dara.ToMap(request), dara.String("1"))
   _, _err = client.Hello(dara.ToMap(request), []*string{dara.String("1"), dara.String("2")}, nil)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
   _, _err = client.Hello(nil, nil, nil)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
   _err = dara.Convert(map[string]interface{}{}, &_result)
 
-  return _result, _err
+  return _result, nil
   _, _err = client.Complex3(nil, dara.String("test"))
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
-  _result = nil
-  return _result , _err
+  return nil , nil
 }
 
 func complex3_opResponse (response_ *dara.Response, request *ComplexRequest, client *Client)( _result *ComplexRequest, _err error) {
@@ -1402,17 +1396,17 @@ func complex3_opResponse (response_ *dara.Response, request *ComplexRequest, cli
   req.Accesskey = request.AccessKey
   _err = PrintNull()
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
   _, _err = client.ThrowsFunc()
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
   dara.IntValue(response_.StatusCode)
   source.Array(dara.ToMap(request), dara.String("1"))
   _err = dara.Convert(dara.Merge(request_.Query), &_result)
 
-  return _result, _err
+  return _result, nil
 }
 
 func multiTryCatch_opTryFunc (a *int)(_err error) {
@@ -1446,6 +1440,6 @@ func multiTryCatch_opTryFunc (a *int)(_err error) {
     return _err
   }
 
-  return _err
+  return nil
 }
 

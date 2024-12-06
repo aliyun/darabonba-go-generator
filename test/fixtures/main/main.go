@@ -29,7 +29,7 @@ func _main (args []*string) (_err error) {
     return _err
   }
 
-  return _err
+  return nil
 }
 
 func ThrowError () (_err error) {

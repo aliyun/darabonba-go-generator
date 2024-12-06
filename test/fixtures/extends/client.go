@@ -194,10 +194,9 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
     }
 
 
-    _result = nil
-    return _result , _err
+    return nil , nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 
@@ -212,7 +211,7 @@ func (client *Client) NewModels () (_err error) {
     MaxAttemp: dara.Int(32),
     MaxRetry: dara.Int(32),
   }
-  return _err
+  return nil
 }
 
 func (client *Client) TryCatch () {

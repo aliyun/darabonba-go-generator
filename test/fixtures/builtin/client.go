@@ -97,7 +97,7 @@ func ArrayTest (args []*string) (_err error) {
 
   }
 
-  return _err
+  return nil
 }
 
 func CheckStr (str *string) (_result *bool) {
@@ -118,7 +118,7 @@ func BytesTest (args []*string) (_err error) {
   length := len(data)
   obj := dara.ToString(data)
   data2 := dara.BytesFromString(fullStr, "base64")
-  return _err
+  return nil
 }
 
 func DateTest (args []*string) (_err error) {
@@ -147,7 +147,7 @@ func DateTest (args []*string) (_err error) {
   weekOfYear := date.WeekOfYear()
   month := date.Month()
   year := date.Year()
-  return _err
+  return nil
 }
 
 func EnvTest (args []*string) (_err error) {
@@ -167,7 +167,7 @@ func EnvTest (args []*string) (_err error) {
     return _err
   }
 
-  return _err
+  return nil
 }
 
 func FileTest (args []*string) (_err error) {
@@ -211,7 +211,7 @@ func FileTest (args []*string) (_err error) {
 
   }
 
-  return _err
+  return nil
 }
 
 func FormTest (args []*string) (_err error) {
@@ -227,7 +227,7 @@ func FormTest (args []*string) (_err error) {
   form := dara.ToFormString(m)
   form = form + "&key7=23233&key8=" + dara.GetBoundary()
   r := dara.ToFileForm(m, dara.GetBoundary())
-  return _err
+  return nil
 }
 
 func JsonTest (args []*string) (_err error) {
@@ -248,7 +248,7 @@ func JsonTest (args []*string) (_err error) {
   ma := dara.ParseJSON(ms)
   arrStr := "[1,2,3,4]"
   arr := dara.ParseJSON(arrStr)
-  return _err
+  return nil
 }
 
 func LogerTest (args []*string) (_err error) {
@@ -257,7 +257,7 @@ func LogerTest (args []*string) (_err error) {
   fmt.Printf("[WARNING] %s\n", "test")
   fmt.Printf("[DEBUG] %s\n", "test")
   fmt.Printf("[ERROR] %s\n", "test")
-  return _err
+  return nil
 }
 
 func MapTestCase (args []*string) (_err error) {
@@ -300,7 +300,7 @@ func MapTestCase (args []*string) (_err error) {
     newKey = newKey + e.Key
     newValue = newValue + dara.ToString(e.Value)
   }
-  return _err
+  return nil
 }
 
 func NumberTest (args []*string) (_err error) {
@@ -330,7 +330,7 @@ func NumberTest (args []*string) (_err error) {
   randomNum := dara.Random()
   inum = dara.Floor(inum)
   inum = dara.Round(inum)
-  return _err
+  return nil
 }
 
 func StreamTest (args []*string) (_err error) {
@@ -375,7 +375,7 @@ func StreamTest (args []*string) (_err error) {
 
   }
 
-  return _err
+  return nil
 }
 
 func StringTest (args []*string) (_err error) {
@@ -426,7 +426,7 @@ func StringTest (args []*string) (_err error) {
   lnum := strconv.ParseInt(num, 10, 64)
   fnum := strconv.ParseFloat(num, 32) + 1
   dnum := strconv.ParseFloat(num, 64) + 1
-  return _err
+  return nil
 }
 
 func UrlTest (args []*string) (_err error) {
@@ -455,7 +455,7 @@ func UrlTest (args []*string) (_err error) {
   newSearch := dara.PercentEncode(search)
   newPath := dara.PathEncode(pathname)
   all := "test" + path + protocol + hostname + hash + search + href + auth + newUrl + newSearch + newPath
-  return _err
+  return nil
 }
 
 func XmlTest (args []*string) (_err error) {
@@ -471,7 +471,7 @@ func XmlTest (args []*string) (_err error) {
   xml := dara.ToXML(m)
   xml = xml + "<key7>132</key7>"
   respMap := dara.ParseXml(xml, nil)
-  return _err
+  return nil
 }
 
 func ReturnAny () (_result interface{}) {
@@ -580,6 +580,6 @@ func Main (args []*string) (_err error) {
     return
   }
 
-  return _err
+  return nil
 }
 

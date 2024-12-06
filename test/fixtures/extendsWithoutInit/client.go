@@ -49,10 +49,9 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
       continue
     }
 
-    _result = nil
-    return _result , _err
+    return nil , nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 

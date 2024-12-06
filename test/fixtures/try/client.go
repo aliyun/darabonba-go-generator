@@ -122,29 +122,25 @@ func (client *Client) TryMultiCatch (a *int) (_result *int, _err error) {
     if _t, ok := _err.(*Err1Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
-      _result = nil
-      return _result , _err
+      return nil , nil
     }
     if _t, ok := _err.(*Err2Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
-      _result = nil
-      return _result , _err
+      return nil , nil
     }
     if _t, ok := _err.(*source.Err3Error); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
-      _result = nil
-      return _result , _err
+      return nil , nil
     }
     if _t, ok := _err.(dara.BaseError); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
-      _result = nil
-      return _result , _err
+      return nil , nil
     }
   }
-  return _result, _err
+  return _result, nil
 }
 
 func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err error) {
@@ -207,7 +203,7 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
   }
-  return _result, _err
+  return _result, nil
 }
 
 func tryMultiCatch_opTryFunc (a *int)( _result *int, _err error) {
@@ -220,30 +216,30 @@ func tryMultiCatch_opTryFunc (a *int)( _result *int, _err error) {
         "key1": dara.String("str"),
       },
     }
-    return _result, _err
+    return nil, _err
   } else if dara.IntValue(a) == 0 {
     _err = &Err2Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
       AccessErrMessage: dara.String("str2"),
     }
-    return _result, _err
+    return nil, _err
   } else if dara.IntValue(a) == -10 {
     _err = &source.Err3Error{
       Name: dara.String("str"),
       Code: dara.String("str"),
     }
-    return _result, _err
+    return nil, _err
   } else {
     _err = &dara.SDKError{
       Name: dara.String("str"),
       Code: dara.String("str"),
     }
-    return _result, _err
+    return nil, _err
   }
 
   _result = dara.Int(dara.IntValue(a) + 100)
-  return _result , _err
+  return _result , nil
 }
 
 func multiTryCatch_opTryFunc (a *int, name string, code string, data map[string]*string)(_err error) {
@@ -262,6 +258,6 @@ func multiTryCatch_opTryFunc (a *int, name string, code string, data map[string]
     return _err
   }
 
-  return _err
+  return nil
 }
 

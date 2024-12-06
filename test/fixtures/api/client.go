@@ -125,9 +125,9 @@ func (client *Client) HelloRuntime() (_err error) {
       continue
     }
 
-    return _err
+    return nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 func (client *Client) HelloVirtualCall(m *M) (_err error) {
@@ -213,15 +213,15 @@ func (client *Client) HelloComplex() (_result interface{}, _err error) {
       continue
     }
 
-    return _result, _err
+    return _result, nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 
 func (client *Client) GetHost () (_result *string, _err error) {
   _result = dara.String("www.test.com")
-  return _result, _err
+  return _result, nil
 }
 
 func helloComplex_opResponse (response_ *dara.Response)( _result interface{}, _err error) {
@@ -230,15 +230,15 @@ func helloComplex_opResponse (response_ *dara.Response)( _result interface{}, _e
       "code": dara.ToString(dara.IntValue(response_.StatusCode)),
       "message": "httpCode: " + dara.ToString(dara.IntValue(response_.StatusCode)) + " ",
     })
-    return _result, _err
+    return nil, _err
   }
 
   obj, _err := dara.ReadAsJSON(response_.Body)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
 
   _result = obj
-  return _result , _err
+  return _result , nil
 }
 

@@ -353,9 +353,9 @@ func (client *Client) TestAPI() (_err error) {
     }
 
     // return comment
-    return _err
+    return nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 // testAPI2 comment
@@ -424,7 +424,7 @@ func (client *Client) TestAPI2() (_err error) {
 
     // empty return comment
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 
@@ -440,6 +440,6 @@ func StaticFunc () {
 func TestFunc () (_err error) {
   // empty comment1
   // empty comment2
-  return _err
+  return nil
 }
 

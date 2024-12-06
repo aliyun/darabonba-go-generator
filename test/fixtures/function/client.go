@@ -34,109 +34,109 @@ func HelloParams (a *string, b *string) (_err error) {
 
 func HelloTest (a *string) (_result *string, _err error) {
   _result = a
-  return _result , _err
+  return _result , nil
 }
 
 func EqualString (a *string, b *string) (_result *bool, _err error) {
   _result = dara.Bool(true)
-  return _result, _err
+  return _result, nil
 }
 
 func HelloTestNestReturn (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   _body, _err := EqualString(helloTestTmp, helloTestTmp1)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
   _result = _body
-  return _result, _err
+  return _result, nil
 }
 
 func HelloTestNestDeclar (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   tmpTmp, _err := EqualString(helloTestTmp, helloTestTmp1)
   tmp := dara.BoolValue(tmpTmp)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
 
   _result = dara.Bool(tmp)
-  return _result , _err
+  return _result , nil
 }
 
 func HelloTestNestIf (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   if EqualString(helloTestTmp, helloTestTmp1) {
     _result = dara.Bool(true)
-    return _result, _err
+    return _result, nil
   }
 
   _result = dara.Bool(false)
-  return _result, _err
+  return _result, nil
 }
 
 func HelloTestNestFor (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   for EqualString(helloTestTmp, helloTestTmp1) {
     _result = dara.Bool(true)
-    return _result, _err
+    return _result, nil
   }
   _result = dara.Bool(false)
-  return _result, _err
+  return _result, nil
 }
 
 func HelloTestNestFor1 (a *string, b *string) (_result *bool, _err error) {
   helloTestTmp, err := HelloTest(a)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   helloTestTmp1, err := HelloTest(b)
   if err != nil {
     _err = err
-    return _result, _err
+    return nil, _err
   }
   for EqualString(helloTestTmp, helloTestTmp1) {
     _result = dara.Bool(true)
-    return _result, _err
+    return _result, nil
   }
   _result = dara.Bool(false)
-  return _result, _err
+  return _result, nil
 }
 

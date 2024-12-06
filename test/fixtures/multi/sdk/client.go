@@ -43,17 +43,17 @@ func (client *Client) Test3 () (_result <-chan *string, _err error) {
 func (client *Client) Test4 () (_result *int, _err error) {
   api, _err := api.NewClient()
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
 
   statusTmp, _err := api.Test3()
   status := dara.IntValue(statusTmp)
   if _err != nil {
-    return _result, _err
+    return nil, _err
   }
 
   _result = dara.Int(status)
-  return _result , _err
+  return _result , nil
 }
 
 func test3_opYieldFunc(_yield chan<- *string, _yieldErr chan<- error) {

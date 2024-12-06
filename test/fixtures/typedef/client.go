@@ -82,13 +82,13 @@ func (client *Client) Main (test1 *http.Request, test2 *url.URL) (_err error) {
   }
   client.Vid = test1
   client.Url = test2
-  return _err
+  return nil
 }
 
 func (client *Client) TestHttpRequest (req *http.Request) (_result *http.Response, _err error) {
   _body := TestHttpRequestWith(dara.String("test"), req)
   _result = _body
-  return _result, _err
+  return _result, nil
 }
 
 func TestHttpRequestWith (method *string, req *http.Request) (_result *http.Response) {
@@ -102,6 +102,6 @@ func TestHttpHeader (method *string, headers *http.Header) (_result *http.Reques
 func (client *Client) TestHttpHeaderWith (headers *http.Header) (_result *http.Request, _err error) {
   _body := TestHttpHeader(dara.String("test"), headers)
   _result = _body
-  return _result, _err
+  return _result, nil
 }
 

@@ -65,9 +65,9 @@ func (client *Client) Test3() (_result *int, _err error) {
     }
 
     _result = response_.StatusCode
-    return _result , _err
+    return _result , nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 

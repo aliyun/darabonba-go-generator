@@ -94,9 +94,9 @@ func (client *Client) TestAPI() (_err error) {
       continue
     }
 
-    return _err
+    return nil
   }
-  return _result, _resultErr
+  return nil, _resultErr
 }
 
 
@@ -104,7 +104,7 @@ func (client *Client) TestAPI() (_err error) {
 // 
 // testFunc
 func TestFunc () (_err error) {
-  return _err
+  return nil
 }
 
 // Deprecated: annotation test deprecated
@@ -135,7 +135,7 @@ func TestFunc () (_err error) {
 func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
   // empty comment1
   // empty comment2
-  return _err
+  return nil
 }
 
 // Deprecated: test is deprecated, use xxx instead.
@@ -162,7 +162,7 @@ func TestFuncWithAnnotation1 (test *string, _test *string) (_err error) {
 func TestFuncWithAnnotation2 (test *string, _test *string) (_err error) {
   // empty comment1
   // empty comment2
-  return _err
+  return nil
 }
 
 // Deprecated: deprecated test for line break.
@@ -177,6 +177,6 @@ func TestFuncWithAnnotation2 (test *string, _test *string) (_err error) {
 func TestFuncWithAnnotation3 (test *string, _test *string) (_err error) {
   // empty comment1
   // empty comment2
-  return _err
+  return nil
 }
 
