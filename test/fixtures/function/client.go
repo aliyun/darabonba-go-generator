@@ -16,6 +16,8 @@ func HelloMap () (_result map[string]*string) {
   tea.Convert(tea.Merge(map[string]*string{
     "key": tea.String("value"),
     "key-1": tea.String("value-1"),
+    "key-2": tea.String("value-2"),
+    "\"\"": tea.String("value-3"),
     },m), &_result)
   return _result
 }
