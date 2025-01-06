@@ -16,8 +16,13 @@ exception Err2 = {
 
 
 
-async function tryMultiCatch(a: number): number {
+async function tryMultiCatch(a: number, client: Source, b: string, c: number, m: Source.Config): number {
   try {
+    var obj = {};
+    client.print(obj, 'test');
+    b.split(',');
+    m.validate();
+    c.parseInt();
     if(a > 0) {
       a = 20;
       throw new Err1 {

@@ -115,8 +115,8 @@ func (client *Client)Init(config *source.Config)(_err error) {
 
 
 
-func (client *Client) TryMultiCatch (a *int) (_result *int, _err error) {
-  _result, _err  = tryMultiCatch_opTryFunc(a)
+func (client *Client) TryMultiCatch (a *int, client *source.Client, b *string, c *int, m *source.Config) (_result *int, _err error) {
+  _result, _err  = tryMultiCatch_opTryFunc(client, b, m, c, a)
   final := "ok"
   if _err != nil {
     if _t, ok := _err.(*Err1Error); ok {
@@ -210,7 +210,15 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
   return _result, _err
 }
 
-func tryMultiCatch_opTryFunc (a *int)( _result *int, _err error) {
+func tryMultiCatch_opTryFunc (client *source.Client, b *string, m *Config, c *int, a *int)( _result *int, _err error) {
+  obj := map[string]interface{}{}
+  client.Print(obj, dara.String("test"))
+  b.Split(",")
+  _err = m.Validate()
+  if _err != nil {
+    return _result, _err
+  }
+  int(c)
   if dara.IntValue(a) > 0 {
     a = dara.Int(20)
     _err = &Err1Error{
