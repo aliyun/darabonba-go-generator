@@ -18,7 +18,6 @@ type iBaseInfo interface {
 
 type BaseInfo struct {
   darautil.iRuntimeOptions
-  MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
   // whether to try again
   Autoretry *bool `json:"autoretry,omitempty" xml:"autoretry,omitempty"`
   // ignore SSL validation
@@ -55,6 +54,7 @@ type BaseInfo struct {
   Socks5NetWork *string `json:"socks5NetWork,omitempty" xml:"socks5NetWork,omitempty"`
   // whether to enable keep-alive
   KeepAlive *bool `json:"keepAlive,omitempty" xml:"keepAlive,omitempty"`
+  MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
 }
 
 func (s BaseInfo) String() string {
@@ -63,10 +63,6 @@ func (s BaseInfo) String() string {
 
 func (s BaseInfo) GoString() string {
   return s.String()
-}
-
-func (s *BaseInfo) GetMaxAttemp() *int  {
-  return s.MaxAttemp
 }
 
 func (s *BaseInfo) GetAutoretry() *bool  {
@@ -141,9 +137,8 @@ func (s *BaseInfo) GetKeepAlive() *bool  {
   return s.KeepAlive
 }
 
-func (s *BaseInfo) SetMaxAttemp(v int) *BaseInfo {
-  s.MaxAttemp = &v
-  return s
+func (s *BaseInfo) GetMaxAttemp() *int  {
+  return s.MaxAttemp
 }
 
 func (s *BaseInfo) SetAutoretry(v bool) *BaseInfo {
@@ -236,6 +231,11 @@ func (s *BaseInfo) SetKeepAlive(v bool) *BaseInfo {
   return s
 }
 
+func (s *BaseInfo) SetMaxAttemp(v int) *BaseInfo {
+  s.MaxAttemp = &v
+  return s
+}
+
 type iInfo interface {
   iBaseInfo
   String() string
@@ -248,8 +248,6 @@ type iInfo interface {
 
 type Info struct {
   iBaseInfo
-  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
-  Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
   MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
   // whether to try again
   Autoretry *bool `json:"autoretry,omitempty" xml:"autoretry,omitempty"`
@@ -287,6 +285,8 @@ type Info struct {
   Socks5NetWork *string `json:"socks5NetWork,omitempty" xml:"socks5NetWork,omitempty"`
   // whether to enable keep-alive
   KeepAlive *bool `json:"keepAlive,omitempty" xml:"keepAlive,omitempty"`
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
+  Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
 }
 
 func (s Info) String() string {
@@ -295,14 +295,6 @@ func (s Info) String() string {
 
 func (s Info) GoString() string {
   return s.String()
-}
-
-func (s *Info) GetName() *string  {
-  return s.Name
-}
-
-func (s *Info) GetAge() *int  {
-  return s.Age
 }
 
 func (s *Info) GetMaxAttemp() *int  {
@@ -381,14 +373,12 @@ func (s *Info) GetKeepAlive() *bool  {
   return s.KeepAlive
 }
 
-func (s *Info) SetName(v string) *Info {
-  s.Name = &v
-  return s
+func (s *Info) GetName() *string  {
+  return s.Name
 }
 
-func (s *Info) SetAge(v int) *Info {
-  s.Age = &v
-  return s
+func (s *Info) GetAge() *int  {
+  return s.Age
 }
 
 func (s *Info) SetMaxAttemp(v int) *Info {
@@ -483,6 +473,16 @@ func (s *Info) SetSocks5NetWork(v string) *Info {
 
 func (s *Info) SetKeepAlive(v bool) *Info {
   s.KeepAlive = &v
+  return s
+}
+
+func (s *Info) SetName(v string) *Info {
+  s.Name = &v
+  return s
+}
+
+func (s *Info) SetAge(v int) *Info {
+  s.Age = &v
   return s
 }
 

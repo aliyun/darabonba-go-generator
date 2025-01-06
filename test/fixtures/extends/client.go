@@ -61,9 +61,9 @@ type iSub interface {
 
 type Sub struct {
   iBase
+  Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
   Code *string `json:"code,omitempty" xml:"code,omitempty" require:"true"`
-  Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
 }
 
 func (s Sub) String() string {
@@ -74,6 +74,10 @@ func (s Sub) GoString() string {
   return s.String()
 }
 
+func (s *Sub) GetAge() *int  {
+  return s.Age
+}
+
 func (s *Sub) GetName() *string  {
   return s.Name
 }
@@ -82,8 +86,9 @@ func (s *Sub) GetCode() *string  {
   return s.Code
 }
 
-func (s *Sub) GetAge() *int  {
-  return s.Age
+func (s *Sub) SetAge(v int) *Sub {
+  s.Age = &v
+  return s
 }
 
 func (s *Sub) SetName(v string) *Sub {
@@ -93,11 +98,6 @@ func (s *Sub) SetName(v string) *Sub {
 
 func (s *Sub) SetCode(v string) *Sub {
   s.Code = &v
-  return s
-}
-
-func (s *Sub) SetAge(v int) *Sub {
-  s.Age = &v
   return s
 }
 
@@ -111,8 +111,8 @@ type iSubModel interface {
 
 type SubModel struct {
   source.iConfig
-  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
   MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
+  Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
 
 func (s SubModel) String() string {
@@ -123,21 +123,21 @@ func (s SubModel) GoString() string {
   return s.String()
 }
 
-func (s *SubModel) GetName() *string  {
-  return s.Name
-}
-
 func (s *SubModel) GetMaxAttemp() *int  {
   return s.MaxAttemp
 }
 
-func (s *SubModel) SetName(v string) *SubModel {
-  s.Name = &v
-  return s
+func (s *SubModel) GetName() *string  {
+  return s.Name
 }
 
 func (s *SubModel) SetMaxAttemp(v int) *SubModel {
   s.MaxAttemp = &v
+  return s
+}
+
+func (s *SubModel) SetName(v string) *SubModel {
+  s.Name = &v
   return s
 }
 
