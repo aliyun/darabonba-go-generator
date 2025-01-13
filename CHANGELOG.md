@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.1.9 - 2025-01-13
+
+> Adjust field name for object
+
 ## 1.1.7 - 2024-05-29
 
 > Resolve return type
