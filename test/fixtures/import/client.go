@@ -20,7 +20,6 @@ type iM interface {
 }
 
 type M struct {
-  dara.Model
   A *map_.Request `json:"a,omitempty" xml:"a,omitempty"`
   B *string_.Request `json:"b,omitempty" xml:"b,omitempty"`
 }
@@ -49,6 +48,10 @@ func (s *M) SetA(v *map_.Request) *M {
 func (s *M) SetB(v *string_.Request) *M {
   s.B = v
   return s
+}
+
+func (s *M) Validate() error {
+  return dara.Validate(s)
 }
 
 type Client struct {

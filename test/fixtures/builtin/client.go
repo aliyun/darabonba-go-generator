@@ -23,7 +23,6 @@ type iM interface {
 }
 
 type M struct {
-  dara.Model
   A *string `json:"a,omitempty" xml:"a,omitempty" require:"true"`
   B *int `json:"b,omitempty" xml:"b,omitempty" require:"true"`
 }
@@ -52,6 +51,10 @@ func (s *M) SetA(v string) *M {
 func (s *M) SetB(v int) *M {
   s.B = &v
   return s
+}
+
+func (s *M) Validate() error {
+  return dara.Validate(s)
 }
 
 

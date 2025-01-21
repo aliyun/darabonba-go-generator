@@ -18,7 +18,6 @@ type iBase interface {
 }
 
 type Base struct {
-  dara.Model
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
   Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
 }
@@ -49,6 +48,10 @@ func (s *Base) SetAge(v int) *Base {
   return s
 }
 
+func (s *Base) Validate() error {
+  return dara.Validate(s)
+}
+
 type iSub interface {
   iBase
   String() string
@@ -60,7 +63,6 @@ type iSub interface {
 }
 
 type Sub struct {
-  iBase
   Age *int `json:"age,omitempty" xml:"age,omitempty" require:"true"`
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
   Code *string `json:"code,omitempty" xml:"code,omitempty" require:"true"`
@@ -101,6 +103,10 @@ func (s *Sub) SetCode(v string) *Sub {
   return s
 }
 
+func (s *Sub) Validate() error {
+  return dara.Validate(s)
+}
+
 type iSubModel interface {
   source.iConfig
   String() string
@@ -110,7 +116,6 @@ type iSubModel interface {
 }
 
 type SubModel struct {
-  source.iConfig
   MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
@@ -139,6 +144,10 @@ func (s *SubModel) SetMaxAttemp(v int) *SubModel {
 func (s *SubModel) SetName(v string) *SubModel {
   s.Name = &v
   return s
+}
+
+func (s *SubModel) Validate() error {
+  return dara.Validate(s)
 }
 
 type Client struct {

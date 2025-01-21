@@ -20,7 +20,6 @@ type iTest interface {
 // 
 // TestModel
 type Test struct {
-  dara.Model
   // Alichange app id 
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
 }
@@ -40,6 +39,10 @@ func (s *Test) GetTest() *string  {
 func (s *Test) SetTest(v string) *Test {
   s.Test = &v
   return s
+}
+
+func (s *Test) Validate() error {
+  return dara.Validate(s)
 }
 
 type Client struct {

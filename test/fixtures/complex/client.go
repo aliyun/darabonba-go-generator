@@ -94,7 +94,6 @@ type iComplexRequest interface {
 }
 
 type ComplexRequest struct {
-  dara.Model
   AccessKey *string `json:"accessKey,omitempty" xml:"accessKey,omitempty" require:"true"`
   // Body
   // 
@@ -522,6 +521,10 @@ func (s *ComplexRequest) SetPart(v []*ComplexRequestPart) *ComplexRequest {
   return s
 }
 
+func (s *ComplexRequest) Validate() error {
+  return dara.Validate(s)
+}
+
 type ComplexRequestHeader struct {
   // The ID of the security group to which you want to assign the instance. Instances in the same security group can communicate with each other. The maximum number of instances that a security group can contain depends on the type of the security group. For more information, see the "Security group limits" section in [Limits](https://help.aliyun.com/document_detail/25412.html#SecurityGroupQuota).
   // 
@@ -569,6 +572,10 @@ func (s *ComplexRequestHeader) SetContent(v string) *ComplexRequestHeader {
   return s
 }
 
+func (s *ComplexRequestHeader) Validate() error {
+  return dara.Validate(s)
+}
+
 type ComplexRequestConfigs struct {
   Key *string `json:"key,omitempty" xml:"key,omitempty" require:"true"`
   Value []*string `json:"value,omitempty" xml:"value,omitempty" require:"true" type:"Repeated"`
@@ -610,6 +617,10 @@ func (s *ComplexRequestConfigs) SetExtra(v map[string]*string) *ComplexRequestCo
   return s
 }
 
+func (s *ComplexRequestConfigs) Validate() error {
+  return dara.Validate(s)
+}
+
 type ComplexRequestPart struct {
   // PartNumber
   PartNumber *string `json:"PartNumber,omitempty" xml:"PartNumber,omitempty"`
@@ -632,6 +643,10 @@ func (s *ComplexRequestPart) SetPartNumber(v string) *ComplexRequestPart {
   return s
 }
 
+func (s *ComplexRequestPart) Validate() error {
+  return dara.Validate(s)
+}
+
 type iResponse interface {
   dara.Model
   String() string
@@ -641,7 +656,6 @@ type iResponse interface {
 }
 
 type Response struct {
-  dara.Model
   Instance *ComplexRequestPart `json:"instance,omitempty" xml:"instance,omitempty" require:"true"`
 }
 
@@ -660,6 +674,10 @@ func (s *Response) GetInstance() *ComplexRequestPart  {
 func (s *Response) SetInstance(v *ComplexRequestPart) *Response {
   s.Instance = v
   return s
+}
+
+func (s *Response) Validate() error {
+  return dara.Validate(s)
 }
 
 type iErr1Error interface {
@@ -1108,7 +1126,7 @@ func PrintNull () (_err error) {
   str := dara.StringValue(strTmp)
   final := "ok"
   if _err != nil {
-    if _t, ok := _err.(dara.BaseError); ok {
+    if _t, ok := _err.(*dara.SDKError); ok {
     }
   }
   return _err
@@ -1119,7 +1137,7 @@ func TestTryWithComplexReturnType () (_result *source.Request, _err error) {
   str := dara.StringValue(strTmp)
   final := "ok"
   if _err != nil {
-    if _t, ok := _err.(dara.BaseError); ok {
+    if _t, ok := _err.(*dara.SDKError); ok {
     }
   }
   _result = nil
@@ -1131,7 +1149,7 @@ func TestTryWithComplexReturnTypeWithOutCat () (_result *source.Request, _err er
   str := dara.StringValue(strTmp)
   final := "ok"
   if _err != nil {
-    if _t, ok := _err.(dara.BaseError); ok {
+    if _t, ok := _err.(*dara.SDKError); ok {
       e := _t;
       sim := "a"
     }
@@ -1187,7 +1205,14 @@ func (client *Client) ThrowsFunc3 () (_result *string, _err error) {
   return _result, _err
 }
 
+func (client *Client) GetInt (num *int32) (_result *int32) {
+  _result = num
+  return _result
+}
+
 func (client *Client) ReturnFunc () (_result *string) {
+  index := int32(0)
+  i := dara.Int32Value(client.GetInt(dara.Int32(index)))
   _result = nil
   return _result
 }
@@ -1355,7 +1380,7 @@ func (client *Client) MultiTryCatch (a *int) (_err error) {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
-    if _t, ok := _err.(dara.BaseError); ok {
+    if _t, ok := _err.(*dara.SDKError); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }

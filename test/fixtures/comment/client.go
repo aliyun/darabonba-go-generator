@@ -25,7 +25,6 @@ type iTest1 interface {
 // 
 // TestModel
 type Test1 struct {
-  dara.Model
   // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
   //model的test back comment
@@ -60,6 +59,10 @@ func (s *Test1) SetTest2(v string) *Test1 {
   return s
 }
 
+func (s *Test1) Validate() error {
+  return dara.Validate(s)
+}
+
 type iTest2 interface {
   dara.Model
   String() string
@@ -74,7 +77,6 @@ type iTest2 interface {
 // 
 // TestModel2
 type Test2 struct {
-  dara.Model
   // model的test front comment
   // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
@@ -109,6 +111,10 @@ func (s *Test2) SetTest2(v string) *Test2 {
   return s
 }
 
+func (s *Test2) Validate() error {
+  return dara.Validate(s)
+}
+
 type iTest3 interface {
   dara.Model
   String() string
@@ -119,7 +125,6 @@ type iTest3 interface {
 // 
 // TestModel3
 type Test3 struct {
-  dara.Model
   // empty comment1
   // empy comment2
 }
@@ -130,6 +135,10 @@ func (s Test3) String() string {
 
 func (s Test3) GoString() string {
   return s.String()
+}
+
+func (s *Test3) Validate() error {
+  return dara.Validate(s)
 }
 
 type iTestErr1 interface {
@@ -146,7 +155,6 @@ type iTestErr1 interface {
 // 
 // TestErr
 type TestErr1 struct {
-  dara.Model
   // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
   //error的test back comment
@@ -181,6 +189,10 @@ func (s *TestErr1) SetTest2(v string) *TestErr1 {
   return s
 }
 
+func (s *TestErr1) Validate() error {
+  return dara.Validate(s)
+}
+
 type iTestErr2 interface {
   dara.Model
   String() string
@@ -195,7 +207,6 @@ type iTestErr2 interface {
 // 
 // TestErr2
 type TestErr2 struct {
-  dara.Model
   // model的test front comment
   // test desc
   Test *string `json:"test,omitempty" xml:"test,omitempty" require:"true"`
@@ -230,6 +241,10 @@ func (s *TestErr2) SetTest2(v string) *TestErr2 {
   return s
 }
 
+func (s *TestErr2) Validate() error {
+  return dara.Validate(s)
+}
+
 type iTestErr3 interface {
   dara.Model
   String() string
@@ -240,7 +255,6 @@ type iTestErr3 interface {
 // 
 // TestErr3
 type TestErr3 struct {
-  dara.Model
   // empty comment1
   // empy comment2
 }
@@ -251,6 +265,10 @@ func (s TestErr3) String() string {
 
 func (s TestErr3) GoString() string {
   return s.String()
+}
+
+func (s *TestErr3) Validate() error {
+  return dara.Validate(s)
 }
 
 type Client struct {

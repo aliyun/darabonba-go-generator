@@ -21,7 +21,6 @@ type iInterceptorContext interface {
 }
 
 type InterceptorContext struct {
-  dara.Model
   Request *InterceptorContextRequest `json:"request,omitempty" xml:"request,omitempty" require:"true" type:"Struct"`
   Configuration *InterceptorContextConfiguration `json:"configuration,omitempty" xml:"configuration,omitempty" require:"true" type:"Struct"`
   Response *InterceptorContextResponse `json:"response,omitempty" xml:"response,omitempty" require:"true" type:"Struct"`
@@ -60,6 +59,10 @@ func (s *InterceptorContext) SetConfiguration(v *InterceptorContextConfiguration
 func (s *InterceptorContext) SetResponse(v *InterceptorContextResponse) *InterceptorContext {
   s.Response = v
   return s
+}
+
+func (s *InterceptorContext) Validate() error {
+  return dara.Validate(s)
 }
 
 type InterceptorContextRequest struct {
@@ -263,6 +266,10 @@ func (s *InterceptorContextRequest) SetUserAgent(v string) *InterceptorContextRe
   return s
 }
 
+func (s *InterceptorContextRequest) Validate() error {
+  return dara.Validate(s)
+}
+
 type InterceptorContextConfiguration struct {
   RegionId *string `json:"regionId,omitempty" xml:"regionId,omitempty" require:"true"`
   Endpoint *string `json:"endpoint,omitempty" xml:"endpoint,omitempty"`
@@ -344,6 +351,10 @@ func (s *InterceptorContextConfiguration) SetSuffix(v string) *InterceptorContex
   return s
 }
 
+func (s *InterceptorContextConfiguration) Validate() error {
+  return dara.Validate(s)
+}
+
 type InterceptorContextResponse struct {
   StatusCode *int `json:"statusCode,omitempty" xml:"statusCode,omitempty"`
   Headers map[string]*string `json:"headers,omitempty" xml:"headers,omitempty"`
@@ -395,6 +406,10 @@ func (s *InterceptorContextResponse) SetDeserializedBody(v interface{}) *Interce
   return s
 }
 
+func (s *InterceptorContextResponse) Validate() error {
+  return dara.Validate(s)
+}
+
 type iAttributeMap interface {
   dara.Model
   String() string
@@ -406,7 +421,6 @@ type iAttributeMap interface {
 }
 
 type AttributeMap struct {
-  dara.Model
   Attributes map[string]interface{} `json:"attributes,omitempty" xml:"attributes,omitempty" require:"true"`
   Key map[string]*string `json:"key,omitempty" xml:"key,omitempty" require:"true"`
 }
@@ -435,6 +449,10 @@ func (s *AttributeMap) SetAttributes(v map[string]interface{}) *AttributeMap {
 func (s *AttributeMap) SetKey(v map[string]*string) *AttributeMap {
   s.Key = v
   return s
+}
+
+func (s *AttributeMap) Validate() error {
+  return dara.Validate(s)
 }
 
 type ClientInterface interface {

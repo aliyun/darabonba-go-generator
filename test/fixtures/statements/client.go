@@ -13,7 +13,6 @@ type iConfig interface {
 }
 
 type Config struct {
-  dara.Model
 }
 
 func (s Config) String() string {
@@ -22,6 +21,10 @@ func (s Config) String() string {
 
 func (s Config) GoString() string {
   return s.String()
+}
+
+func (s *Config) Validate() error {
+  return dara.Validate(s)
 }
 
 type Client struct {

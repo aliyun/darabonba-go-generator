@@ -20,7 +20,6 @@ type iM interface {
 }
 
 type M struct {
-  dara.Model
   A *http.Request `json:"a,omitempty" xml:"a,omitempty"`
   B *url.URL `json:"b,omitempty" xml:"b,omitempty"`
 }
@@ -49,6 +48,10 @@ func (s *M) SetA(v *http.Request) *M {
 func (s *M) SetB(v *url.URL) *M {
   s.B = v
   return s
+}
+
+func (s *M) Validate() error {
+  return dara.Validate(s)
 }
 
 type Client struct {

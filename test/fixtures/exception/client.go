@@ -17,7 +17,6 @@ type iM interface {
 }
 
 type M struct {
-  dara.Model
   SubM *MSubM `json:"subM,omitempty" xml:"subM,omitempty" require:"true" type:"Struct"`
 }
 
@@ -38,6 +37,10 @@ func (s *M) SetSubM(v *MSubM) *M {
   return s
 }
 
+func (s *M) Validate() error {
+  return dara.Validate(s)
+}
+
 type MSubM struct {
 }
 
@@ -47,6 +50,10 @@ func (s MSubM) String() string {
 
 func (s MSubM) GoString() string {
   return s.String()
+}
+
+func (s *MSubM) Validate() error {
+  return dara.Validate(s)
 }
 
 type iMyErrError interface {
@@ -246,6 +253,10 @@ func (s *MyErrSubmodel) SetStringfield(v string) *MyErrSubmodel {
   return s
 }
 
+func (s *MyErrSubmodel) Validate() error {
+  return dara.Validate(s)
+}
+
 type MyErrArrays struct {
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
@@ -265,6 +276,10 @@ func (s *MyErrArrays) GetName() *string  {
 func (s *MyErrArrays) SetName(v string) *MyErrArrays {
   s.Name = &v
   return s
+}
+
+func (s *MyErrArrays) Validate() error {
+  return dara.Validate(s)
 }
 
 type iSubRespErrError interface {
@@ -496,6 +511,10 @@ func (s *SubMyErrSubmodel) SetStringfield(v string) *SubMyErrSubmodel {
   return s
 }
 
+func (s *SubMyErrSubmodel) Validate() error {
+  return dara.Validate(s)
+}
+
 type SubMyErrArrays struct {
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
@@ -515,6 +534,10 @@ func (s *SubMyErrArrays) GetName() *string  {
 func (s *SubMyErrArrays) SetName(v string) *SubMyErrArrays {
   s.Name = &v
   return s
+}
+
+func (s *SubMyErrArrays) Validate() error {
+  return dara.Validate(s)
 }
 
 
