@@ -14,15 +14,19 @@ exception Err2 = {
   accessErrMessage: string
 }
 
-
+static function test(str: string): void;
 
 async function tryMultiCatch(a: number, client: Source, b: string, c: number, m: Source.Config): number {
+  var inc = 0;
   try {
     var obj = {};
     client.print(obj, 'test');
     b.split(',');
     m.validate();
     c.parseInt();
+    var req = new Source.Request {
+      accesskey = $JSON.stringify([b])
+    };
     if(a > 0) {
       a = 20;
       throw new Err1 {
@@ -49,6 +53,7 @@ async function tryMultiCatch(a: number, client: Source, b: string, c: number, m:
         code = "str",
       }
     }
+    inc++;
     return a + 100;
   } catch(err: Err1) {
     $Logger.log(err.name);
@@ -60,6 +65,7 @@ async function tryMultiCatch(a: number, client: Source, b: string, c: number, m:
     $Logger.log(err.name);
     return null;
   } catch(err) {
+    test(err.message);
     $Logger.log(err.name);
     return null;
   } finally {
@@ -130,6 +136,7 @@ async function multiTryCatch(a: number): map[string] string {
     $Logger.log(err.name);
   } catch(err) {
     $Logger.log(err.name);
+    $Logger.log(err.message);
   } finally {
     var final = 'ok';
     return data;

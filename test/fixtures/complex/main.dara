@@ -395,7 +395,13 @@ function throwsFunc3() throws: string {
   };
 }
 
+function getInt(num: int32): int32 {
+  return num;
+}
+
 function returnFunc(): string {
+  var index: int32 = 0;
+  var i = getInt(index);
   return null;
 }
 

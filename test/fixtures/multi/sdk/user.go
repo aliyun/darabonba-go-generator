@@ -17,7 +17,6 @@ type iBaseInfo interface {
 }
 
 type BaseInfo struct {
-  darautil.iRuntimeOptions
   // whether to try again
   Autoretry *bool `json:"autoretry,omitempty" xml:"autoretry,omitempty"`
   // ignore SSL validation
@@ -236,6 +235,10 @@ func (s *BaseInfo) SetMaxAttemp(v int) *BaseInfo {
   return s
 }
 
+func (s *BaseInfo) Validate() error {
+  return dara.Validate(s)
+}
+
 type iInfo interface {
   iBaseInfo
   String() string
@@ -247,7 +250,6 @@ type iInfo interface {
 }
 
 type Info struct {
-  iBaseInfo
   MaxAttemp *int `json:"maxAttemp,omitempty" xml:"maxAttemp,omitempty" require:"true"`
   // whether to try again
   Autoretry *bool `json:"autoretry,omitempty" xml:"autoretry,omitempty"`
@@ -484,6 +486,10 @@ func (s *Info) SetName(v string) *Info {
 func (s *Info) SetAge(v int) *Info {
   s.Age = &v
   return s
+}
+
+func (s *Info) Validate() error {
+  return dara.Validate(s)
 }
 
 

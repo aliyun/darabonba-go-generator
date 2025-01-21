@@ -115,8 +115,13 @@ func (client *Client)Init(config *source.Config)(_err error) {
 
 
 
+func Test (str *string) {
+  panic("No Support!")
+}
+
 func (client *Client) TryMultiCatch (a *int, client *source.Client, b *string, c *int, m *source.Config) (_result *int, _err error) {
-  _result, _err  = tryMultiCatch_opTryFunc(client, b, m, c, a)
+  inc := 0
+  _result, _err  = tryMultiCatch_opTryFunc(client, b, m, c, a, inc)
   final := "ok"
   if _err != nil {
     if _t, ok := _err.(*Err1Error); ok {
@@ -137,8 +142,9 @@ func (client *Client) TryMultiCatch (a *int, client *source.Client, b *string, c
       _result = nil
       return _result , _err
     }
-    if _t, ok := _err.(dara.BaseError); ok {
+    if _t, ok := _err.(*dara.SDKError); ok {
       err := _t;
+      Test(err.Message)
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
       _result = nil
       return _result , _err
@@ -202,15 +208,16 @@ func (client *Client) MultiTryCatch (a *int) (_result map[string]*string, _err e
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
     }
-    if _t, ok := _err.(dara.BaseError); ok {
+    if _t, ok := _err.(*dara.SDKError); ok {
       err := _t;
       fmt.Printf("[LOG] %s\n", dara.StringValue(err.Name))
+      fmt.Printf("[LOG] %s\n", dara.StringValue(err.Message))
     }
   }
   return _result, _err
 }
 
-func tryMultiCatch_opTryFunc (client *source.Client, b *string, m *Config, c *int, a *int)( _result *int, _err error) {
+func tryMultiCatch_opTryFunc (client *source.Client, b *string, m *Config, c *int, a *int, inc int)( _result *int, _err error) {
   obj := map[string]interface{}{}
   client.Print(obj, dara.String("test"))
   b.Split(",")
@@ -219,6 +226,9 @@ func tryMultiCatch_opTryFunc (client *source.Client, b *string, m *Config, c *in
     return _result, _err
   }
   int(c)
+  req := &source.Request{
+    Accesskey: dara.String(dara.Stringify([]*string{b})),
+  }
   if dara.IntValue(a) > 0 {
     a = dara.Int(20)
     _err = &Err1Error{
@@ -250,6 +260,7 @@ func tryMultiCatch_opTryFunc (client *source.Client, b *string, m *Config, c *in
     return _result, _err
   }
 
+  inc++
   _result = dara.Int(dara.IntValue(a) + 100)
   return _result , _err
 }

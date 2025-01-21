@@ -17,7 +17,6 @@ type iM interface {
 }
 
 type M struct {
-  dara.Model
   SubM *MSubM `json:"subM,omitempty" xml:"subM,omitempty" require:"true" type:"Struct"`
 }
 
@@ -38,6 +37,10 @@ func (s *M) SetSubM(v *MSubM) *M {
   return s
 }
 
+func (s *M) Validate() error {
+  return dara.Validate(s)
+}
+
 type MSubM struct {
 }
 
@@ -47,6 +50,10 @@ func (s MSubM) String() string {
 
 func (s MSubM) GoString() string {
   return s.String()
+}
+
+func (s *MSubM) Validate() error {
+  return dara.Validate(s)
 }
 
 type iMyModel interface {
@@ -104,7 +111,6 @@ type iMyModel interface {
 }
 
 type MyModel struct {
-  dara.Model
   Stringfield *string `json:"stringfield,omitempty" xml:"stringfield,omitempty" require:"true"`
   Stringarrayfield []*string `json:"stringarrayfield,omitempty" xml:"stringarrayfield,omitempty" require:"true" type:"Repeated"`
   Mapfield map[string]*string `json:"mapfield,omitempty" xml:"mapfield,omitempty" require:"true"`
@@ -355,6 +361,10 @@ func (s *MyModel) SetComplexList(v [][]*string) *MyModel {
   return s
 }
 
+func (s *MyModel) Validate() error {
+  return dara.Validate(s)
+}
+
 type MyModelSubmodel struct {
   Stringfield *string `json:"stringfield,omitempty" xml:"stringfield,omitempty" require:"true"`
 }
@@ -376,6 +386,10 @@ func (s *MyModelSubmodel) SetStringfield(v string) *MyModelSubmodel {
   return s
 }
 
+func (s *MyModelSubmodel) Validate() error {
+  return dara.Validate(s)
+}
+
 type MyModelArrays struct {
   Name *string `json:"name,omitempty" xml:"name,omitempty" require:"true"`
 }
@@ -395,6 +409,10 @@ func (s *MyModelArrays) GetName() *string  {
 func (s *MyModelArrays) SetName(v string) *MyModelArrays {
   s.Name = &v
   return s
+}
+
+func (s *MyModelArrays) Validate() error {
+  return dara.Validate(s)
 }
 
 
