@@ -7,7 +7,7 @@ import (
 )
 
 
-func Test1 () (_result <-chan *string) {
+func Test1 (_yield chan *string) {
   panic("No Support!")
 }
 

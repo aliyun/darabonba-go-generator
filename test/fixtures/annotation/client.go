@@ -46,6 +46,7 @@ func (s *Test) Validate() error {
 }
 
 type Client struct {
+  DisableSDKError *bool
   A  *string
 }
 
@@ -98,6 +99,9 @@ func (client *Client) TestAPI() (_err error) {
     }
 
     return _err
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }

@@ -55,6 +55,7 @@ func (s *M) Validate() error {
 }
 
 type Client struct {
+  DisableSDKError *bool
   Vid  *http.Request
   Url  *url.URL
 }

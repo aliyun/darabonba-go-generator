@@ -681,12 +681,15 @@ func (s *Response) Validate() error {
 }
 
 type iErr1Error interface {
-  dara.BaseError
+  Error() string
+  GetName() *string 
+  GetMessage() *string 
+  GetCode() *string 
+  GetStack() *string 
   GetData() map[string]*string 
 }
 
 type Err1Error struct {
-  dara.BaseError
   Name *string ``
   Message *string ``
   Code *string ``
@@ -724,12 +727,15 @@ func (s *Err1Error) GetData() map[string]*string  {
 }
 
 type iErr2Error interface {
-  dara.BaseError
+  Error() string
+  GetName() *string 
+  GetMessage() *string 
+  GetCode() *string 
+  GetStack() *string 
   GetAccessErrMessage() *string 
 }
 
 type Err2Error struct {
-  dara.BaseError
   Name *string ``
   Message *string ``
   Code *string ``
@@ -767,6 +773,7 @@ func (s *Err2Error) GetAccessErrMessage() *string  {
 }
 
 type Client struct {
+  DisableSDKError *bool
   Protocol  *string
   Pathname  *string
   Strs  []*string
@@ -959,6 +966,9 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
 
     return _result, _err
   }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
+  }
   return _result, _resultErr
 }
 
@@ -1023,6 +1033,9 @@ func (client *Client) ComplexMap() (_result map[string]interface{}, _err error) 
 
 
     return nil, nil
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }
@@ -1230,7 +1243,7 @@ func (client *Client) ReturnFunc2 () (_result map[string]interface{}) {
   mapVal := map[string]map[string]*string{
     "test": tmp,
   }
-  if true {
+  if dara.BoolValue(source.JudgeStr(dara.String("test"))) {
     _result = mapVal["test"]
     return _result
   } else {
@@ -1392,7 +1405,7 @@ func complex1_opResponse (request *ComplexRequest, client *Client)( _result *sou
   if true && true {
     _result = nil
     return _result , _err
-  } else if true || false {
+  } else if source.JudgeStr(dara.String("test")) || false {
     return _result, _err
   }
 

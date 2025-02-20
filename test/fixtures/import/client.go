@@ -55,6 +55,7 @@ func (s *M) Validate() error {
 }
 
 type Client struct {
+  DisableSDKError *bool
   SourceClient  *string_.Client
   SourceMap  *map_.Client
 }

@@ -229,7 +229,7 @@ api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
 } returns {
   if (true && true){
     return null;
-  } else if(true || false){
+  } else if(Source.judgeStr("test") || false){
     return new Source.RuntimeObject{};
   }
   client.print(request, '1');
@@ -417,7 +417,7 @@ function returnFunc2(): map[string]any {
   var mapVal = {
     test = tmp,
   };
-  if (true) {
+  if (Source.judgeStr("test")) {
     return mapVal['test'];
   } else {
     var body : readable = null;

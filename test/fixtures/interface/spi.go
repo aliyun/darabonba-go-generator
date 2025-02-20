@@ -465,6 +465,7 @@ type ClientInterface interface {
 }
 
 type Client struct {
+  DisableSDKError *bool
 }
 
 func NewClient()(*Client, error) {

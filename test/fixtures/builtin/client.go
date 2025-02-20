@@ -92,9 +92,9 @@ func ArrayTest (args []*string) (_err error) {
     llArr := dara.ConcatArr(acsArr, descArr).([]*string)
     dara.ArrAppend(&llArr, "test")
     dara.ArrRemove(&llArr, "test")
-    if CheckStr(newArr[3]) {
+    if dara.BoolValue(CheckStr(newArr[3])) {
       // TODO
-    } else if CheckStr(dara.String(all)) {
+    } else if dara.BoolValue(CheckStr(dara.String(all))) {
       // TODO
     }
 
@@ -131,7 +131,7 @@ func DateTest (args []*string) (_err error) {
   }
 
   dateStr := date.Format("YYYY-MM-DD HH:mm:ss")
-  if CheckStr(dara.String(dateStr)) {
+  if dara.BoolValue(CheckStr(dara.String(dateStr))) {
     m1 := &M{
       A: dara.String(date.Format("YYYY-MM-DD HH:mm:ss")),
     }

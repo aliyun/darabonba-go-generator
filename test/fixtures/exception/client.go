@@ -57,7 +57,10 @@ func (s *MSubM) Validate() error {
 }
 
 type iMyErrError interface {
-  dara.BaseError
+  Error() string
+  GetMessage() *string 
+  GetCode() *string 
+  GetStack() *string 
   GetStringfield() *string 
   GetStringarrayfield() []*string 
   GetMapfield() map[string]*string 
@@ -85,7 +88,6 @@ type iMyErrError interface {
 }
 
 type MyErrError struct {
-  dara.BaseError
   Message *string ``
   Code *string ``
   Stack *string ``
@@ -283,15 +285,20 @@ func (s *MyErrArrays) Validate() error {
 }
 
 type iSubRespErrError interface {
-  dara.IResponseError
+  Error() string
+  GetStatusCode() *int 
+  GetRetryAfter() *int64 
+  GetName() *string 
+  GetMessage() *string 
+  GetCode() *string 
+  GetStack() *string 
   GetTestField() *string 
   GetRetryAtfter() *string 
 }
 
 type SubRespErrError struct {
-  dara.IResponseError
   StatusCode *int ``
-  RetryAfter *int ``
+  RetryAfter *int64 ``
   Name *string ``
   Message *string ``
   Code *string ``
@@ -313,7 +320,7 @@ func (s *SubRespErrError) GetStatusCode() *int  {
   return s.StatusCode
 }
 
-func (s *SubRespErrError) GetRetryAfter() *int  {
+func (s *SubRespErrError) GetRetryAfter() *int64  {
   return s.RetryAfter
 }
 
@@ -342,13 +349,36 @@ func (s *SubRespErrError) GetRetryAtfter() *string  {
 }
 
 type iSubMyErrError interface {
-  iMyErrError
+  Error() string
+  GetStringfield() *string 
+  GetStringarrayfield() []*string 
+  GetMapfield() map[string]*string 
+  GetName() *int 
+  GetSubmodel() *SubMyErrSubmodel 
+  GetModuleModelMap() map[string]*source.Request 
+  GetSubModelMap() map[string]*MSubM 
+  GetModelMap() map[string]*M 
+  GetModuleMap() map[string]*source.Client 
+  GetObject() map[string]interface{} 
+  GetNumberfield() *int 
+  GetInt64field() *int64 
+  GetUint64field() *uint64 
+  GetInt32field() *int32 
+  GetUint32field() *uint32 
+  GetInt16field() *int16 
+  GetUint16field() *uint16 
+  GetInt8field() *int8 
+  GetUint8field() *uint8 
+  GetReadable() io.Reader 
+  GetRequest() *dara.Request 
+  GetLists() [][]*string 
+  GetArrays() [][]*SubMyErrArrays 
+  GetComplexList() [][]*string 
   GetTestField() *string 
   GetRetryAtfter() *string 
 }
 
 type SubMyErrError struct {
-  iMyErrError
   Stringfield *string ` require:"true"`
   Stringarrayfield []*string ` require:"true" type:"Repeated"`
   Mapfield map[string]*string ` require:"true"`

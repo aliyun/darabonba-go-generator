@@ -93,7 +93,7 @@ func HelloTestNestIf (a *string, b *string) (_result *bool, _err error) {
     _err = err
     return _result, _err
   }
-  if EqualString(helloTestTmp, helloTestTmp1) {
+  if dara.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
     _result = dara.Bool(true)
     return _result, _err
   }
@@ -113,7 +113,7 @@ func HelloTestNestFor (a *string, b *string) (_result *bool, _err error) {
     _err = err
     return _result, _err
   }
-  for EqualString(helloTestTmp, helloTestTmp1) {
+  for dara.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
     _result = dara.Bool(true)
     return _result, _err
   }
@@ -132,7 +132,7 @@ func HelloTestNestFor1 (a *string, b *string) (_result *bool, _err error) {
     _err = err
     return _result, _err
   }
-  for EqualString(helloTestTmp, helloTestTmp1) {
+  for dara.BoolValue(EqualString(helloTestTmp, helloTestTmp1)) {
     _result = dara.Bool(true)
     return _result, _err
   }
