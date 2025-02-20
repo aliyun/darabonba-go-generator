@@ -11,6 +11,7 @@ import (
 
 type Client struct {
   openapi.Client
+  DisableSDKError *bool
   Client_  spi.Client
   A  *string
   B  *int

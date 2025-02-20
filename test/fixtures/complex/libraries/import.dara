@@ -5,6 +5,10 @@ function print(runtime: object, str: string): void {
   return;
 }
 
+static function judgeStr(a: string): boolean {
+  return true;
+}
+
 model Request = {
   accesskey?: string(name='accesskey', description='accesskey'),
   region?: string(name='region', description='region'),

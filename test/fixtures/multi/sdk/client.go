@@ -10,6 +10,7 @@ import (
 )
 
 type Client struct {
+  DisableSDKError *bool
   User  *user.Info
 }
 
@@ -31,13 +32,11 @@ func (client *Client)Init()(_err error) {
 
 
 
-func (client *Client) Test3 () (_result <-chan *string, _err error) {
-  _yield := make(chan *string)
-  _yieldErr := make(chan error, 1)
+func (client *Client) Test3 (_yield chan *string, _yieldErr chan error) {
+  defer close(_yield)
+  defer close(_yieldErr)
   go test3_opYieldFunc(_yield, _yieldErr)
-  _result = _yield
-  _err = <-_yieldErr
-  return _result, _err
+  return
 }
 
 func (client *Client) Test4 () (_result *int, _err error) {
@@ -56,10 +55,9 @@ func (client *Client) Test4 () (_result *int, _err error) {
   return _result , _err
 }
 
-func test3_opYieldFunc(_yield chan<- *string, _yieldErr chan<- error) {
-  defer close(_yield)
-  defer close(_yieldErr)
-  it := util.Test1()
+func test3_opYieldFunc(_yield chan *string, _yieldErr chan error) {
+  it := make(chan string)
+  go util.Test1(it)
   for test := range it {
     _yield <- dara.String(test)
   }

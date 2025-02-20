@@ -9,6 +9,7 @@ import (
 )
 
 type Client struct {
+  DisableSDKError *bool
 }
 
 func NewClient()(*Client, error) {
@@ -66,6 +67,9 @@ func (client *Client) Test3() (_result *int, _err error) {
 
     _result = response_.StatusCode
     return _result , _err
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }

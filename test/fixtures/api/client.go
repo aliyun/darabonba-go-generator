@@ -49,6 +49,7 @@ func (s *M) Validate() error {
 }
 
 type Client struct {
+  DisableSDKError *bool
 }
 
 func NewClient(config *Config)(*Client, error) {
@@ -132,6 +133,9 @@ func (client *Client) HelloRuntime() (_err error) {
     }
 
     return _err
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }
@@ -220,6 +224,9 @@ func (client *Client) HelloComplex() (_result interface{}, _err error) {
     }
 
     return _result, _err
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }

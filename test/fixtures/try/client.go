@@ -8,12 +8,15 @@ import (
 )
 
 type iErr1Error interface {
-  dara.BaseError
+  Error() string
+  GetName() *string 
+  GetMessage() *string 
+  GetCode() *string 
+  GetStack() *string 
   GetData() map[string]*string 
 }
 
 type Err1Error struct {
-  dara.BaseError
   Name *string ``
   Message *string ``
   Code *string ``
@@ -51,12 +54,15 @@ func (s *Err1Error) GetData() map[string]*string  {
 }
 
 type iErr2Error interface {
-  dara.BaseError
+  Error() string
+  GetName() *string 
+  GetMessage() *string 
+  GetCode() *string 
+  GetStack() *string 
   GetAccessErrMessage() *string 
 }
 
 type Err2Error struct {
-  dara.BaseError
   Name *string ``
   Message *string ``
   Code *string ``
@@ -94,6 +100,7 @@ func (s *Err2Error) GetAccessErrMessage() *string  {
 }
 
 type Client struct {
+  DisableSDKError *bool
   Configs  []*source.Config
 }
 

@@ -152,6 +152,7 @@ func (s *SubModel) Validate() error {
 
 type Client struct {
   source.Client
+  DisableSDKError *bool
 }
 
 func NewClient(config *source.Config)(*Client, error) {
@@ -205,6 +206,9 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
 
     _result = nil
     return _result , _err
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }

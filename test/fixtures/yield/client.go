@@ -3,10 +3,11 @@ package client
 
 import (
   "github.com/alibabacloud-go/tea/dara"
-  
+  "fmt"
 )
 
 type Client struct {
+  DisableSDKError *bool
 }
 
 func NewClient()(*Client, error) {
@@ -20,7 +21,9 @@ func (client *Client)Init()(_err error) {
 }
 
 
-func (client *Client) Test3(name *string) (_result <-chan interface{}, _err error) {
+func (client *Client) Test3(name *string, _yield chan interface{}, _yieldErr chan error) {
+  defer close(_yield)
+  defer close(_yieldErr)
   _runtime := dara.NewRuntimeObject(map[string]interface{}{
     "timeouted": "retry",
   })
@@ -64,8 +67,6 @@ func (client *Client) Test3(name *string) (_result <-chan interface{}, _err erro
       continue
     }
 
-    _yield := make(chan interface{})
-    _yieldErr := make(chan error, 1)
     go test3_opResponse(_yield, _yieldErr, response_, name)
     _err = <-_yieldErr
     if _err != nil {
@@ -80,10 +81,10 @@ func (client *Client) Test3(name *string) (_result <-chan interface{}, _err erro
       continue
     }
 
-    _result = _yield
-    return _result, _err
+    return
   }
-  return _result, _resultErr
+  _yieldErr <- _resultErr
+  return
 }
 
 
@@ -92,16 +93,37 @@ func (client *Client) Test1 () (_result []*string) {
   return _result
 }
 
-func (client *Client) Test2 (name *string) (_result <-chan *string) {
-  _yield := make(chan *string)
+func (client *Client) Test2 (name *string, _yield chan *string) {
+  defer close(_yield)
   go test2_opYieldFunc(_yield, name)
-  _result = _yield
-  return _result
+  return
 }
 
-func test3_opResponse(_yield chan<- interface{}, _yieldErr chan<- error, response_ *dara.Response, name *string) {
+func (client *Client) Test4 (name *string, _yield chan interface{}, _yieldErr chan error) {
   defer close(_yield)
   defer close(_yieldErr)
+  go test4_opYieldFunc(_yield, _yieldErr, name)
+  return
+}
+
+func (client *Client) Test5 (name *string, _yield chan *string) {
+  defer close(_yield)
+  go test5_opYieldFunc(_yield, name)
+  return
+}
+
+func (client *Client) Test6 (name *string) (_err error) {
+  arr := make(chan interface{})
+  _yieldErr := make(chan error)
+  go client.Test3(name, arr, _yieldErr)
+  for data := range arr {
+    fmt.Printf("[INFO] %s\n", dara.Stringify(data))
+  }
+  _err = <- _yieldErr
+  return _err
+}
+
+func test3_opResponse(_yield chan interface{}, _yieldErr chan error, response_ *dara.Response, name *string) {
   resp := map[string]interface{}{
     "nextToken": "100",
     "truncated": false,
@@ -117,24 +139,35 @@ func test3_opResponse(_yield chan<- interface{}, _yieldErr chan<- error, respons
   }
 
   name = dara.String("test")
-  it, _err := dara.ReadAsSSE(response_.Body)
-  if _err != nil {
-    _yieldErr <- _err
-    return
-  }
-
+  it := make(chan *dara.SSEEvent)
+  go dara.ReadAsSSE(response_.Body, it, _yieldErr)
   for i := range it {
     _body := dara.ParseJSON(dara.StringValue(i.Data))
     yield <- _body
   }
 }
 
-func test2_opYieldFunc(_yield chan<- *string, name *string) {
-  defer close(_yield)
+func test2_opYieldFunc(_yield chan *string, name *string) {
   arr := client.Test1()
   name = dara.String("test")
   for _, str := range arr {
     _yield <- dara.String(str)
+  }
+}
+
+func test4_opYieldFunc(_yield chan interface{}, _yieldErr chan error, name *string) {
+  arr := make(chan interface{})
+  go client.Test3(name, arr, _yieldErr)
+  for data := range arr {
+    _yield <- data
+  }
+}
+
+func test5_opYieldFunc(_yield chan *string, name *string) {
+  arr := make(chan string)
+  go client.Test2(name, arr)
+  for data := range arr {
+    _yield <- dara.String(data)
   }
 }
 

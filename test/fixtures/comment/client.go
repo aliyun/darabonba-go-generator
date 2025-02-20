@@ -272,6 +272,7 @@ func (s *TestErr3) Validate() error {
 }
 
 type Client struct {
+  DisableSDKError *bool
   // type's comment
   A  []*string
 }
@@ -373,6 +374,9 @@ func (client *Client) TestAPI() (_err error) {
     // return comment
     return _err
   }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
+  }
   return _result, _resultErr
 }
 
@@ -441,6 +445,9 @@ func (client *Client) TestAPI2() (_err error) {
     }
 
     // empty return comment
+  }
+  if dara.BoolValue(client.DisableSDKError) != true {
+    _resultErr = dara.TeaSDKError(_resultErr)
   }
   return _result, _resultErr
 }

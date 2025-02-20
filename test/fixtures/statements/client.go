@@ -28,6 +28,7 @@ func (s *Config) Validate() error {
 }
 
 type Client struct {
+  DisableSDKError *bool
 }
 
 func NewClient(config *Config)(*Client, error) {

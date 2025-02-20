@@ -13,6 +13,7 @@ function test2(name: string): iterator[string] {
   }
 }
 
+
 api test3(name: string): asyncIterator[any] {
   __request.protocol = "https";
   __request.method = 'DELETE';
@@ -44,4 +45,26 @@ api test3(name: string): asyncIterator[any] {
   }
 } runtime {
   timeouted = 'retry',
+}
+
+
+async function test4(name: string): asyncIterator[any] {
+  var arr = test3(name);
+  for(var data : arr) {
+    yield data;
+  }
+}
+
+function test5(name: string): iterator[string] {
+  var arr = test2(name);
+  for(var data : arr) {
+    yield data;
+  }
+}
+
+async function test6(name: string): void {
+  var arr = test3(name);
+  for(var data : arr) {
+    $Logger.info($JSON.stringify(data));
+  }
 }
