@@ -35,7 +35,7 @@ func (client *Client)Init()(_err error) {
 func (client *Client) Test3 (_yield chan *string, _yieldErr chan error) {
   defer close(_yield)
   defer close(_yieldErr)
-  go test3_opYieldFunc(_yield, _yieldErr)
+  test3_opYieldFunc(_yield, _yieldErr)
   return
 }
 
@@ -56,8 +56,8 @@ func (client *Client) Test4 () (_result *int, _err error) {
 }
 
 func test3_opYieldFunc(_yield chan *string, _yieldErr chan error) {
-  it := make(chan string)
-  go util.Test1(it)
+  it := make(chan string, 1)
+  util.Test1(it)
   for test := range it {
     _yield <- dara.String(test)
   }

@@ -496,13 +496,13 @@ func (s *Info) Validate() error {
 func Test (_yield chan *string, _yieldErr chan error) {
   defer close(_yield)
   defer close(_yieldErr)
-  go test_opYieldFunc(_yield, _yieldErr)
+  test_opYieldFunc(_yield, _yieldErr)
   return
 }
 
 func test_opYieldFunc(_yield chan *string, _yieldErr chan error) {
-  it := make(chan string)
-  go util.Test1(it, it)
+  it := make(chan string, 1)
+  util.Test1(it, it)
   for test := range it {
     _yield <- dara.String(test)
   }
