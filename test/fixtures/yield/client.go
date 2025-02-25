@@ -67,7 +67,7 @@ func (client *Client) Test3(name *string, _yield chan interface{}, _yieldErr cha
       continue
     }
 
-    go test3_opResponse(_yield, _yieldErr, response_, name)
+    test3_opResponse(_yield, _yieldErr, response_, name)
     _err = <-_yieldErr
     if _err != nil {
       retriesAttempted++
@@ -95,26 +95,26 @@ func (client *Client) Test1 () (_result []*string) {
 
 func (client *Client) Test2 (name *string, _yield chan *string) {
   defer close(_yield)
-  go test2_opYieldFunc(_yield, name)
+  test2_opYieldFunc(_yield, name)
   return
 }
 
 func (client *Client) Test4 (name *string, _yield chan interface{}, _yieldErr chan error) {
   defer close(_yield)
   defer close(_yieldErr)
-  go test4_opYieldFunc(_yield, _yieldErr, name)
+  test4_opYieldFunc(_yield, _yieldErr, name)
   return
 }
 
 func (client *Client) Test5 (name *string, _yield chan *string) {
   defer close(_yield)
-  go test5_opYieldFunc(_yield, name)
+  test5_opYieldFunc(_yield, name)
   return
 }
 
 func (client *Client) Test6 (name *string) (_err error) {
-  arr := make(chan interface{})
-  _yieldErr := make(chan error)
+  arr := make(chan interface{}, 1)
+  _yieldErr := make(chan error, 1)
   go client.Test3(name, arr, _yieldErr)
   for data := range arr {
     fmt.Printf("[INFO] %s\n", dara.Stringify(data))
@@ -139,8 +139,8 @@ func test3_opResponse(_yield chan interface{}, _yieldErr chan error, response_ *
   }
 
   name = dara.String("test")
-  it := make(chan *dara.SSEEvent)
-  go dara.ReadAsSSE(response_.Body, it, _yieldErr)
+  it := make(chan *dara.SSEEvent, 1)
+  dara.ReadAsSSE(response_.Body, it, _yieldErr)
   for i := range it {
     _body := dara.ParseJSON(dara.StringValue(i.Data))
     yield <- _body
@@ -156,16 +156,16 @@ func test2_opYieldFunc(_yield chan *string, name *string) {
 }
 
 func test4_opYieldFunc(_yield chan interface{}, _yieldErr chan error, name *string) {
-  arr := make(chan interface{})
-  go client.Test3(name, arr, _yieldErr)
+  arr := make(chan interface{}, 1)
+  client.Test3(name, arr, _yieldErr)
   for data := range arr {
     _yield <- data
   }
 }
 
 func test5_opYieldFunc(_yield chan *string, name *string) {
-  arr := make(chan string)
-  go client.Test2(name, arr)
+  arr := make(chan string, 1)
+  client.Test2(name, arr)
   for data := range arr {
     _yield <- dara.String(data)
   }
