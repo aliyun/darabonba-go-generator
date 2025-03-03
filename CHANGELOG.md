@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.1 - 2025-03-03
+
+> Fixed the problem of model toMap generation
+
 ## 2.0.0 - 2025-03-03
 
 > Upgrade By Darbaonba V2
