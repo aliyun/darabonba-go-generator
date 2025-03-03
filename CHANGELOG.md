@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.0 - 2025-03-03
+
+> Upgrade By Darbaonba V2
+
 ## 1.1.8 - 2024-07-15
 
 > Resolve description line
