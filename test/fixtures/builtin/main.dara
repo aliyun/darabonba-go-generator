@@ -329,6 +329,11 @@ static async function xmlTest(args: [string]): void {
     var respMap : map[string]any = $XML.parseXml(xml, null);
 }
 
+static function modelTest(md: M): void {
+    var m: map[string]any = md.toMap();
+    var md2 = md.copyWithouStream();
+}
+
 static function returnAny(): any;
 
 static async function main(args: [string]):void {

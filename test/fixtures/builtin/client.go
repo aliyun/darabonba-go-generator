@@ -477,6 +477,11 @@ func XmlTest (args []*string) (_err error) {
   return _err
 }
 
+func ModelTest (md *M) {
+  m := dara.ToMap(md)
+  md2 := md.CopyWithouStream()
+}
+
 func ReturnAny () (_result interface{}) {
   panic("No Support!")
 }
