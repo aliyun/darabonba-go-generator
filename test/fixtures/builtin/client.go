@@ -566,7 +566,7 @@ func Main (args []*string) (_err error) {
       "key": dara.String("value"),
     }
     obj := dara.ToMap(maps)
-    ws := dara.ToWritable(obj)
+    ws := dara.ToWriter(obj)
     rs := dara.ToReader(maps)
     data, _err = rs.Read(30)
     if _err != nil {
