@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.3 - 2025-03-13
+
+> Fixed the problem of args has error
+
 ## 2.0.1 - 2025-03-03
 
 > Fixed the problem of model toMap generation
