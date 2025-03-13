@@ -58,6 +58,18 @@ func (s *M) Validate() error {
 }
 
 
+func ErrStrFunc () (_result *string, _err error) {
+  panic("No Support!")
+}
+
+func ErrNumFunc () (_result *int, _err error) {
+  panic("No Support!")
+}
+
+func ErrArrFunc () (_result []*string, _err error) {
+  panic("No Support!")
+}
+
 func ArrayTest (args []*string) (_err error) {
   if (len(args) > 0) && dara.ArrContains(args, "cn-hanghzou") {
     index := dara.ArrIndex(args, "cn-hanghzou")
@@ -72,6 +84,12 @@ func ArrayTest (args []*string) (_err error) {
     fullStr := dara.ArrJoin(args, ",")
     newArr := []*string{dara.String("asc"), dara.String("test1"), dara.String("test2")}
     cArr := dara.ConcatArr(newArr, args).([]*string)
+    eArr, _err := ErrArrFunc()
+    if _err != nil {
+      return _err
+    }
+
+    cArr = dara.ConcatArr(newArr, eArr).([]*string)
     nArr := []*int{dara.Int(1), dara.Int(3), dara.Int(4)}
     nnArr := dara.ConcatArr(nArr, []*int{dara.Int(4), dara.Int(5), dara.Int(6)}).([]*int)
     m1 := &M{
@@ -90,7 +108,7 @@ func ArrayTest (args []*string) (_err error) {
     descArr := dara.SortArr(newArr, "desc").([]*string)
     tmpStr := dara.StringValue(newArr[1])
     llArr := dara.ConcatArr(acsArr, descArr).([]*string)
-    dara.ArrAppend(&llArr, "test")
+    dara.ArrAppend(&llArr, "test", 10)
     dara.ArrRemove(&llArr, "test")
     if dara.BoolValue(CheckStr(newArr[3])) {
       // TODO
@@ -109,7 +127,14 @@ func CheckStr (str *string) (_result *bool) {
 }
 
 func BytesTest (args []*string) (_err error) {
-  fullStr := dara.ArrJoin(args, ",")
+  errsTmp, _err := ErrStrFunc()
+  errs := dara.StringValue(errsTmp)
+  if _err != nil {
+    return _err
+  }
+
+  fullStr := dara.ArrJoin(args, errs)
+  errData := dara.ToBytes(fullStr, errs)
   data := dara.ToBytes(fullStr, "utf8")
   newFullStr := dara.ToString(data)
   if fullStr != newFullStr {
@@ -137,9 +162,16 @@ func DateTest (args []*string) (_err error) {
     }
   }
 
+  errsTmp, _err := ErrStrFunc()
+  errs := dara.StringValue(errsTmp)
+  if _err != nil {
+    return _err
+  }
+
   timestamp := date.Unix()
   yesterday := date.Sub("day", 1)
   oneDay := date.Diff("day", yesterday)
+  errDay := date.Diff(errs, yesterday)
   tomorrow := date.Add("day", 1)
   twoDay := tomorrow.Diff("day", date) + oneDay
   hour := date.Hour()
@@ -154,6 +186,13 @@ func DateTest (args []*string) (_err error) {
 }
 
 func EnvTest (args []*string) (_err error) {
+  errsTmp, _err := ErrStrFunc()
+  errs := dara.StringValue(errsTmp)
+  if _err != nil {
+    return _err
+  }
+
+  errEnv := os.Getenv(errs)
   es := os.Getenv("TEST")
   ma, _err := os.Setenv("TEST", es + "test")
   if _err != nil {
@@ -198,7 +237,24 @@ func FileTest (args []*string) (_err error) {
       return _err
     }
 
-    _err = file.Write(dara.BytesFromString("test", "utf8"))
+    sizeTmp, _err := ErrNumFunc()
+    size := dara.IntValue(sizeTmp)
+    if _err != nil {
+      return _err
+    }
+
+    data2, _err := file.Read(size)
+    if _err != nil {
+      return _err
+    }
+
+    errsTmp, _err := ErrStrFunc()
+    errs := dara.StringValue(errsTmp)
+    if _err != nil {
+      return _err
+    }
+
+    _err = file.Write(dara.BytesFromString(errs, "utf8"))
     if _err != nil {
       return _err
     }
@@ -486,6 +542,10 @@ func ReturnAny () (_result interface{}) {
   panic("No Support!")
 }
 
+func ErrFunc () (_result interface{}, _err error) {
+  panic("No Support!")
+}
+
 func Main (args []*string) (_err error) {
   _err = ArrayTest(args)
   if _err != nil {
@@ -584,6 +644,12 @@ func Main (args []*string) (_err error) {
 
   time.Sleep(time.Duration(a) * time.Millisecond)
   defaultVal := dara.ToString(dara.Default(dara.StringValue(args[0]), dara.StringValue(args[1])))
+  errFuncTmp, err := ErrFunc()
+  if err != nil {
+    _err = err
+    return _err
+  }
+  data2 := dara.ToMap(errFuncTmp)
   if defaultVal == b {
     return
   }

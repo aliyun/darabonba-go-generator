@@ -1,3 +1,9 @@
+static function errStrFunc() throws: string;
+
+static function errNumFunc() throws: integer;
+
+static function errArrFunc() throws: [string];
+
 static async function arrayTest(args: [string]): void { 
     if((args.length() > 0) && args.contains('cn-hanghzou')) {
         var index = args.index('cn-hanghzou');
@@ -12,6 +18,8 @@ static async function arrayTest(args: [string]): void {
         var fullStr = args.join(',');
         var newArr = ['asc', 'test1', 'test2'];
         var cArr: [ string ] = newArr.concat(args);
+        var eArr: [ string ] = errArrFunc();
+        cArr = newArr.concat(eArr);
         var nArr = [1,3,4];
         var nnArr: [ number ] = nArr.concat([4,5,6]);
         var m1 = new M{
@@ -46,7 +54,9 @@ static function checkStr(str: string): boolean {
 }
 
 static async function bytesTest(args: [string]): void { 
-    var fullStr = args.join(',');
+    var errs = errStrFunc();
+    var fullStr = args.join(errs);
+    var errData = fullStr.toBytes(errs);
     var data = fullStr.toBytes('utf8');
     var newFullStr = data.toString();
     if(fullStr != newFullStr) {
@@ -71,9 +81,11 @@ static async function dateTest(args: [string]): void {
             a = date.format('YYYY-MM-DD HH:mm:ss'),
         };
     }
+    var errs = errStrFunc();
     var timestamp = date.unix();
     var yesterday = date.sub('day', 1);
     var oneDay = date.diff('day', yesterday);
+    var errDay = date.diff(errs, yesterday);
     var tomorrow = date.add('day', 1);
     var twoDay = tomorrow.diff('day', date) + oneDay;
     var hour = date.hour();
@@ -87,6 +99,8 @@ static async function dateTest(args: [string]): void {
 }
 
 static async function envTest(args: [string]): void {
+    var errs = errStrFunc();
+    var errEnv = $Env.get(errs);
     var es = $Env.get('TEST');
     var ma = $Env.set('TEST', es + 'test');
     var ma1 = $Env.set('TEST1', 'test1');
@@ -102,7 +116,11 @@ static async function fileTest(args: [string]): void {
         var modifyTime = file.modifyTime();
         var timeLong = modifyTime.diff('minute', createTime);
         var data = file.read(300);
-        file.write($Bytes.from('test', 'utf8'));
+        var size = errNumFunc();
+        var data2 = file.read(size);
+        var errs = errStrFunc();
+        file.write($Bytes.from(errs, 'utf8'));
+        
         var rs:readable = $File.createReadStream('/tmp/test');
         var ws:writable = $File.createWriteStream('/tmp/test');
     }
@@ -336,6 +354,8 @@ static function modelTest(md: M): void {
 
 static function returnAny(): any;
 
+static function errFunc() throws: any;
+
 static async function main(args: [string]):void {
   arrayTest(args);
   bytesTest(args);
@@ -388,6 +408,7 @@ static async function main(args: [string]):void {
 
     $sleep(a);
     var defaultVal = $string($default(args[0], args[1]));
+    var data2 = $object(errFunc());
 
     if($equal(defaultVal, b)) {
         return;
