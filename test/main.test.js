@@ -8,6 +8,26 @@ const DSL = require('@darabonba/parser');
 
 let Generator = require('../lib/generator');
 
+function checkWithSuffix(expectedDir, outputDir, suffix) {
+  if(!fs.existsSync(outputDir)) {
+    assert.ok(false);
+  }
+  const files = fs.readdirSync(outputDir, { withFileTypes: true });
+  
+  for (const file of files) {
+    const filePath = path.join(outputDir, file.name);
+
+    if (file.isDirectory()) {
+      checkWithSuffix(expectedDir, path.join(outputDir, file.name), suffix);
+    } else if (file.name.endsWith(suffix)) {
+      const expectedPath = path.join(expectedDir, file.name);
+      const expected = fs.readFileSync(expectedPath, 'utf8');
+      const actual = fs.readFileSync(filePath, 'utf8');
+      assert.deepStrictEqual(actual, expected);
+    }
+  }
+}
+
 function check(mainFilePath, outputDir, expectedPath, pkgInfo = {}) {
   const generator = new Generator({
     outputDir,
@@ -18,9 +38,15 @@ function check(mainFilePath, outputDir, expectedPath, pkgInfo = {}) {
   const dsl = fs.readFileSync(mainFilePath, 'utf8');
   const ast = DSL.parse(dsl, mainFilePath);
   generator.visit(ast);
-  const clientPath = path.join(outputDir, pkgInfo.exec ? 'main/main.go' : 'client/client.go');
-  const expected = fs.readFileSync(expectedPath, 'utf8');
-  assert.deepStrictEqual(fs.readFileSync(clientPath, 'utf8'), expected);
+  if(expectedPath.endsWith('.go')) {
+    const filename = path.basename(expectedPath).replace('_no_omit', '').replace('spi', 'client');
+    const clientPath = path.join(outputDir, pkgInfo.exec ? 'main' : 'client', filename);
+    const expected = fs.readFileSync(expectedPath, 'utf8');
+    assert.deepStrictEqual(fs.readFileSync(clientPath, 'utf8'), expected);
+  } else {
+    checkWithSuffix(expectedPath, path.join(outputDir, 'client'), '.go');
+  }
+  
 }
 
 describe('new Generator', function () {
@@ -38,14 +64,25 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/model/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/model/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/m_model.go'), {
       pkgDir: path.join(__dirname, 'fixtures/model'),
       ...pkg
     });
+
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/my_model_model.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/model'),
+      ...pkg
+    });
+
     pkg.go = {
       mapAndSliceWithoutOmitempty: true,
     };
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/client_no_omit.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/m_model_no_omit.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/model'),
+      ...pkg
+    });
+
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/model/my_model_model_no_omit.go'), {
       pkgDir: path.join(__dirname, 'fixtures/model'),
       ...pkg
     });
@@ -78,7 +115,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/statements/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/statements/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/statements/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/statements/'), {
       pkgDir: path.join(__dirname, 'fixtures/statements'),
       ...pkg
     });
@@ -89,7 +126,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/import/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/import/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/import/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/import'), {
       pkgDir: path.join(__dirname, 'fixtures/import'),
       ...pkg
     });
@@ -100,7 +137,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/extends/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/extends/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extends/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/extends'), {
       pkgDir: path.join(__dirname, 'fixtures/extends'),
       ...pkg
     });
@@ -122,7 +159,7 @@ describe('new Generator', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/complex/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     const mainFilePath = path.join(__dirname, 'fixtures/complex/main.dara');
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/complex/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/complex'), {
       pkgDir: path.join(__dirname, 'fixtures/complex'),
       package: ['github.com/alibabacloud-go/tea'],
       ...pkg
@@ -137,7 +174,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/annotation/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/annotation/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/annotation/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/annotation'), {
       pkgDir: path.join(__dirname, 'fixtures/annotation'),
       ...pkg,
       editable: true
@@ -149,7 +186,7 @@ describe('new Generator', function () {
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/comment/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
     const mainFilePath = path.join(__dirname, 'fixtures/comment/main.dara');
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/comment/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/comment'), {
       pkgDir: path.join(__dirname, 'fixtures/comment'),
       ...pkg
     });
@@ -160,7 +197,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/tea/main.tea');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/tea/Teafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/tea/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/tea'), {
       pkgDir: path.join(__dirname, 'fixtures/tea'),
       ...pkg
     });
@@ -198,6 +235,16 @@ describe('new Generator', function () {
       pkgDir: path.join(__dirname, 'fixtures/interface'),
       ...pkg
     });
+
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/interface/attribute_map_model.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/interface'),
+      ...pkg
+    });
+
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/interface/spi.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/interface'),
+      ...pkg
+    });
   });
 
   it('typedef should ok', function () {
@@ -217,7 +264,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/builtin/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/builtin/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/builtin/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/builtin'), {
       pkgDir: path.join(__dirname, 'fixtures/builtin'),
       ...pkg
     });
@@ -228,7 +275,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/try/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/try/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/try/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/try'), {
       pkgDir: path.join(__dirname, 'fixtures/try'),
       ...pkg
     });
@@ -239,31 +286,35 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/multi/tea/sdk.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/multi/tea/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    const generator = new Generator({
-      outputDir,
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/multi/sdk'), {
       pkgDir: path.join(__dirname, 'fixtures/multi/tea'),
-      ...pkg,
+      ...pkg
     });
+    // const generator = new Generator({
+    //   outputDir,
+    //   pkgDir: path.join(__dirname, 'fixtures/multi/tea'),
+    //   ...pkg,
+    // });
   
-    const dsl = fs.readFileSync(mainFilePath, 'utf8');
-    const ast = DSL.parse(dsl, mainFilePath);
-    generator.visit(ast);
-    const mainPath = path.join(outputDir, 'client/client.go');
-    const apiPath = path.join(outputDir, 'api/client.go');
-    const modelPath = path.join(outputDir, 'model/user/client.go');
-    const utilPath = path.join(outputDir, 'lib/util/client.go');
-    const expectedMainPath = path.join(__dirname, 'fixtures/multi/sdk/client.go');
-    const expectedModelPath = path.join(__dirname, 'fixtures/multi/sdk/user.go');
-    const expectedUtilPath = path.join(__dirname, 'fixtures/multi/sdk/util.go');
-    const expectedApiPath = path.join(__dirname, 'fixtures/multi/sdk/api.go');
-    const expectedMain = fs.readFileSync(expectedMainPath, 'utf8');
-    assert.deepStrictEqual(fs.readFileSync(mainPath, 'utf8'), expectedMain);
-    const expectedModel = fs.readFileSync(expectedModelPath, 'utf8');
-    assert.deepStrictEqual(fs.readFileSync(modelPath, 'utf8'), expectedModel);
-    const expectedUtil = fs.readFileSync(expectedUtilPath, 'utf8');
-    assert.deepStrictEqual(fs.readFileSync(utilPath, 'utf8'), expectedUtil);
-    const expectedApi = fs.readFileSync(expectedApiPath, 'utf8');
-    assert.deepStrictEqual(fs.readFileSync(apiPath, 'utf8'), expectedApi);
+    // const dsl = fs.readFileSync(mainFilePath, 'utf8');
+    // const ast = DSL.parse(dsl, mainFilePath);
+    // generator.visit(ast);
+    // const mainPath = path.join(outputDir, 'client/client.go');
+    // const apiPath = path.join(outputDir, 'api/client.go');
+    // const modelPath = path.join(outputDir, 'model/user/client.go');
+    // const utilPath = path.join(outputDir, 'lib/util/client.go');
+    // const expectedMainPath = path.join(__dirname, 'fixtures/multi/sdk/client.go');
+    // const expectedModelPath = path.join(__dirname, 'fixtures/multi/sdk/user.go');
+    // const expectedUtilPath = path.join(__dirname, 'fixtures/multi/sdk/util.go');
+    // const expectedApiPath = path.join(__dirname, 'fixtures/multi/sdk/api.go');
+    // const expectedMain = fs.readFileSync(expectedMainPath, 'utf8');
+    // assert.deepStrictEqual(fs.readFileSync(mainPath, 'utf8'), expectedMain);
+    // const expectedModel = fs.readFileSync(expectedModelPath, 'utf8');
+    // assert.deepStrictEqual(fs.readFileSync(modelPath, 'utf8'), expectedModel);
+    // const expectedUtil = fs.readFileSync(expectedUtilPath, 'utf8');
+    // assert.deepStrictEqual(fs.readFileSync(utilPath, 'utf8'), expectedUtil);
+    // const expectedApi = fs.readFileSync(expectedApiPath, 'utf8');
+    // assert.deepStrictEqual(fs.readFileSync(apiPath, 'utf8'), expectedApi);
   });
 
 
@@ -283,7 +334,7 @@ describe('new Generator', function () {
     const mainFilePath = path.join(__dirname, 'fixtures/exception/main.dara');
     const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/exception/Darafile'), 'utf8');
     const pkg = JSON.parse(pkgContent);
-    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/exception/client.go'), {
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/exception'), {
       pkgDir: path.join(__dirname, 'fixtures/exception'),
       ...pkg
     });

@@ -4,6 +4,24 @@ import "./api" API;
 
 type @user = User.Info
 
+model TestModelDir  {
+    test: number,
+    m: User.Info
+}
+
+model TestModelDIR  {
+    test: string,
+    a: any,
+}
+
+exception err {
+    test: string,
+}
+
+exception ERR {
+    test: number,
+}
+
 init(){
     @user = new User.Info{
         name = 'test',
