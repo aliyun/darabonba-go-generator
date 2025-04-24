@@ -4,6 +4,6 @@
   "version": "0.0.1",
   "main": "./import.dara",
   "releases": {
-    "go": "github.com/aliyun/darabonba-go-generator"
+    "go": "github.com/aliyun/darabonba-go-generator:v2.0.1"
   }
 }

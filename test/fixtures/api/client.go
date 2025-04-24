@@ -3,50 +3,7 @@ package client
 
 import (
   "github.com/alibabacloud-go/tea/dara"
-  
 )
-
-type iConfig interface {
-  dara.Model
-  String() string
-  GoString() string
-}
-
-type Config struct {
-}
-
-func (s Config) String() string {
-  return dara.Prettify(s)
-}
-
-func (s Config) GoString() string {
-  return s.String()
-}
-
-func (s *Config) Validate() error {
-  return dara.Validate(s)
-}
-
-type iM interface {
-  dara.Model
-  String() string
-  GoString() string
-}
-
-type M struct {
-}
-
-func (s M) String() string {
-  return dara.Prettify(s)
-}
-
-func (s M) GoString() string {
-  return s.String()
-}
-
-func (s *M) Validate() error {
-  return dara.Validate(s)
-}
 
 type Client struct {
   DisableSDKError *bool

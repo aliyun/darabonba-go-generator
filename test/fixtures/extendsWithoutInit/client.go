@@ -4,7 +4,6 @@ package client
 import (
   source "github.com/aliyun/darabonba-go-generator/test"
   "github.com/alibabacloud-go/tea/dara"
-  
 )
 
 type Client struct {
