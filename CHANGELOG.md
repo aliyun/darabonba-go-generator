@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.4 - 2025-05-08
+
+> Improve the dir structure of the generated code.
+
 ## 2.0.3 - 2025-03-13
 
 > Fixed the problem of args has error
