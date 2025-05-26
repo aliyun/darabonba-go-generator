@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 2.0.5 - 2025-05-26
+## 2.0.6 - 2025-05-26
 
 > Fixed the keywords type generation.
 
