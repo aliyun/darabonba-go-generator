@@ -606,8 +606,9 @@ func Arrayimport2 (request []*source.Request) (_result *string) {
   return _result
 }
 
-func DefaultReturn () (_err error) {
+func DefaultReturn (_type *string) (_err error) {
   if true {
+    _type = dara.String("ok")
   } else {
   }
 
