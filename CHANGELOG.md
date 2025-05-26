@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.5 - 2025-05-26
+
+> Fixed the keywords type generation.
+
 ## 2.0.4 - 2025-05-08
 
 > Improve the dir structure of the generated code.
