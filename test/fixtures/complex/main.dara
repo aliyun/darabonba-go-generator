@@ -533,6 +533,7 @@ static function arrayimport2(request: [ Source.Request ]): string {
 static async function defaultReturn(type: string): void {
   if (true) {
     type = 'ok';
+    var b = type + "abc";
   } else {
     
   }
