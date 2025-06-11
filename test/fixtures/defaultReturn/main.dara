@@ -1,0 +1,77 @@
+model Response {
+  instance: string,
+}
+
+static function hello(): void {
+  return;
+}
+
+static function helloMap(): map[string]string {
+  var m: map[string]string = {};
+  return {
+    key = 'value',
+    'key-1' = 'value-1',
+    ...m,
+  };
+}
+
+static function helloArrayMap(): [map[string]string] {
+  return [
+    {
+      key = 'value',
+    }
+  ];
+}
+
+static async function helloParams(a: string, b: string): void {
+  return;
+}
+
+static async function helloTest(a: string): string {
+  return a;
+}
+
+static async function equalString(a: string, b: string): boolean {
+  return true;
+}
+
+static async function helloTestNestReturn(a: string, b: string): boolean {
+  return equalString(helloTest(a), helloTest(b));
+}
+
+static async function helloTestNestDeclar(a: string, b: string): boolean {
+  var tmp = equalString(helloTest(a), helloTest(b));
+  return tmp;
+}
+
+static async function helloTestNestIf(a: string, b: string): boolean {
+  if (equalString(helloTest(a), helloTest(b))) {
+      return true;
+  }
+  return false;
+}
+
+static async function helloTestNestFor(a: string, b: string): boolean {
+  while (equalString(helloTest(a), helloTest(b))) {
+      return true;
+  }
+  return false;
+}
+
+static async function helloTestNestFor1(a: string, b: string): boolean {
+  while (equalString(helloTest(a), helloTest(b))) {
+      return true;
+  }
+  return false;
+}
+
+static async function helloModel(a: string) throws: Response {
+  return new Response{
+    instance = "string",
+  };
+}
+
+static async function useHelloModel(a: string) throws: Response {
+  var b = helloModel(a);
+  return null;
+}

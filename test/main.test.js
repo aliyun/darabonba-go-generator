@@ -110,6 +110,18 @@ describe('new Generator', function () {
     });
   });
 
+  it('default return function should ok', function () {
+    const outputDir = path.join(__dirname, 'output/defaultReturn');
+    const mainFilePath = path.join(__dirname, 'fixtures/defaultReturn/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/defaultReturn/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/defaultReturn/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/defaultReturn'),
+      defaultReturn: true,
+      ...pkg
+    });
+  });
+
   it('statements should ok', function () {
     const outputDir = path.join(__dirname, 'output/statements');
     const mainFilePath = path.join(__dirname, 'fixtures/statements/main.dara');
