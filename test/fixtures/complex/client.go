@@ -494,6 +494,7 @@ func (client *Client) ReturnFunc2 () (_result map[string]interface{}) {
 }
 
 func (client *Client) ReturnModel () (_result *ComplexRequest) {
+  _result = &ComplexRequest{}
   return _result
 }
 
@@ -645,6 +646,7 @@ func complex1_opResponse (request *ComplexRequest, client *Client)( _result *sou
     _result = nil
     return _result , _err
   } else if source.JudgeStr(dara.String("test")) || false {
+    _result = &source.RuntimeObject{}
     return _result, _err
   }
 
