@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.7 - 2025-06-11
+
+> Add default return in function.
+
 ## 2.0.6 - 2025-05-26
 
 > Fixed the keywords type generation.
