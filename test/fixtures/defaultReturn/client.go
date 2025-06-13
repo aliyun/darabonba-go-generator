@@ -11,8 +11,8 @@ func Hello () {
 }
 
 func HelloMap () (_result map[string]*string) {
-  _result = make(map[string]*string)
   m := make(map[string]*string)
+  _result = make(map[string]*string)
   dara.Convert(dara.Merge(map[string]*string{
     "key": dara.String("value"),
     "key-1": dara.String("value-1"),
@@ -150,7 +150,6 @@ func HelloModel (a *string) (_result *Response, _err error) {
 }
 
 func UseHelloModel (a *string) (_result *Response, _err error) {
-  _result = &Response{}
   b, _err := HelloModel(a)
   if _err != nil {
     return _result, _err
@@ -158,5 +157,15 @@ func UseHelloModel (a *string) (_result *Response, _err error) {
 
   _result = nil
   return _result , _err
+}
+
+func UseHelloModel2 (a *string) (_result *Response, _err error) {
+  _result = &Response{}
+  _body, _err := HelloModel(a)
+  if _err != nil {
+    return _result, _err
+  }
+  _result = _body
+  return _result, _err
 }
 

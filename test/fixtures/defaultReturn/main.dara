@@ -75,3 +75,7 @@ static async function useHelloModel(a: string) throws: Response {
   var b = helloModel(a);
   return null;
 }
+
+static async function useHelloModel2(a: string) throws: Response {
+  return helloModel(a);
+}
