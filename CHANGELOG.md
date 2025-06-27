@@ -1,6 +1,6 @@
 # ChangeLog
 
-## 2.0.7 - 2025-06-11
+## 2.0.8 - 2025-06-12
 
 > Add default return in function.
 
