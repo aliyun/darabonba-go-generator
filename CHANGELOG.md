@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.0.9 - 2025-06-27
+
+> Fixed the FileField model name.
+
 ## 2.0.8 - 2025-06-12
 
 > Add default return in function.
