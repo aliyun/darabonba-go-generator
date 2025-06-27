@@ -1,6 +1,6 @@
 {
   "name": "@darabonba/go-generator",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "The SDK generator for Golang",
   "main": "lib/generator",
   "directories": {
