@@ -57,6 +57,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
     dara.Sleep(_backoffDelayTime)
 
     request_ = dara.NewRequest()
+    client.Print(dara.ToMap(request), dara.String("1"))
     name := "complex"
     var read io.Reader
     var byt []byte
