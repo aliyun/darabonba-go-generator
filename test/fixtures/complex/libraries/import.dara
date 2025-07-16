@@ -1,6 +1,8 @@
 model RuntimeObject = {}
 init(config: Config);
 model Config = {}
+
+@context('printWithCtx')
 function print(runtime: object, str: string): void {
   return;
 }
