@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.1.0 - 2025-07-23
+
+> Add function with context generate.
+
 ## 2.0.9 - 2025-06-27
 
 > Fixed the FileField model name.
