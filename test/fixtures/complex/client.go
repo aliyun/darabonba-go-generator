@@ -608,6 +608,22 @@ func Arrayimport2 (request []*source.Request) (_result *string) {
   return _result
 }
 
+func (client *Client) GroupOp () (_result *bool) {
+  a := "1234"
+  if !(a == "1234") {
+    _result = dara.Bool(true)
+    return _result
+  }
+
+  if !(a == "1234") {
+    _result = dara.Bool(true)
+    return _result
+  }
+
+  _result = dara.Bool(false)
+  return _result
+}
+
 func DefaultReturn (_type *string) (_err error) {
   if true {
     _type = dara.String("ok")

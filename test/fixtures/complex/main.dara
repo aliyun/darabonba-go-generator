@@ -532,6 +532,19 @@ static function arrayimport2(request: [ Source.Request ]): string {
   return '';
 }
 
+function groupOp(): boolean {
+  var a = "1234";
+  if(!a.equals("1234")) {
+    return true;
+  }
+
+  if(!$equal(a, "1234")) {
+    return true;
+  }
+
+  return false;
+}
+
 static async function defaultReturn(type: string): void {
   if (true) {
     type = 'ok';
