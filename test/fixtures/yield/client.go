@@ -95,20 +95,20 @@ func (client *Client) Test1 () (_result []*string) {
 
 func (client *Client) Test2 (name *string, _yield chan *string) {
   defer close(_yield)
-  test2_opYieldFunc(_yield, name)
+  client.test2_opYieldFunc(_yield, name)
   return
 }
 
 func (client *Client) Test4 (name *string, _yield chan interface{}, _yieldErr chan error) {
   defer close(_yield)
   defer close(_yieldErr)
-  test4_opYieldFunc(_yield, _yieldErr, name)
+  client.test4_opYieldFunc(_yield, _yieldErr, name)
   return
 }
 
 func (client *Client) Test5 (name *string, _yield chan *string) {
   defer close(_yield)
-  test5_opYieldFunc(_yield, name)
+  client.test5_opYieldFunc(_yield, name)
   return
 }
 
@@ -147,7 +147,7 @@ func test3_opResponse(_yield chan interface{}, _yieldErr chan error, response_ *
   }
 }
 
-func test2_opYieldFunc(_yield chan *string, name *string) {
+func (client *Client) test2_opYieldFunc(_yield chan *string, name *string) {
   arr := client.Test1()
   name = dara.String("test")
   for _, str := range arr {
@@ -155,15 +155,15 @@ func test2_opYieldFunc(_yield chan *string, name *string) {
   }
 }
 
-func test4_opYieldFunc(_yield chan interface{}, _yieldErr chan error, name *string) {
+func (client *Client) test4_opYieldFunc(_yield chan interface{}, _yieldErr chan error, name *string) {
   arr := make(chan interface{}, 1)
-  client.Test3(name, arr, _yieldErr)
+  go client.Test3(name, arr, _yieldErr)
   for data := range arr {
     _yield <- data
   }
 }
 
-func test5_opYieldFunc(_yield chan *string, name *string) {
+func (client *Client) test5_opYieldFunc(_yield chan *string, name *string) {
   arr := make(chan string, 1)
   client.Test2(name, arr)
   for data := range arr {

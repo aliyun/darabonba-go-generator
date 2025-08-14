@@ -98,6 +98,7 @@ static function intToInt32(a: int32):void;
 @context('Complex1WithCtx')
 api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   client.print(request, '1');
+  client.printSSE(request, '1');
   var name = 'complex';
   var read : readable = null;
   var byt : bytes = null;

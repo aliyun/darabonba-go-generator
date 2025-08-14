@@ -13,7 +13,7 @@ function test2(name: string): iterator[string] {
   }
 }
 
-
+@sse(true)
 api test3(name: string): asyncIterator[any] {
   __request.protocol = "https";
   __request.method = 'DELETE';
