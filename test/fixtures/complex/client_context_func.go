@@ -30,6 +30,7 @@ func (client *Client) Complex1WithCtx(ctx context.Context, request *ComplexReque
 
     request_ = dara.NewRequest()
     client.PrintWithCtx(ctx, dara.ToMap(request), dara.String("1"))
+    go client.PrintSSE(dara.ToMap(request), dara.String("1"))
     name := "complex"
     var read io.Reader
     var byt []byte
