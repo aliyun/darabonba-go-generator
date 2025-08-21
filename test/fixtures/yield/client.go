@@ -101,7 +101,6 @@ func (client *Client) Test2 (name *string, _yield chan *string) {
 
 func (client *Client) Test4 (name *string, _yield chan interface{}, _yieldErr chan error) {
   defer close(_yield)
-  defer close(_yieldErr)
   client.test4_opYieldFunc(_yield, _yieldErr, name)
   return
 }

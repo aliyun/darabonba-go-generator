@@ -33,7 +33,6 @@ func (client *Client)Init()(_err error) {
 
 func (client *Client) Test3 (_yield chan *string, _yieldErr chan error) {
   defer close(_yield)
-  defer close(_yieldErr)
   client.test3_opYieldFunc(_yield, _yieldErr)
   return
 }

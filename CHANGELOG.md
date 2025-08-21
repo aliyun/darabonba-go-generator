@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.1.1 - 2025-07-23
+
+> Fixed the sse function generate.
+
 ## 2.1.0 - 2025-07-23
 
 > Add function with context generate.
