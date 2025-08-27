@@ -16,6 +16,7 @@ type ClientInterface interface {
 
 type Client struct {
   DisableSDKError *bool
+  EnableValidate *bool
 }
 
 func NewClient()(*Client, error) {

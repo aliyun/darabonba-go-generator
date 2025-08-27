@@ -35,7 +35,15 @@ func (s *M) SetSubM(v *MSubM) *M {
 }
 
 func (s *M) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.SubM, "SubM"); err != nil {
+    return err
+  }
+  if s.SubM != nil {
+    if err := s.SubM.Validate(); err != nil {
+      return err
+    }
+  }
+  return nil
 }
 
 type MSubM struct {

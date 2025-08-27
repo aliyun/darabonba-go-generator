@@ -61,7 +61,31 @@ func (s *InterceptorContext) SetResponse(v *InterceptorContextResponse) *Interce
 }
 
 func (s *InterceptorContext) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Request, "Request"); err != nil {
+    return err
+  }
+  if s.Request != nil {
+    if err := s.Request.Validate(); err != nil {
+      return err
+    }
+  }
+  if err := dara.ValidateRequired(s.Configuration, "Configuration"); err != nil {
+    return err
+  }
+  if s.Configuration != nil {
+    if err := s.Configuration.Validate(); err != nil {
+      return err
+    }
+  }
+  if err := dara.ValidateRequired(s.Response, "Response"); err != nil {
+    return err
+  }
+  if s.Response != nil {
+    if err := s.Response.Validate(); err != nil {
+      return err
+    }
+  }
+  return nil
 }
 
 type InterceptorContextRequest struct {
@@ -266,7 +290,40 @@ func (s *InterceptorContextRequest) SetUserAgent(v string) *InterceptorContextRe
 }
 
 func (s *InterceptorContextRequest) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Pathname, "Pathname"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.ProductId, "ProductId"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Action, "Action"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Version, "Version"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Protocol, "Protocol"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Method, "Method"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.AuthType, "AuthType"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.BodyType, "BodyType"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.ReqBodyType, "ReqBodyType"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Credential, "Credential"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.UserAgent, "UserAgent"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type InterceptorContextConfiguration struct {
@@ -351,7 +408,10 @@ func (s *InterceptorContextConfiguration) SetSuffix(v string) *InterceptorContex
 }
 
 func (s *InterceptorContextConfiguration) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.RegionId, "RegionId"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type InterceptorContextResponse struct {

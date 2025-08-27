@@ -189,7 +189,8 @@ describe('new Generator', function () {
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/annotation'), {
       pkgDir: path.join(__dirname, 'fixtures/annotation'),
       ...pkg,
-      editable: true
+      editable: true,
+      noCompatible: true,
     });
   });
 
@@ -289,6 +290,7 @@ describe('new Generator', function () {
     const pkg = JSON.parse(pkgContent);
     check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/try'), {
       pkgDir: path.join(__dirname, 'fixtures/try'),
+      noCompatible: true,
       ...pkg
     });
   });
@@ -351,5 +353,16 @@ describe('new Generator', function () {
       ...pkg
     });
   
+  });
+
+  it('validate should ok', function () {
+    const outputDir = path.join(__dirname, 'output/validate');
+    const mainFilePath = path.join(__dirname, 'fixtures/validate/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/validate/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/validate/validate_model_model.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/validate'),
+      ...pkg
+    });
   });
 });

@@ -7,6 +7,7 @@ import (
 
 type Client struct {
   DisableSDKError *bool
+  EnableValidate *bool
 }
 
 func NewClient(config *Config)(*Client, error) {

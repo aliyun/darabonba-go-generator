@@ -1,0 +1,36 @@
+model RuntimeObject = {}
+init(config: Config);
+model Config = {}
+
+@context('printWithCtx')
+function print(runtime: object, str: string): void {
+  return;
+}
+
+@sse(true)
+async function printSSE(runtime: object, str: string): asyncIterator[string] {
+  yield str;
+}
+
+static function judgeStr(a: string): boolean {
+  return true;
+}
+
+model Request = {
+  accesskey?: string(name='accesskey', description='accesskey', required=true),
+  region?: string(name='region', description='region'),
+  instance: {
+    instanceId: string(name='instanceId', description='instanceId'),
+  }(name='instance', description='instance'),
+  configs: {
+    key: string,
+    value: [ string ],
+    extra: map[string] string
+  },
+}
+
+static function array(request: object, str: string): [ any ];
+
+exception Err3 = {
+  accessErrMessage: string
+}

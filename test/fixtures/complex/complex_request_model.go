@@ -520,7 +520,150 @@ func (s *ComplexRequest) SetPart(v []*ComplexRequestPart) *ComplexRequest {
 }
 
 func (s *ComplexRequest) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.AccessKey, "AccessKey"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Body, "Body"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Strs, "Strs"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.MapList, "MapList"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Header, "Header"); err != nil {
+    return err
+  }
+  if s.Header != nil {
+    if err := s.Header.Validate(); err != nil {
+      return err
+    }
+  }
+  if err := dara.ValidateRequired(s.Configs, "Configs"); err != nil {
+    return err
+  }
+  if s.Configs != nil {
+    if err := s.Configs.Validate(); err != nil {
+      return err
+    }
+  }
+  if err := dara.ValidateRequired(s.Num, "Num"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.I64, "I64"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.F64, "F64"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.B, "B"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.F32, "F32"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.F64List, "F64List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.FloatList, "FloatList"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.BooleantList, "BooleantList"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.I32, "I32"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.StringList, "StringList"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.IntList, "IntList"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int32List, "Int32List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int16List, "Int16List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int64List, "Int64List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.LongList, "LongList"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint64List, "Uint64List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint32List, "Uint32List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint16List, "Uint16List"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.U64, "U64"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.U32, "U32"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.U16, "U16"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Obj, "Obj"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Any, "Any"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Byt, "Byt"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Req, "Req"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Resp, "Resp"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Map, "Map"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.NumMap, "NumMap"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.ModelMap, "ModelMap"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Request, "Request"); err != nil {
+    return err
+  }
+  if s.Request != nil {
+    if err := s.Request.Validate(); err != nil {
+      return err
+    }
+  }
+  if err := dara.ValidateRequired(s.Client, "Client"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Instance, "Instance"); err != nil {
+    return err
+  }
+  if s.Instance != nil {
+    if err := s.Instance.Validate(); err != nil {
+      return err
+    }
+  }
+  if s.Part != nil {
+    for _, item := range s.Part {
+      if item != nil {
+        if err := item.Validate(); err != nil {
+          return err
+        }
+      }
+    }
+  }
+  return nil
 }
 
 type ComplexRequestHeader struct {
@@ -571,7 +714,10 @@ func (s *ComplexRequestHeader) SetContent(v string) *ComplexRequestHeader {
 }
 
 func (s *ComplexRequestHeader) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Content, "Content"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type ComplexRequestConfigs struct {
@@ -616,7 +762,16 @@ func (s *ComplexRequestConfigs) SetExtra(v map[string]*string) *ComplexRequestCo
 }
 
 func (s *ComplexRequestConfigs) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Key, "Key"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Value, "Value"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Extra, "Extra"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type ComplexRequestPart struct {

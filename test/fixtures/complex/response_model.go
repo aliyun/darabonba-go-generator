@@ -35,6 +35,14 @@ func (s *Response) SetInstance(v *ComplexRequestPart) *Response {
 }
 
 func (s *Response) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Instance, "Instance"); err != nil {
+    return err
+  }
+  if s.Instance != nil {
+    if err := s.Instance.Validate(); err != nil {
+      return err
+    }
+  }
+  return nil
 }
 
