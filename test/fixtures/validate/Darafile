@@ -1,0 +1,16 @@
+{
+  "scope": "darabonba",
+  "name": "validate",
+  "version": "1.0.0",
+  "main": "./main.dara",
+  "libraries": {
+    "Source": "darabonba:Import:*"
+  },
+  "go": {
+    "package": "github.com/aliyun/test/validate",
+    "clientName": "client"
+  },
+  "releases": {
+    "go": "github.com/aliyun/test/validate/client:v1.0.0"
+  }
+}

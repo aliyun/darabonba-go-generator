@@ -48,7 +48,13 @@ func (s *TestModelDIR) SetA(v interface{}) *TestModelDIR {
 }
 
 func (s *TestModelDIR) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Test, "Test"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.A, "A"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type iTestModelDir interface {
@@ -93,6 +99,17 @@ func (s *TestModelDir) SetM(v *user.Info) *TestModelDir {
 }
 
 func (s *TestModelDir) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Test, "Test"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.M, "M"); err != nil {
+    return err
+  }
+  if s.M != nil {
+    if err := s.M.Validate(); err != nil {
+      return err
+    }
+  }
+  return nil
 }
 

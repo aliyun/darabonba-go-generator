@@ -47,6 +47,12 @@ func (s *M) SetB(v int) *M {
 }
 
 func (s *M) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.A, "A"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.B, "B"); err != nil {
+    return err
+  }
+  return nil
 }
 

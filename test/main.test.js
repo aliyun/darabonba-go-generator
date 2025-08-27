@@ -352,4 +352,15 @@ describe('new Generator', function () {
     });
   
   });
+
+  it('validate should ok', function () {
+    const outputDir = path.join(__dirname, 'output/validate');
+    const mainFilePath = path.join(__dirname, 'fixtures/validate/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/validate/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/validate/validate_model_model.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/validate'),
+      ...pkg
+    });
+  });
 });

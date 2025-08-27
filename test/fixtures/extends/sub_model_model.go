@@ -45,6 +45,12 @@ func (s *SubModel) SetName(v string) *SubModel {
 }
 
 func (s *SubModel) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.MaxAttemp, "MaxAttemp"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Name, "Name"); err != nil {
+    return err
+  }
+  return nil
 }
 

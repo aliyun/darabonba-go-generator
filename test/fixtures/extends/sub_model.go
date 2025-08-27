@@ -57,6 +57,15 @@ func (s *Sub) SetCode(v string) *Sub {
 }
 
 func (s *Sub) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Age, "Age"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Name, "Name"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Code, "Code"); err != nil {
+    return err
+  }
+  return nil
 }
 

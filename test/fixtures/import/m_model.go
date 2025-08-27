@@ -49,6 +49,16 @@ func (s *M) SetB(v *string_.Request) *M {
 }
 
 func (s *M) Validate() error {
-  return dara.Validate(s)
+  if s.A != nil {
+    if err := s.A.Validate(); err != nil {
+      return err
+    }
+  }
+  if s.B != nil {
+    if err := s.B.Validate(); err != nil {
+      return err
+    }
+  }
+  return nil
 }
 
