@@ -10,6 +10,7 @@ import (
 
 type Client struct {
   DisableSDKError *bool
+  EnableValidate *bool
   Vid  *http.Request
   Url  *url.URL
 }

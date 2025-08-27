@@ -8,7 +8,6 @@ import (
 )
 
 type Client struct {
-  DisableSDKError *bool
   Configs  []*source.Config
 }
 

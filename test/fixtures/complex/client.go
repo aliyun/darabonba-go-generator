@@ -11,6 +11,7 @@ import (
 
 type Client struct {
   DisableSDKError *bool
+  EnableValidate *bool
   Protocol  *string
   Pathname  *string
   Strs  []*string
@@ -281,6 +282,12 @@ func (client *Client) ComplexMap() (_result map[string]interface{}, _err error) 
 
 func (client *Client) Complex3(request *ComplexRequest, name *string) (_result *ComplexRequest, _err error) {
   request_ := dara.NewRequest()
+  if dara.BoolValue(client.EnableValidate) == true {
+    _err = request.Validate()
+    if _err != nil {
+      return _result, _err
+    }
+  }
   name = dara.String("complex")
   request_.Protocol, _err = client.TemplateString()
   if _err != nil {

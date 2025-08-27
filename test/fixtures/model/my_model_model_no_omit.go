@@ -313,7 +313,84 @@ func (s *MyModel) SetComplexList(v [][]*string) *MyModel {
 }
 
 func (s *MyModel) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Stringfield, "Stringfield"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Stringarrayfield, "Stringarrayfield"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Mapfield, "Mapfield"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Name, "Name"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Submodel, "Submodel"); err != nil {
+    return err
+  }
+  if s.Submodel != nil {
+    if err := s.Submodel.Validate(); err != nil {
+      return err
+    }
+  }
+  if err := dara.ValidateRequired(s.ModuleModelMap, "ModuleModelMap"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.SubModelMap, "SubModelMap"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.ModelMap, "ModelMap"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.ModuleMap, "ModuleMap"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Object, "Object"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Numberfield, "Numberfield"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int64field, "Int64field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint64field, "Uint64field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int32field, "Int32field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint32field, "Uint32field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int16field, "Int16field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint16field, "Uint16field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Int8field, "Int8field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Uint8field, "Uint8field"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Readable, "Readable"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Request, "Request"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Lists, "Lists"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Arrays, "Arrays"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.ComplexList, "ComplexList"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type MyModelSubmodel struct {
@@ -338,7 +415,10 @@ func (s *MyModelSubmodel) SetStringfield(v string) *MyModelSubmodel {
 }
 
 func (s *MyModelSubmodel) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Stringfield, "Stringfield"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type MyModelArrays struct {
@@ -363,6 +443,9 @@ func (s *MyModelArrays) SetName(v string) *MyModelArrays {
 }
 
 func (s *MyModelArrays) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Name, "Name"); err != nil {
+    return err
+  }
+  return nil
 }
 

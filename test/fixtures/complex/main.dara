@@ -266,6 +266,7 @@ api ComplexMap(): map[string]any {
 }
 
 api Complex3(request: ComplexRequest, name: string): ComplexRequest {
+  request.validate();
   name = 'complex';
   __request.protocol = templateString();
   __request.port = 80;

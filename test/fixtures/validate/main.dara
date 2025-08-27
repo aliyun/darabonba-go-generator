@@ -1,0 +1,38 @@
+
+import Source;
+
+model M {
+    name?: string(maxLength=500),
+    test: {
+        name?: string(maxLength=500),
+    }
+}
+
+model ValidateModel {
+  name: string(pattern='[a-zA-Z][a-zA-Z0-9]*', maxLength=10, minLength=2, require=true, description="User name"),
+  age?: number(minimum=0, maximum=150, description="User age"),
+  email?: string(pattern='\\w+@\\w+\\.\\w+', description="User email"),
+  // 基本类型数组，无验证逻辑
+  tags?: [ string ],
+  // 基本类型map，无验证逻辑  
+  metadata?: map[string]string,
+  // 需要验证的数组
+  requests?: [ Source.Request ],
+  // 需要验证的map
+  modelMap?: map[string]M,
+  request: Source.Request,
+  m: M,
+  mm: M.test,
+  profile?: {
+    bio?: string(maxLength=500),
+    score?: number(minimum=0, maximum=100)
+  }
+}
+
+init() {
+  
+}
+
+api validateTest(): void {
+  // do nothing
+}

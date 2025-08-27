@@ -202,7 +202,10 @@ func (s *SubMyErrSubmodel) SetStringfield(v string) *SubMyErrSubmodel {
 }
 
 func (s *SubMyErrSubmodel) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Stringfield, "Stringfield"); err != nil {
+    return err
+  }
+  return nil
 }
 
 type SubMyErrArrays struct {
@@ -227,6 +230,9 @@ func (s *SubMyErrArrays) SetName(v string) *SubMyErrArrays {
 }
 
 func (s *SubMyErrArrays) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Name, "Name"); err != nil {
+    return err
+  }
+  return nil
 }
 

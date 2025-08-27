@@ -10,6 +10,7 @@ import (
 
 type Client struct {
   DisableSDKError *bool
+  EnableValidate *bool
   SourceClient  *string_.Client
   SourceMap  *map_.Client
 }
