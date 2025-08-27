@@ -47,6 +47,12 @@ func (s *AttributeMap) SetKey(v map[string]*string) *AttributeMap {
 }
 
 func (s *AttributeMap) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Attributes, "Attributes"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Key, "Key"); err != nil {
+    return err
+  }
+  return nil
 }
 

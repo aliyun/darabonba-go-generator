@@ -1,0 +1,31 @@
+
+import Source;
+
+model M {
+    name?: string(maxLength=500),
+    test: {
+        name?: string(maxLength=500),
+    }
+}
+
+model ValidateModel {
+  name: string(pattern='[a-zA-Z][a-zA-Z0-9]*', maxLength=10, minLength=2, require=true, description="User name"),
+  age?: number(minimum=0, maximum=150, description="User age"),
+  email?: string(pattern='\\w+@\\w+\\.\\w+', description="User email"),
+  tags?: [ string ],
+  request: Source.Request,
+  m: M,
+  mm: M.test,
+  profile?: {
+    bio?: string(maxLength=500),
+    score?: number(minimum=0, maximum=100)
+  }
+}
+
+init() {
+  
+}
+
+api validateTest(): void {
+  // do nothing
+}

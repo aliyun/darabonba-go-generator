@@ -47,6 +47,12 @@ func (s *Base) SetAge(v int) *Base {
 }
 
 func (s *Base) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Name, "Name"); err != nil {
+    return err
+  }
+  if err := dara.ValidateRequired(s.Age, "Age"); err != nil {
+    return err
+  }
+  return nil
 }
 

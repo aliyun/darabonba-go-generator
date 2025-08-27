@@ -41,6 +41,9 @@ func (s *Test) SetTest(v string) *Test {
 }
 
 func (s *Test) Validate() error {
-  return dara.Validate(s)
+  if err := dara.ValidateRequired(s.Test, "Test"); err != nil {
+    return err
+  }
+  return nil
 }
 
