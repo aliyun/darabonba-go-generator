@@ -82,6 +82,10 @@ func (client *Client) NewModels () (_err error) {
     MaxAttemp: dara.Int(32),
     MaxRetry: dara.Int(32),
   }
+  sc := &source.Config{
+    MaxAttemp: dara.Int(32),
+    MaxRetry: dara.Int(32),
+  }
   return _err
 }
 
