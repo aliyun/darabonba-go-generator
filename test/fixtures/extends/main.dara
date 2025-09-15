@@ -18,6 +18,7 @@ model SubModel extends Source.Config {
     name: string,
 }
 
+@context('newModelsCtx')
 async function newModels(): void {
     var s = new Sub{
         name = "str",
@@ -27,6 +28,11 @@ async function newModels(): void {
 
     var sm = new SubModel{
         name = "str",
+        maxAttemp = 32,
+        maxRetry = 32,
+    };
+
+    var sc = new Source.Config{
         maxAttemp = 32,
         maxRetry = 32,
     };

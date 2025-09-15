@@ -184,7 +184,7 @@ func (client *Client) Complex1WithCtx(ctx context.Context, request *ComplexReque
 }
 
 
-func complex1WithCtx_opResponse (ctx *context.Context, request *ComplexRequest, client *Client)( _result *source.RuntimeObject, _err error) {
+func complex1WithCtx_opResponse (ctx context.Context, request *ComplexRequest, client *Client)( _result *source.RuntimeObject, _err error) {
   if true && true {
     _result = nil
     return _result , _err
