@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.1.2 - 2025-09-16
+
+> Fixed the sse function with ctx error.
+
 ## 2.1.1 - 2025-07-23
 
 > Fixed the sse function generate.
