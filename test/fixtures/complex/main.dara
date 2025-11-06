@@ -99,6 +99,7 @@ static function intToInt32(a: int32):void;
 api Complex1(request: ComplexRequest, client: Source): Source.RuntimeObject {
   client.print(request, '1');
   client.printSSE(request, '1');
+  var host = '(http.host eq "video.example.com")';
   var name = 'complex';
   var read : readable = null;
   var byt : bytes = null;
