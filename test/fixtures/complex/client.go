@@ -179,7 +179,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
     tmp := dara.ToMap(request_.Query,
       request_.Headers,
       request_)
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{
@@ -259,7 +259,7 @@ func (client *Client) ComplexMap() (_result map[string]interface{}, _err error) 
     dara.Sleep(_backoffDelayTime)
 
     request_ = dara.NewRequest()
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{

@@ -79,7 +79,7 @@ func (client *Client) TestAPI() (_err error) {
     num := 123
     // static function call comment
     StaticFunc()
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{
@@ -166,7 +166,7 @@ func (client *Client) TestAPI2() (_err error) {
     }
 
     // back comment
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{

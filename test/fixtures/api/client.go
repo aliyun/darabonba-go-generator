@@ -63,7 +63,7 @@ func (client *Client) HelloRuntime() (_err error) {
     test = map[string]interface{}{
       "key": "value",
     }
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{
@@ -155,7 +155,7 @@ func (client *Client) HelloComplex() (_result interface{}, _err error) {
     test = map[string]interface{}{
       "key": "value",
     }
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{

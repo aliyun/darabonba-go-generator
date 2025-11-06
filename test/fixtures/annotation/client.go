@@ -43,7 +43,7 @@ func (client *Client) TestAPI() (_err error) {
     dara.Sleep(_backoffDelayTime)
 
     request_ = dara.NewRequest()
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{

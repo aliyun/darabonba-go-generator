@@ -150,7 +150,7 @@ func (client *Client) Complex1WithCtx(ctx context.Context, request *ComplexReque
     tmp := dara.ToMap(request_.Query,
       request_.Headers,
       request_)
-    response_, _err := dara.DoRequestWithCtx(ctx, request_, _runtime)
+    response_, _err = dara.DoRequestWithCtx(ctx, request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{
