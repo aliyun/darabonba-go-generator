@@ -60,6 +60,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
     request_ = dara.NewRequest()
     client.Print(dara.ToMap(request), dara.String("1"))
     go client.PrintSSE(dara.ToMap(request), dara.String("1"))
+    host := "(http.host eq \"video.example.com\")"
     name := "complex"
     var read io.Reader
     var byt []byte
@@ -79,7 +80,7 @@ func (client *Client) Complex1(request *ComplexRequest, client *source.Client) (
     IntToInt32(dara.ToInt32(dara.Int(a)))
     mapVal := map[string]interface{}{
       "read": read,
-      "test": "{\\"test\\":\\"ok\\"}",
+      "test": "{\"test\":\"ok\"}",
       "b": dara.BoolValue(request.B),
       "num": dara.IntValue(request.Num),
       "u16": dara.Uint16Value(request.U16),
