@@ -33,6 +33,7 @@ func (client *Client) Test3(name *string, _yield chan interface{}, _yieldErr cha
   var request_ *dara.Request
   var response_ *dara.Response
   var _resultErr error
+  var _err error
   retriesAttempted := int(0)
   retryPolicyContext = &dara.RetryPolicyContext{
     RetriesAttempted: retriesAttempted,
@@ -55,7 +56,7 @@ func (client *Client) Test3(name *string, _yield chan interface{}, _yieldErr cha
       "nextToken": dara.String("100"),
       "maxResults": dara.String("200"),
     }
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{

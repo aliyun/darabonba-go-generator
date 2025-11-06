@@ -47,7 +47,7 @@ func (client *Client) _request() (_result map[string]interface{}, _err error) {
 
     request_ = dara.NewRequest()
     in := "try"
-    response_, _err := dara.DoRequest(request_, _runtime)
+    response_, _err = dara.DoRequest(request_, _runtime)
     if _err != nil {
       retriesAttempted++
       retryPolicyContext = &dara.RetryPolicyContext{
