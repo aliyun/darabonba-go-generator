@@ -1,9 +1,6 @@
 // This file is auto-generated, don't edit it. Thanks.
 package util
 
-import (
-  "github.com/alibabacloud-go/tea/dara"
-)
 
 
 func Test1 (_yield chan *string) {

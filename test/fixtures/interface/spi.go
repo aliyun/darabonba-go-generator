@@ -1,10 +1,6 @@
 // This file is auto-generated, don't edit it. Thanks.
 package client
 
-import (
-  "github.com/alibabacloud-go/tea/dara"
-)
-
 type ClientInterface interface {
   ModifyConfiguration (context *InterceptorContext, attributeMap *AttributeMap) (_err error) 
   ModifyRequest (context *InterceptorContext, attributeMap *AttributeMap) (_err error) 
