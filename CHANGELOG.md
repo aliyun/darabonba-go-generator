@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 2.1.4 - 2026-05-27
+
+> Fixed import dara when not used.
+
 ## 2.1.2 - 2025-09-16
 
 > Fixed the sse function with ctx error.
