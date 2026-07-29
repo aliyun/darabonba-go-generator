@@ -2,6 +2,8 @@
 package client
 
 import (
+  "io"
+  "io/ioutil"
   "github.com/alibabacloud-go/tea/dara"
   "fmt"
 )
@@ -33,7 +35,6 @@ func (client *Client) Test3(name *string, _yield chan interface{}, _yieldErr cha
   var request_ *dara.Request
   var response_ *dara.Response
   var _resultErr error
-  var _err error
   retriesAttempted := int(0)
   retryPolicyContext = &dara.RetryPolicyContext{
     RetriesAttempted: retriesAttempted,
@@ -69,7 +70,44 @@ func (client *Client) Test3(name *string, _yield chan interface{}, _yieldErr cha
       continue
     }
 
-    test3_opResponse(_yield, _yieldErr, response_, name)
+    resp := map[string]interface{}{
+      "nextToken": "100",
+      "truncated": false,
+      "replicaPairs": "sdfs",
+    }
+    if dara.IntValue(response_.StatusCode) > 400 {
+      _err := dara.NewSDKError(map[string]interface{}{
+        "code": "sdfsd",
+        "message": "sdfs",
+      })
+      if dara.BoolValue(client.DisableSDKError) != true {
+        _err = dara.TeaSDKError(_err)
+      }
+      if _err != nil {
+        retriesAttempted++
+        retryPolicyContext = &dara.RetryPolicyContext{
+          RetriesAttempted: retriesAttempted,
+          HttpRequest:      request_,
+          HttpResponse:     response_,
+          Exception:        _err,
+        }
+        _resultErr = _err
+        continue
+      }
+
+    }
+
+    name = dara.String("test")
+    it := make(chan *dara.SSEEvent, 1)
+    sseBody, _ok := response_.Body.(io.ReadCloser)
+    if !_ok {
+      sseBody = ioutil.NopCloser(response_.Body)
+    }
+    dara.ReadAsSSE(sseBody, it, _yieldErr)
+    for i := range it {
+      _body := dara.ParseJSON(dara.StringValue(i.Data))
+      yield <- _body
+    }
     _err = <-_yieldErr
     if _err != nil {
       retriesAttempted++
@@ -122,30 +160,6 @@ func (client *Client) Test6 (name *string) (_err error) {
   }
   _err = <- _yieldErr
   return _err
-}
-
-func test3_opResponse(_yield chan interface{}, _yieldErr chan error, response_ *dara.Response, name *string) {
-  resp := map[string]interface{}{
-    "nextToken": "100",
-    "truncated": false,
-    "replicaPairs": "sdfs",
-  }
-  if dara.IntValue(response_.StatusCode) > 400 {
-    _err := dara.NewSDKError(map[string]interface{}{
-      "code": "sdfsd",
-      "message": "sdfs",
-    })
-    _yieldErr <- _err
-    return
-  }
-
-  name = dara.String("test")
-  it := make(chan *dara.SSEEvent, 1)
-  dara.ReadAsSSE(response_.Body, it, _yieldErr)
-  for i := range it {
-    _body := dara.ParseJSON(dara.StringValue(i.Data))
-    yield <- _body
-  }
 }
 
 func (client *Client) test2_opYieldFunc(_yield chan *string, name *string) {
