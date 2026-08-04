@@ -44,6 +44,9 @@ describe('helper', function () {
 
     // Control characters
     expect(_goEscape('a\nb\tc')).to.equal('a\\nb\\tc');
+    // template_string path: keep real newlines for legacy line-split emit
+    expect(_goEscape('a\nb', { keepNewlines: true })).to.equal('a\nb');
+    expect(_string({ string: 'a\n"b' }, true, { keepNewlines: true })).to.equal('a\n\\"b');
 
     // Read path: return raw AST content unchanged (no no-op quote rewrite)
     expect(_string({ string: '""' })).to.equal('""');

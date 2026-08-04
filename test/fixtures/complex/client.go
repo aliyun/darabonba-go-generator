@@ -609,7 +609,10 @@ func MapAssign (request *ComplexRequest, name *string) {
 }
 
 func Arrayimport2 (request []*source.Request) (_result *string) {
-  s := "{\n    \"a\": \"test\",\n    \"b\": \"ok\"\n  }"
+  s := "{" + 
+"    \"a\": \"test\"," + 
+"    \"b\": \"ok\"" + 
+"  }"
   _result = dara.String("")
   return _result
 }
