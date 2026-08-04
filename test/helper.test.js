@@ -3,7 +3,7 @@
 const expect = require('expect.js');
 
 const {
-  _name, _string, _type, _format, _initValue, _avoidReserveName,
+  _name, _string, _goEscape, _type, _format, _initValue, _avoidReserveName,
   _setExtendFunc, _pointerType, _importFilter
 } = require('../lib//helper');
 
@@ -27,6 +27,28 @@ describe('helper', function () {
   it('_string should ok', function () {
     var name = _string({ string: 'helper' });
     expect(name).to.equal('helper');
+  });
+
+  it('_string escape for Go should ok', function () {
+    // Dara "a\"b" → AST content a"b → Go literal body a\"b
+    expect(_string({ string: 'a"b' }, true)).to.equal('a\\"b');
+    expect(_goEscape('a"b')).to.equal('a\\"b');
+
+    // ACS-style JSON config
+    expect(_string({ string: '{"enableHistoryServer":false}' }, true))
+      .to.equal('{\\"enableHistoryServer\\":false}');
+
+    // Backslash must be escaped before quotes
+    expect(_goEscape('a\\b')).to.equal('a\\\\b');
+    expect(_goEscape('a\\"b')).to.equal('a\\\\\\"b');
+
+    // Control characters
+    expect(_goEscape('a\nb\tc')).to.equal('a\\nb\\tc');
+
+    // Historical read-path edge cases
+    expect(_string({ string: '""' })).to.equal('""');
+    expect(_string({ string: '""' }, true)).to.equal('\\"\\"');
+    expect(_string({ string: '' }, true)).to.equal('');
   });
 
   it('_type should ok', function () {

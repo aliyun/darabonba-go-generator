@@ -1,0 +1,12 @@
+{
+  "scope": "darabonba",
+  "name": "string_escape_exec",
+  "version": "0.0.1",
+  "main": "./main.dara",
+  "go": {
+    "package": "main",
+    "packageInfo": {
+      "name": "github.com/aliyun/test/string_escape_exec"
+    }
+  }
+}

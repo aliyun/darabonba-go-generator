@@ -365,4 +365,31 @@ describe('new Generator', function () {
       ...pkg
     });
   });
+
+  it('string escape should ok', function () {
+    const outputDir = path.join(__dirname, 'output/string_escape');
+    const mainFilePath = path.join(__dirname, 'fixtures/string_escape/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/string_escape/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/string_escape/client.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/string_escape'),
+      ...pkg
+    });
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/string_escape/m_model.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/string_escape'),
+      ...pkg
+    });
+  });
+
+  it('string escape exec should ok', function () {
+    const outputDir = path.join(__dirname, 'output/string_escape_exec');
+    const mainFilePath = path.join(__dirname, 'fixtures/string_escape_exec/main.dara');
+    const pkgContent = fs.readFileSync(path.join(__dirname, 'fixtures/string_escape_exec/Darafile'), 'utf8');
+    const pkg = JSON.parse(pkgContent);
+    check(mainFilePath, outputDir, path.join(__dirname, 'fixtures/string_escape_exec/main.go'), {
+      pkgDir: path.join(__dirname, 'fixtures/string_escape_exec'),
+      exec: true,
+      ...pkg
+    });
+  });
 });
