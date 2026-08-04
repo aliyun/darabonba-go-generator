@@ -45,8 +45,10 @@ describe('helper', function () {
     // Control characters
     expect(_goEscape('a\nb\tc')).to.equal('a\\nb\\tc');
 
-    // Historical read-path edge cases
+    // Read path: return raw AST content unchanged (no no-op quote rewrite)
     expect(_string({ string: '""' })).to.equal('""');
+    expect(_string({ string: 'a"b' })).to.equal('a"b');
+    expect(_string({ string: '{"k":"v"}' })).to.equal('{"k":"v"}');
     expect(_string({ string: '""' }, true)).to.equal('\\"\\"');
     expect(_string({ string: '' }, true)).to.equal('');
   });
