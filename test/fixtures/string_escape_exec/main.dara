@@ -1,0 +1,4 @@
+static async function main(args: [ string ]) throws : void {
+  var s = "a\"b";
+  var config = "{\"enableHistoryServer\":false,\"disableHistoryServerAuth\":false,\"useVPCEndpoint\":false}";
+}
