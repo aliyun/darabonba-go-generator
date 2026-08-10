@@ -1,4 +1,7 @@
 # ChangeLog
+## 2.1.5 - 2026-08-10
+
+> Fixed emit valid Go string literals for quotes and backslashes.
 
 ## 2.1.4 - 2026-05-27
 
