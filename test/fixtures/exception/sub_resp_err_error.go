@@ -65,6 +65,9 @@ func (s *SubRespErrError) GetAccessDeniedDetail() map[string]interface{}  {
 }
 
 func (s *SubRespErrError) GetName() *string  {
+  if s.Name == nil {
+    return dara.String("SubRespErrError")
+  }
   return s.Name
 }
 
