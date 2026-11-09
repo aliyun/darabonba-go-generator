@@ -33,6 +33,9 @@ func (err Err2Error) Error() string {
 }
 
 func (s *Err2Error) GetName() *string  {
+  if s.Name == nil {
+    return dara.String("Err2Error")
+  }
   return s.Name
 }
 
