@@ -1,4 +1,8 @@
 # ChangeLog
+## 2.1.6 - 2026-11-10
+
+> Fixed generated Go exceptions to return their concrete type name when no explicit name is set, so exception-based retry conditions can match errors such as `ServerError`.
+
 ## 2.1.5 - 2026-08-10
 
 > Fixed emit valid Go string literals for quotes and backslashes.
