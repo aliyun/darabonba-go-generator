@@ -33,6 +33,9 @@ func (err ERRError) Error() string {
 }
 
 func (s *ERRError) GetName() *string  {
+  if s.Name == nil {
+    return dara.String("ERRError")
+  }
   return s.Name
 }
 
@@ -79,6 +82,9 @@ func (err ErrError) Error() string {
 }
 
 func (s *ErrError) GetName() *string  {
+  if s.Name == nil {
+    return dara.String("ErrError")
+  }
   return s.Name
 }
 
