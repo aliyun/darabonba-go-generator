@@ -7,6 +7,7 @@ import (
   "encoding/base64"
   "fmt"
   "regexp"
+  "strings"
   "strconv"
   "time"
 )
@@ -410,7 +411,7 @@ func StringTest (args []*string) (_err error) {
 
   }
 
-  if dara.HasSuffix(fullStr, "beijing") {
+  if strings.HasSuffix(fullStr, "beijing") {
     newStr3, _err := regexp.MustCompile(`beijing`).ReplaceAllString(fullStr, "chengdu")
     if _err != nil {
       return _err
@@ -458,7 +459,7 @@ func UrlTest (args []*string) (_err error) {
   search := url.Search()
   href := url.Href()
   auth := url.Auth()
-  url2, _err := dara.Parse(dara.StringValue(args[1]))
+  url2, _err := dara.ParseURL(dara.StringValue(args[1]))
   if _err != nil {
     return _err
   }
